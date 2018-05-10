@@ -1,5 +1,5 @@
 
-package dto;
+package DTO;
 
 
 public class DetalleInsumoServicioDto {

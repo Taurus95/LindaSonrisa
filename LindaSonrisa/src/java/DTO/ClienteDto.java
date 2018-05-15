@@ -1,7 +1,7 @@
 
 package DTO;
 
-import java.util.Date;
+import java.sql.Date;
 import java.util.Objects;
 
 
@@ -81,7 +81,7 @@ public class ClienteDto {
     }
 
     public Date getFechaNacimiento() {
-        return fechaNacimiento;
+        return (Date) fechaNacimiento;
     }
 
     public void setFechaNacimiento(Date fechaNacimiento) {

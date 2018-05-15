@@ -1,7 +1,7 @@
 
 package DTO;
 
-import java.util.Date;
+import java.sql.Date;
 import java.util.Objects;
 
 
@@ -15,6 +15,7 @@ public class DetalleInsumoDto {
     private java.util.Date fechaLlegada;
 
     public DetalleInsumoDto() {
+        
     }
 
     public DetalleInsumoDto(String codigo, int idInsumo, int cantidadActual, Date fechaVencimiento, int precioCompraUnidad, Date fechaLlegada) {
@@ -51,7 +52,7 @@ public class DetalleInsumoDto {
     }
 
     public Date getFechaVencimiento() {
-        return fechaVencimiento;
+        return (Date) fechaVencimiento;
     }
 
     public void setFechaVencimiento(Date fechaVencimiento) {
@@ -67,7 +68,7 @@ public class DetalleInsumoDto {
     }
 
     public Date getFechaLlegada() {
-        return fechaLlegada;
+        return (Date) fechaLlegada;
     }
 
     public void setFechaLlegada(Date fechaLlegada) {

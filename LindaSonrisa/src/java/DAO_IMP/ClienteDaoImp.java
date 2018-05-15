@@ -27,15 +27,6 @@ public class ClienteDaoImp implements IClienteDao {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-//    rut varchar(20)  NOT NULL,
-//  nombre varchar(40)  NOT NULL,
-//  correo varchar(30)  NOT NULL,
-//  sexo char(1)  NOT NULL,
-//  direccion varchar(100)  NOT NULL,
-//  telefono varchar(15)  NOT NULL,
-//  fecha_nacimiento date NOT NULL,
-//  contraseña varchar(100)  NOT NULL,
-//  habilitado number(1) NOT NULL,
     @Override
     public boolean agregar(ClienteDto obj) {
         String query = "INSERT INTO cliente VALUES(?,?,?,?,?,?,?,?,?);";
@@ -44,7 +35,7 @@ public class ClienteDaoImp implements IClienteDao {
             sql.setString(1, obj.getRut());
             sql.setString(2, obj.getNombre());
             sql.setString(3, obj.getCorreo());
-            //sql.setString(4, obj.getSexo());
+            //sql.setCharacterStream(4, obj.getSexo());
             sql.setString(5, obj.getDireccion());
             sql.setString(6, obj.getTelefono());
             sql.setDate(7, obj.getFechaNacimiento());
@@ -52,8 +43,10 @@ public class ClienteDaoImp implements IClienteDao {
             sql.setBoolean(9, obj.isHabilitado());
             
             if(sql.execute()){
+                connection.close();
                 return true;
             }
+            
         } catch (SQLException s) {
             log.error("Error SQL listando detalle " + s.getMessage());
         } catch (Exception e) {

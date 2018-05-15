@@ -1,6 +1,6 @@
 package DTO;
 
-import java.util.Date;
+import java.sql.Date;
 
 
 public class PedidoDto {
@@ -37,7 +37,7 @@ public class PedidoDto {
     }
 
     public Date getFechaPedido() {
-        return fechaPedido;
+        return (Date) fechaPedido;
     }
 
     public void setFechaPedido(Date fechaPedido) {
@@ -45,7 +45,7 @@ public class PedidoDto {
     }
 
     public Date getFechaEntrega() {
-        return fechaEntrega;
+        return (Date) fechaEntrega;
     }
 
     public void setFechaEntrega(Date fechaEntrega) {

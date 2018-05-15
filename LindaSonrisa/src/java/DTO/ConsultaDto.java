@@ -1,7 +1,7 @@
 
 package DTO;
 
-import java.util.Date;
+import java.sql.Date;
 
 
 public class ConsultaDto {
@@ -44,7 +44,7 @@ public class ConsultaDto {
     }
 
     public Date getFecha() {
-        return fecha;
+        return (Date) fecha;
     }
 
     public void setFecha(Date fecha) {

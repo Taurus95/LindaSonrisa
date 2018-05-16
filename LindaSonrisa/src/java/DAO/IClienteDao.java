@@ -9,5 +9,8 @@ import DTO.ClienteDto;
 public interface IClienteDao extends IBaseDao<ClienteDto> {
 
     public boolean deshabilitar(ClienteDto cliente);
+    
+    public boolean habilitar(ClienteDto cliente);
+    
 
 }

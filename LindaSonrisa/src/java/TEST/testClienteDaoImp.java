@@ -24,6 +24,7 @@ public class testClienteDaoImp {
         nuevo.setRut("19.017.683-5");
         nuevo.setNombre("Andres Chacon");
         nuevo.setCorreo("andresch95@gmail.com");
+        nuevo.setDireccion("Santa Julia 180");
         nuevo.setFechaNacimiento(Date.valueOf("1995-05-06"));
         nuevo.setHabilitado(true);
         nuevo.setSexo('M');

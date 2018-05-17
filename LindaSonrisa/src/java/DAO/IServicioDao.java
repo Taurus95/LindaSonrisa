@@ -10,4 +10,6 @@ public interface IServicioDao extends IBaseDao<ServicioDto> {
 
     public boolean deshabilitar(ServicioDto obj);
     
+    public boolean habilitar(ServicioDto obj);
+    
 }

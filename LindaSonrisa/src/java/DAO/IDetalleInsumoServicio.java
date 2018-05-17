@@ -7,4 +7,5 @@ import DTO.DetalleInsumoServicioDto;
 public interface IDetalleInsumoServicio extends IBaseDao<DetalleInsumoServicioDto> {
     
     public boolean eliminar(DetalleInsumoServicioDto obj);
+    
 }

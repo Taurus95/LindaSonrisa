@@ -33,5 +33,10 @@ public class ProveedorDaoImp implements IProveedorDao {
     public ProveedorDto buscar(ProveedorDto obj) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public boolean habilitar(ProveedorDto obj) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

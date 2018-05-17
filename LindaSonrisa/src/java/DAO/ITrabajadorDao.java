@@ -9,4 +9,5 @@ import DTO.TrabajadorDto;
 public interface ITrabajadorDao extends IBaseDao<TrabajadorDto> {
 
     public boolean deshabilitar(TrabajadorDto obj);
+    public boolean habilitar(TrabajadorDto obj);
 }

@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.List;
 import BBDD.Conexion;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -53,7 +54,7 @@ public class ClienteDaoImp implements IClienteDao {
                     ClienteDto aux = new ClienteDto();
                     aux.setRut(results.getString("rut"));
                     aux.setNombre(results.getString("nombre"));
-                    aux.setSexo(results.getString("sexo").charAt(0));
+                    aux.setSexo(results.getString("sexo"));
                     aux.setCorreo(results.getString("correo"));
                     aux.setDireccion(results.getString("direccion"));
                     aux.setTelefono(results.getString("telefono"));
@@ -86,7 +87,7 @@ public class ClienteDaoImp implements IClienteDao {
             sql.setString(4, String.valueOf(obj.getSexo()));
             sql.setString(5, obj.getDireccion());
             sql.setString(6, obj.getTelefono());
-            sql.setDate(7, obj.getFechaNacimiento());
+            sql.setDate(7, (Date) obj.getFechaNacimiento());
             sql.setString(8, obj.getContrasenia());
             sql.setBoolean(9, obj.isHabilitado());
 
@@ -114,7 +115,7 @@ public class ClienteDaoImp implements IClienteDao {
             //sql.setString(4, obj.getSexo());
             sql.setString(5, obj.getDireccion());
             sql.setString(6, obj.getTelefono());
-            sql.setDate(7, obj.getFechaNacimiento());
+            sql.setDate(7, (Date) obj.getFechaNacimiento());
             sql.setString(8, obj.getContrasenia());
             sql.setBoolean(9, obj.isHabilitado());
 

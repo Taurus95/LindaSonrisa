@@ -10,17 +10,17 @@ public class ClienteDto {
     private String rut; //PK
     private String nombre;
     private String correo;
-    private char sexo;
+    private String sexo;
     private String direccion;
     private String telefono;
-    private java.util.Date fechaNacimiento;
+    private java.sql.Date fechaNacimiento;
     private String contrasenia;
     private boolean habilitado;
 
     public ClienteDto() {
     }
 
-    public ClienteDto(String rut, String nombre, String correo, char sexo, String direccion, String telefono, Date fechaNacimiento, String contrasenia, boolean habilitado) {
+    public ClienteDto(String rut, String nombre, String correo, String sexo, String direccion, String telefono, Date fechaNacimiento, String contrasenia, boolean habilitado) {
         this.rut = rut;
         this.nombre = nombre;
         this.correo = correo;
@@ -31,6 +31,7 @@ public class ClienteDto {
         this.contrasenia = contrasenia;
         this.habilitado = habilitado;
     }
+    
 
     public String getRut() {
         return rut;
@@ -56,11 +57,11 @@ public class ClienteDto {
         this.correo = correo;
     }
 
-    public char getSexo() {
+    public String getSexo() {
         return sexo;
     }
 
-    public void setSexo(char sexo) {
+    public void setSexo(String sexo) {
         this.sexo = sexo;
     }
 
@@ -80,12 +81,12 @@ public class ClienteDto {
         this.telefono = telefono;
     }
 
-    public Date getFechaNacimiento() {
-        return (Date) fechaNacimiento;
+    public java.util.Date getFechaNacimiento() {
+        return fechaNacimiento;
     }
 
-    public void setFechaNacimiento(Date fechaNacimiento) {
-        this.fechaNacimiento = fechaNacimiento;
+    public void setFechaNacimiento(java.util.Date fechaNacimiento) {
+        this.fechaNacimiento = (Date) fechaNacimiento;
     }
 
     public String getContrasenia() {
@@ -107,7 +108,7 @@ public class ClienteDto {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 53 * hash + Objects.hashCode(this.rut);
+        hash = 59 * hash + Objects.hashCode(this.rut);
         return hash;
     }
 
@@ -133,7 +134,6 @@ public class ClienteDto {
     public String toString() {
         return "ClienteDto{" + "rut=" + rut + ", nombre=" + nombre + ", correo=" + correo + ", sexo=" + sexo + ", direccion=" + direccion + ", telefono=" + telefono + ", fechaNacimiento=" + fechaNacimiento + ", contrasenia=" + contrasenia + ", habilitado=" + habilitado + '}';
     }
-    
-    
+
     
 }

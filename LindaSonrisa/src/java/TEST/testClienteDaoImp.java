@@ -27,7 +27,7 @@ public class testClienteDaoImp {
         nuevo.setDireccion("Santa Julia 180");
         nuevo.setFechaNacimiento(Date.valueOf("1995-05-06"));
         nuevo.setHabilitado(true);
-        nuevo.setSexo('M');
+        nuevo.setSexo("masculino");
         nuevo.setTelefono("81865628");
         nuevo.setContrasenia(DigestUtils.md5Hex("andres"));
 

@@ -53,7 +53,7 @@ public class ClienteDaoImp implements IClienteDao {
                     ClienteDto aux = new ClienteDto();
                     aux.setRut(results.getString("rut"));
                     aux.setNombre(results.getString("nombre"));
-                    //aux.setSexo(results.getString("sexo"));
+                    aux.setSexo(results.getString("sexo").charAt(0));
                     aux.setCorreo(results.getString("correo"));
                     aux.setDireccion(results.getString("direccion"));
                     aux.setTelefono(results.getString("telefono"));

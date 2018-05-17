@@ -83,7 +83,7 @@ public class ClienteDaoImp implements IClienteDao {
             sql.setString(1, obj.getRut());
             sql.setString(2, obj.getNombre());
             sql.setString(3, obj.getCorreo());
-            //sql.setString(4, obj.getSexo());
+            sql.setString(4, String.valueOf(obj.getSexo()));
             sql.setString(5, obj.getDireccion());
             sql.setString(6, obj.getTelefono());
             sql.setDate(7, obj.getFechaNacimiento());
@@ -94,9 +94,9 @@ public class ClienteDaoImp implements IClienteDao {
                 return true;
             }
         } catch (SQLException s) {
-            log.error("Error SQL listando detalle " + s.getMessage());
+            log.error("Error SQL al agregar cliente" + s.getMessage());
         } catch (Exception e) {
-            log.error("Error al listar detalles " + e.getMessage());
+            log.error("Error al agregar cliente" + e.getMessage());
         }
         return false;
     }
@@ -123,9 +123,9 @@ public class ClienteDaoImp implements IClienteDao {
                 return true;
             }
         } catch (SQLException s) {
-            log.error("Error SQL listando detalle " + s.getMessage());
+            log.error("Error SQL al modificar cliente" + s.getMessage());
         } catch (Exception e) {
-            log.error("Error al listar detalles " + e.getMessage());
+            log.error("Error al modificar " + e.getMessage());
         }
         return false;
     }
@@ -159,7 +159,7 @@ public class ClienteDaoImp implements IClienteDao {
         } catch (SQLException s) {
             log.error("Error SQL buscando cliente " + s.getMessage());
         } catch (Exception e) {
-            log.error("Error al buscan cliente " + e.getMessage());
+            log.error("Error al buscar cliente " + e.getMessage());
         } finally {
             return aux;
         }

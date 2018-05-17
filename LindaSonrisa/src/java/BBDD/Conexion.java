@@ -4,6 +4,7 @@ import java.security.Principal;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
+
 public class Conexion {  
     private static final org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger(Principal.class);
     public static Connection getConexion() {
@@ -13,7 +14,7 @@ public class Conexion {
            String driverUrl="jdbc:oracle:thin:@localhost:1521:XE";
            Class.forName(driverClassName);
            connection = DriverManager.getConnection(
-                   driverUrl, "system","system");
+                   driverUrl, "CLS","CLS");
         }catch (Exception e) {
             log.error("Error en conexcion: "+e.getMessage());
         }

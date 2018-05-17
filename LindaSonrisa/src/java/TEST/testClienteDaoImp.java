@@ -42,8 +42,10 @@ public class testClienteDaoImp {
         aux.setRut("19.017.683-5");
         log.info("buscando elemento: "+implement.buscar(aux).toString());
         implement.deshabilitar(aux);
-        //proando
-
+        log.info("buscando elemento deshabilitado: "+implement.buscar(aux).toString());
+        implement.habilitar(aux);
+        log.info("buscando elemento habilitado: "+implement.buscar(aux).toString());
+       
     }
 
 }

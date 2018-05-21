@@ -21,7 +21,7 @@ public class testClienteDaoImp {
         log.info("Iniciando pruebas de clienteDaoImp");
         //objeto de prueba
         ClienteDto nuevo = new ClienteDto();
-        nuevo.setRut("19.017.683-5");
+        nuevo.setRut("24.017.683-5");
         nuevo.setNombre("Andres Chacon");
         nuevo.setCorreo("andresch95@gmail.com");
         nuevo.setDireccion("Santa Julia 180");
@@ -31,22 +31,22 @@ public class testClienteDaoImp {
         nuevo.setTelefono("81865628");
         nuevo.setContrasenia(DigestUtils.md5Hex("andres"));
 
-        log.info("ClienteDto creado"+nuevo.toString());
-        
+        log.info("ClienteDto creado " + nuevo.toString());
+
         //Dao implementado
         ClienteDaoImp implement = new ClienteDaoImp();
         //agregando nuevo
         implement.agregar(nuevo);
-        nuevo.setCorreo("andres@gmail.com");
+        nuevo.setCorreo("modificado@gmail.com");
         implement.modificar(nuevo);
         ClienteDto aux = new ClienteDto();
-        aux.setRut("19.017.683-5");
-        log.info("buscando elemento: "+implement.buscar(aux).toString());
+        aux.setRut("24.017.683-5");
+        log.info("buscando elemento modificado: " + implement.buscar(aux).toString());
         implement.deshabilitar(aux);
-        log.info("buscando elemento deshabilitado: "+implement.buscar(aux).toString());
+        log.info("buscando elemento deshabilitado: " + implement.buscar(aux).toString());
         implement.habilitar(aux);
-        log.info("buscando elemento habilitado: "+implement.buscar(aux).toString());
-       
+        log.info("buscando elemento habilitado: " + implement.buscar(aux).toString());
+
     }
 
 }

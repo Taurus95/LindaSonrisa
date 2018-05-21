@@ -14,7 +14,7 @@ public class Conexion {
            String driverUrl="jdbc:oracle:thin:@localhost:1521:XE";
            Class.forName(driverClassName);
            connection = DriverManager.getConnection(
-                   driverUrl, "CLS","CLS");
+                   driverUrl, "system","system");
         }catch (Exception e) {
             log.error("Error en conexcion: "+e.getMessage());
         }

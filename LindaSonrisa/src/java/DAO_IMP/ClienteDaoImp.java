@@ -23,12 +23,12 @@ public class ClienteDaoImp implements IClienteDao {
 
     @Override
     public boolean deshabilitar(ClienteDto cliente) {
-        String query = "UPDATE cliente WHERE rut=? SET habilitado=0;";
+        String query = "UPDATE cliente SET habilitado=0 WHERE rut=?";
         try (Connection connection = Conexion.getConexion()) {
             PreparedStatement sql = connection.prepareStatement(query);
             sql.setString(1, cliente.getRut());
 
-            //probando exceuteUpdate para ver que se afecto solo una row
+            //Si actualiza una row retorna
             if (sql.executeUpdate() == 1) {
                 connection.close();
                 return true;
@@ -46,7 +46,7 @@ public class ClienteDaoImp implements IClienteDao {
     @Override
     public List<ClienteDto> listar() {
         List<ClienteDto> list = new ArrayList<>();
-        String query = "SELECT * FROM cliente;";
+        String query = "SELECT * FROM cliente";
         try (Connection connection = Conexion.getConexion()) {
             PreparedStatement sql = connection.prepareStatement(query);
             try (ResultSet results = sql.executeQuery()) {
@@ -78,24 +78,24 @@ public class ClienteDaoImp implements IClienteDao {
     //agregar nuevo cliente
     @Override
     public boolean agregar(ClienteDto obj) {
-        String query = "INSERT INTO cliente VALUES(?,?,?,?,?,?,?,?,?);";
+        String query = "INSERT INTO cliente VALUES(?,?,?,?,?,?,?,?,?)";
         try (Connection connection = Conexion.getConexion()) {
             PreparedStatement sql = connection.prepareStatement(query);
             sql.setString(1, obj.getRut());
             sql.setString(2, obj.getNombre());
             sql.setString(3, obj.getCorreo());
-            sql.setString(4, String.valueOf(obj.getSexo()));
+            sql.setString(4, obj.getSexo());
             sql.setString(5, obj.getDireccion());
             sql.setString(6, obj.getTelefono());
             sql.setDate(7, (Date) obj.getFechaNacimiento());
             sql.setString(8, obj.getContrasenia());
             sql.setBoolean(9, obj.isHabilitado());
-
+            //Si retorna true agregamos correcto
             if (sql.execute()) {
                 return true;
             }
         } catch (SQLException s) {
-            log.error("Error SQL al agregar cliente" + s.getMessage());
+            log.error("Error SQL al agregar cliente: " + s.getMessage());
         } catch (Exception e) {
             log.error("Error al agregar cliente" + e.getMessage());
         }
@@ -105,19 +105,19 @@ public class ClienteDaoImp implements IClienteDao {
     //modificamos todo parametro del cliente, hasta su contraseña.
     @Override
     public boolean modificar(ClienteDto obj) {
-        String query = "UPDATE cliente WHERE rut=? SET nombre=?,correo=?,sexo=?,direccion=?,telefono=?,"
-                + "fecha_nacimiento=?,contraseña=?,habilitado=?";
+        String query = "UPDATE cliente SET nombre=?,correo=?,sexo=?,direccion=?,telefono=?,"
+                + "fecha_nacimiento=?,contraseña=?,habilitado=? WHERE rut=? ";
         try (Connection connection = Conexion.getConexion()) {
             PreparedStatement sql = connection.prepareStatement(query);
-            sql.setString(1, obj.getRut());
-            sql.setString(2, obj.getNombre());
-            sql.setString(3, obj.getCorreo());
-            //sql.setString(4, obj.getSexo());
-            sql.setString(5, obj.getDireccion());
-            sql.setString(6, obj.getTelefono());
-            sql.setDate(7, (Date) obj.getFechaNacimiento());
-            sql.setString(8, obj.getContrasenia());
-            sql.setBoolean(9, obj.isHabilitado());
+            sql.setString(9, obj.getRut());
+            sql.setString(1, obj.getNombre());
+            sql.setString(2, obj.getCorreo());
+            sql.setString(3, obj.getSexo());
+            sql.setString(4, obj.getDireccion());
+            sql.setString(5, obj.getTelefono());
+            sql.setDate(6, (Date) obj.getFechaNacimiento());
+            sql.setString(7, obj.getContrasenia());
+            sql.setBoolean(8, obj.isHabilitado());
 
             //probando executeUpdate para comprobar que actualizo una fila nada mas y no mas o menos.
             if (sql.executeUpdate() == 1) {
@@ -135,7 +135,7 @@ public class ClienteDaoImp implements IClienteDao {
     @Override
     public ClienteDto buscar(ClienteDto obj) {
         ClienteDto aux = new ClienteDto();
-        String query = "SELECT * FROM cliente WHERE rut = ?;";
+        String query = "SELECT * FROM cliente WHERE rut = ?";
         try (Connection connection = Conexion.getConexion()) {
 
             PreparedStatement sql = connection.prepareStatement(query);
@@ -145,7 +145,7 @@ public class ClienteDaoImp implements IClienteDao {
                 while (results.next()) {
                     aux.setRut(results.getString("rut"));
                     aux.setNombre(results.getString("nombre"));
-                    //aux.setSexo(results.getString("sexo"));
+                    aux.setSexo(results.getString("sexo"));
                     aux.setCorreo(results.getString("correo"));
                     aux.setDireccion(results.getString("direccion"));
                     aux.setTelefono(results.getString("telefono"));
@@ -169,12 +169,12 @@ public class ClienteDaoImp implements IClienteDao {
     //habilitamos cliente con su rut
     @Override
     public boolean habilitar(ClienteDto cliente) {
-        String query = "UPDATE cliente WHERE rut=? SET habilitado=1;";
+        String query = "UPDATE cliente SET habilitado=1  WHERE rut=?";
         try (Connection connection = Conexion.getConexion()) {
             PreparedStatement sql = connection.prepareStatement(query);
             sql.setString(1, cliente.getRut());
 
-            //probando con executeUpdate para ver que se afecto solo una row
+            //Si actualizamos un registro retornamos 
             if (sql.executeUpdate() == 1) {
                 connection.close();
                 return true;

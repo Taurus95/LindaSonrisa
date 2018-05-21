@@ -28,8 +28,9 @@ public class InsumoDaoImp implements IInsumoDao {
         try (Connection coneccion = Conexion.getConexion()) {
             PreparedStatement sql = coneccion.prepareStatement(query);
             ResultSet results = sql.executeQuery();
-            InsumoDto obj = new InsumoDto();
+
             while (results.next()) {
+                InsumoDto obj = new InsumoDto();
                 obj.setIdInsumo(results.getInt("id_insumo"));
                 obj.setDescripcion(results.getString("descripcion"));
                 obj.setCantidadActual(results.getInt("cantidad_actual"));
@@ -55,9 +56,10 @@ public class InsumoDaoImp implements IInsumoDao {
             PreparedStatement sql = coneccion.prepareStatement(query);
             sql.setInt(1, obj.getIdInsumo());
             ResultSet results = sql.executeQuery();
-            DetalleInsumoDto aux = new DetalleInsumoDto();
-            aux.setIdInsumo(obj.getIdInsumo());
+
             while (results.next()) {
+                DetalleInsumoDto aux = new DetalleInsumoDto();
+                aux.setIdInsumo(obj.getIdInsumo());
                 aux.setCodigo(results.getString("codigo"));
                 aux.setCantidadActual(results.getInt("cantidad_actual"));
                 aux.setFechaLlegada(results.getDate("fecha_llegada"));
@@ -81,8 +83,9 @@ public class InsumoDaoImp implements IInsumoDao {
         try (Connection coneccion = Conexion.getConexion()) {
             PreparedStatement sql = coneccion.prepareStatement(query);
             ResultSet results = sql.executeQuery();
-            InsumoDto obj = new InsumoDto();
+
             while (results.next()) {
+                InsumoDto obj = new InsumoDto();
                 obj.setIdInsumo(results.getInt("id_insumo"));
                 obj.setDescripcion(results.getString("descripcion"));
                 obj.setCantidadActual(results.getInt("cantidad_actual"));
@@ -167,10 +170,10 @@ public class InsumoDaoImp implements IInsumoDao {
         }
         return obj;
     }
-    
+
     //funcion para cnocer el id del ultimo agregado
-    public int ultimoId(){
-         String query = "SELECT MAX(id_insumo) as id FROM insumo";
+    public int ultimoId() {
+        String query = "SELECT MAX(id_insumo) as id FROM insumo";
         try (Connection coneccion = Conexion.getConexion()) {
             PreparedStatement sql = coneccion.prepareStatement(query);
             ResultSet results = sql.executeQuery();

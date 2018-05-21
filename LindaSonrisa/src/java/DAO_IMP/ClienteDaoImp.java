@@ -65,6 +65,7 @@ public class ClienteDaoImp implements IClienteDao {
             } catch (Exception e) {
                 log.error("Error al obtener resultset de listado: " + e.getMessage());
             }
+            connection.close();
 
         } catch (SQLException s) {
             log.error("Error SQL listando cliente " + s.getMessage());
@@ -92,6 +93,7 @@ public class ClienteDaoImp implements IClienteDao {
             sql.setBoolean(9, obj.isHabilitado());
             //Si retorna true agregamos correcto
             if (sql.execute()) {
+                connection.close();
                 return true;
             }
         } catch (SQLException s) {
@@ -121,6 +123,7 @@ public class ClienteDaoImp implements IClienteDao {
 
             //probando executeUpdate para comprobar que actualizo una fila nada mas y no mas o menos.
             if (sql.executeUpdate() == 1) {
+                connection.close();
                 return true;
             }
         } catch (SQLException s) {
@@ -156,6 +159,7 @@ public class ClienteDaoImp implements IClienteDao {
             } catch (Exception e) {
                 log.error("Error al obtener resultset de buscar: " + e.getMessage());
             }
+            connection.close();
 
         } catch (SQLException s) {
             log.error("Error SQL buscando cliente " + s.getMessage());

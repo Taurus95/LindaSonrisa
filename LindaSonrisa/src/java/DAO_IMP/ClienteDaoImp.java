@@ -137,7 +137,6 @@ public class ClienteDaoImp implements IClienteDao {
     //buscar regresa un cliente filtrado por su rut//
     @Override
     public ClienteDto buscar(ClienteDto obj) {
-        ClienteDto aux = new ClienteDto();
         String query = "SELECT * FROM cliente WHERE rut = ?";
         try (Connection connection = Conexion.getConexion()) {
 
@@ -146,15 +145,15 @@ public class ClienteDaoImp implements IClienteDao {
 
             try (ResultSet results = sql.executeQuery()) {
                 while (results.next()) {
-                    aux.setRut(results.getString("rut"));
-                    aux.setNombre(results.getString("nombre"));
-                    aux.setSexo(results.getString("sexo"));
-                    aux.setCorreo(results.getString("correo"));
-                    aux.setDireccion(results.getString("direccion"));
-                    aux.setTelefono(results.getString("telefono"));
-                    aux.setFechaNacimiento(results.getDate("fecha_nacimiento"));
-                    aux.setHabilitado(results.getBoolean("habilitado"));
-                    aux.setContrasenia(results.getString("contraseña"));
+                    obj.setRut(results.getString("rut"));
+                    obj.setNombre(results.getString("nombre"));
+                    obj.setSexo(results.getString("sexo"));
+                    obj.setCorreo(results.getString("correo"));
+                    obj.setDireccion(results.getString("direccion"));
+                    obj.setTelefono(results.getString("telefono"));
+                    obj.setFechaNacimiento(results.getDate("fecha_nacimiento"));
+                    obj.setHabilitado(results.getBoolean("habilitado"));
+                    obj.setContrasenia(results.getString("contraseña"));
                 }
             } catch (Exception e) {
                 log.error("Error al obtener resultset de buscar: " + e.getMessage());
@@ -166,7 +165,7 @@ public class ClienteDaoImp implements IClienteDao {
         } catch (Exception e) {
             log.error("Error al buscar cliente " + e.getMessage());
         } finally {
-            return aux;
+            return obj;
         }
     }
 

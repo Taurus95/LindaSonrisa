@@ -18,6 +18,7 @@ public class FichaSocialDaoImp implements IBaseDao<FichaSocialDto> {
 
     private static final org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger(Principal.class);
 
+    //creo que este metodo no sera necesario, de serlo se crea
     @Override
     public List<FichaSocialDto> listar() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -75,18 +76,17 @@ public class FichaSocialDaoImp implements IBaseDao<FichaSocialDto> {
     @Override
     public FichaSocialDto buscar(FichaSocialDto obj) {
         String query= "SELECT * FROM ficha_social WHERE rut_cliente = ?";
-        FichaSocialDto aux = new FichaSocialDto();
         try(Connection conecion = Conexion.getConexion()){
             PreparedStatement sql = conecion.prepareStatement(query);
             sql.setString(1, obj.getRutCliente());
             try(ResultSet result = sql.executeQuery()){
                 while(result.next()){
-                    aux.setRutCliente(result.getString("rut_cliente"));
-                    aux.setLiquidacion1(result.getBlob("liquidacion1"));
-                    aux.setLiquidacion2(result.getBlob("liquidacion2"));
-                    aux.setLiquidacion3(result.getBlob("liquidacion3"));
-                    aux.setCertificadoAFP(result.getBlob("certificado_AFP"));
-                    aux.setFiniquito(result.getBlob("finiquito"));
+                    obj.setRutCliente(result.getString("rut_cliente"));
+                    obj.setLiquidacion1(result.getBlob("liquidacion1"));
+                    obj.setLiquidacion2(result.getBlob("liquidacion2"));
+                    obj.setLiquidacion3(result.getBlob("liquidacion3"));
+                    obj.setCertificadoAFP(result.getBlob("certificado_AFP"));
+                    obj.setFiniquito(result.getBlob("finiquito"));
                 }
             }
             conecion.close();
@@ -95,7 +95,7 @@ public class FichaSocialDaoImp implements IBaseDao<FichaSocialDto> {
         } catch (Exception e) {
             log.error("Error buscando ficha social " + e.getMessage());
         }
-        return aux;
+        return obj;
     }
 
 }

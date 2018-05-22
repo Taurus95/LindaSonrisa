@@ -10,6 +10,7 @@ public class TrabajadorDto {
     private String rut;//PK
     private String nombre;
     private java.util.Date fechaNacimiento;
+    private String sexo;
     private String correo;
     private String direccion;
     private String telefono;
@@ -21,10 +22,11 @@ public class TrabajadorDto {
     public TrabajadorDto() {
     }
 
-    public TrabajadorDto(String rut, String nombre, Date fechaNacimiento, String correo, String direccion, String telefono, String contrasenia, String tipo, String especialidad, boolean habilitado) {
+    public TrabajadorDto(String rut, String nombre, Date fechaNacimiento, String sexo, String correo, String direccion, String telefono, String contrasenia, String tipo, String especialidad, boolean habilitado) {
         this.rut = rut;
         this.nombre = nombre;
         this.fechaNacimiento = fechaNacimiento;
+        this.sexo = sexo;
         this.correo = correo;
         this.direccion = direccion;
         this.telefono = telefono;
@@ -56,6 +58,14 @@ public class TrabajadorDto {
 
     public void setFechaNacimiento(Date fechaNacimiento) {
         this.fechaNacimiento = fechaNacimiento;
+    }
+    
+    public String getSexo(){
+        return sexo;
+    }
+    
+    public void setSexo (String sexo){
+        this.sexo = sexo;
     }
 
     public String getCorreo() {
@@ -141,7 +151,7 @@ public class TrabajadorDto {
 
     @Override
     public String toString() {
-        return "TrabajadorDto{" + "rut=" + rut + ", nombre=" + nombre + ", fechaNacimiento=" + fechaNacimiento + ", correo=" + correo + ", direccion=" + direccion + ", telefono=" + telefono + ", contrasenia=" + contrasenia + ", tipo=" + tipo + ", especialidad=" + especialidad + ", habilitado=" + habilitado + '}';
+        return "TrabajadorDto{" + "rut=" + rut + ", nombre=" + nombre + ", fechaNacimiento=" + fechaNacimiento + ", sexo=" + sexo +", correo=" + correo + ", direccion=" + direccion + ", telefono=" + telefono + ", contrasenia=" + contrasenia + ", tipo=" + tipo + ", especialidad=" + especialidad + ", habilitado=" + habilitado + '}';
     }
     
     

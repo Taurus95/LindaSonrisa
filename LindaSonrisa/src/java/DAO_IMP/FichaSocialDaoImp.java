@@ -27,8 +27,8 @@ public class FichaSocialDaoImp implements IBaseDao<FichaSocialDto> {
     @Override
     public boolean agregar(FichaSocialDto obj) {
         String query = "INSERT INTO ficha_social VAlUES(?,?,?,?,?,?)";
-        try (Connection conecion = Conexion.getConexion()) {
-            PreparedStatement sql = conecion.prepareStatement(query);
+        try (Connection conection = Conexion.getConexion()) {
+            PreparedStatement sql = conection.prepareStatement(query);
             sql.setString(1, obj.getRutCliente());
             sql.setBlob(5, obj.getCertificadoAFP());
             sql.setBlob(6, obj.getFiniquito());
@@ -37,7 +37,7 @@ public class FichaSocialDaoImp implements IBaseDao<FichaSocialDto> {
             sql.setBlob(4, obj.getLiquidacion3());
 
             if (sql.execute()) {
-                conecion.close();
+                conection.close();
                 return true;
             }
         } catch (SQLException ex) {
@@ -52,8 +52,8 @@ public class FichaSocialDaoImp implements IBaseDao<FichaSocialDto> {
     public boolean modificar(FichaSocialDto obj) {
         String query = "UPDATE ficha_social SET liquidacion1=?,liquidacion2=?,liquidacion3=?,"
                 + "certificado_AFP=?,finiquito=? WHERE rut_cliente=?";
-        try (Connection conecion = Conexion.getConexion()) {
-            PreparedStatement sql = conecion.prepareStatement(query);
+        try (Connection conection = Conexion.getConexion()) {
+            PreparedStatement sql = conection.prepareStatement(query);
             sql.setString(6, obj.getRutCliente());
             sql.setBlob(4, obj.getCertificadoAFP());
             sql.setBlob(5, obj.getFiniquito());
@@ -62,7 +62,7 @@ public class FichaSocialDaoImp implements IBaseDao<FichaSocialDto> {
             sql.setBlob(3, obj.getLiquidacion3());
 
             if (sql.executeUpdate() == 1) {
-                conecion.close();
+                conection.close();
                 return true;
             }
         } catch (SQLException ex) {
@@ -76,8 +76,8 @@ public class FichaSocialDaoImp implements IBaseDao<FichaSocialDto> {
     @Override
     public FichaSocialDto buscar(FichaSocialDto obj) {
         String query= "SELECT * FROM ficha_social WHERE rut_cliente = ?";
-        try(Connection conecion = Conexion.getConexion()){
-            PreparedStatement sql = conecion.prepareStatement(query);
+        try(Connection conection = Conexion.getConexion()){
+            PreparedStatement sql = conection.prepareStatement(query);
             sql.setString(1, obj.getRutCliente());
             try(ResultSet result = sql.executeQuery()){
                 while(result.next()){
@@ -89,7 +89,7 @@ public class FichaSocialDaoImp implements IBaseDao<FichaSocialDto> {
                     obj.setFiniquito(result.getBlob("finiquito"));
                 }
             }
-            conecion.close();
+            conection.close();
         } catch (SQLException ex) {
             log.error("Error buscando ficha social " + ex.getMessage());
         } catch (Exception e) {

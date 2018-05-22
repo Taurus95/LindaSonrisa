@@ -28,6 +28,10 @@ public class DetalleInsumoDaoImp implements IBaseDao<DetalleInsumoDto> {
     public DetalleInsumoDto buscarMasAntiguoConCantidad(int id_insumo) {
         String query = "SELECT * FROM detalle_insumo WHERE fecha_vencimiento=(SELECT MIN(fecha_vencimiento) FROM"
                 + "detalle insumo) AND cantidad_actual != 0 AND id_insumo=?";
+        //QUERY QUE SI FUNCIONA
+        //select * from detalle_insumo where fecha_vencimiento=
+        //(select min(fecha_vencimiento) from detalle_insumo  where id_insumo=? and Cantidad_Actual not in (0));
+
         try (Connection coneccion = Conexion.getConexion()) {
             PreparedStatement sql = coneccion.prepareStatement(query);
             sql.setInt(1, id_insumo);

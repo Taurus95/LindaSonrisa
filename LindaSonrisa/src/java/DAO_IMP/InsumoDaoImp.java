@@ -22,11 +22,11 @@ public class InsumoDaoImp implements IInsumoDao {
 
     @Override
     public List<InsumoDto> buscarCriticos() {
-        //probar query
-        String query = "SELECT * FROM insumo WHERE cantidad_actual < cantidad_critica ";
+        //Query Correcta
+        String query = "SELECT * FROM insumo WHERE cantidad_actual < cantidad_critica";
         List<InsumoDto> list = new ArrayList<>();
-        try (Connection coneccion = Conexion.getConexion()) {
-            PreparedStatement sql = coneccion.prepareStatement(query);
+        try (Connection conexion = Conexion.getConexion()) {
+            PreparedStatement sql = conexion.prepareStatement(query);
             ResultSet results = sql.executeQuery();
 
             while (results.next()) {
@@ -38,7 +38,7 @@ public class InsumoDaoImp implements IInsumoDao {
                 obj.setCantidadMaxima(results.getInt("cantidad_maxima"));
                 list.add(obj);
             }
-            coneccion.close();
+            conexion.close();
 
         } catch (SQLException ex) {
             log.error("Error listando criticos insumo " + ex.getMessage());
@@ -52,8 +52,8 @@ public class InsumoDaoImp implements IInsumoDao {
     public List<DetalleInsumoDto> buscarDetalles(InsumoDto obj) {
         String query = "SELECT * FROM detalle_insumo WHERE id_insumo =?";
         List<DetalleInsumoDto> list = new ArrayList<>();
-        try (Connection coneccion = Conexion.getConexion()) {
-            PreparedStatement sql = coneccion.prepareStatement(query);
+        try (Connection conexion = Conexion.getConexion()) {
+            PreparedStatement sql = conexion.prepareStatement(query);
             sql.setInt(1, obj.getIdInsumo());
             ResultSet results = sql.executeQuery();
 
@@ -80,8 +80,8 @@ public class InsumoDaoImp implements IInsumoDao {
     public List<InsumoDto> listar() {
         String query = "SELECT * FROM insumo ";
         List<InsumoDto> list = new ArrayList<>();
-        try (Connection coneccion = Conexion.getConexion()) {
-            PreparedStatement sql = coneccion.prepareStatement(query);
+        try (Connection conexion = Conexion.getConexion()) {
+            PreparedStatement sql = conexion.prepareStatement(query);
             ResultSet results = sql.executeQuery();
 
             while (results.next()) {
@@ -93,7 +93,7 @@ public class InsumoDaoImp implements IInsumoDao {
                 obj.setCantidadMaxima(results.getInt("cantidad_maxima"));
                 list.add(obj);
             }
-            coneccion.close();
+            conexion.close();
 
         } catch (SQLException ex) {
             log.error("Error listando insumo " + ex.getMessage());
@@ -106,15 +106,15 @@ public class InsumoDaoImp implements IInsumoDao {
     @Override
     public boolean agregar(InsumoDto obj) {
         String query = "INSERT INTO insumo(descripcion,cantidad_actual,cantidad_critica,cantidad_maxima) VALUES(?,?,?,?)";
-        try (Connection coneccion = Conexion.getConexion()) {
-            PreparedStatement sql = coneccion.prepareStatement(query);
+        try (Connection conexion = Conexion.getConexion()) {
+            PreparedStatement sql = conexion.prepareStatement(query);
             sql.setString(1, obj.getDescripcion());
             sql.setInt(2, obj.getCantidadActual());
             sql.setInt(3, obj.getCantidadCritica());
             sql.setInt(4, obj.getCantidadMaxima());
 
             if (sql.execute()) {
-                coneccion.close();
+                conexion.close();
                 return true;
             }
         } catch (SQLException ex) {
@@ -128,8 +128,8 @@ public class InsumoDaoImp implements IInsumoDao {
     @Override
     public boolean modificar(InsumoDto obj) {
         String query = "UPDATE insumo SET descripcion=?,cantidad_actual=?,cantidad_critica=?,cantidad_maxima=? WHERE id_insumo=?";
-        try (Connection coneccion = Conexion.getConexion()) {
-            PreparedStatement sql = coneccion.prepareStatement(query);
+        try (Connection conexion = Conexion.getConexion()) {
+            PreparedStatement sql = conexion.prepareStatement(query);
             sql.setString(1, obj.getDescripcion());
             sql.setInt(2, obj.getCantidadActual());
             sql.setInt(3, obj.getCantidadCritica());
@@ -137,7 +137,7 @@ public class InsumoDaoImp implements IInsumoDao {
             sql.setInt(5, obj.getIdInsumo());
 
             if (sql.executeUpdate() == 1) {
-                coneccion.close();
+                conexion.close();
                 return true;
             }
         } catch (SQLException ex) {
@@ -151,8 +151,8 @@ public class InsumoDaoImp implements IInsumoDao {
     @Override
     public InsumoDto buscar(InsumoDto obj) {
         String query = "SELECT * FROM insumo WHERE id_insumo = ?";
-        try (Connection coneccion = Conexion.getConexion()) {
-            PreparedStatement sql = coneccion.prepareStatement(query);
+        try (Connection conexion = Conexion.getConexion()) {
+            PreparedStatement sql = conexion.prepareStatement(query);
             sql.setInt(1, obj.getIdInsumo());
             ResultSet results = sql.executeQuery();
             while (results.next()) {
@@ -161,7 +161,7 @@ public class InsumoDaoImp implements IInsumoDao {
                 obj.setCantidadCritica(results.getInt("cantidad_critica"));
                 obj.setCantidadMaxima(results.getInt("cantidad_maxima"));
             }
-            coneccion.close();
+            conexion.close();
 
         } catch (SQLException ex) {
             log.error("Error buscando insumo " + ex.getMessage());
@@ -171,16 +171,16 @@ public class InsumoDaoImp implements IInsumoDao {
         return obj;
     }
 
-    //funcion para cnocer el id del ultimo agregado
+    //funcion para conocer el id del ultimo agregado
     public int ultimoId() {
         String query = "SELECT MAX(id_insumo) as id FROM insumo";
-        try (Connection coneccion = Conexion.getConexion()) {
-            PreparedStatement sql = coneccion.prepareStatement(query);
+        try (Connection conexion = Conexion.getConexion()) {
+            PreparedStatement sql = conexion.prepareStatement(query);
             ResultSet results = sql.executeQuery();
             while (results.next()) {
                 return results.getInt("id");
             }
-            coneccion.close();
+            conexion.close();
 
         } catch (SQLException ex) {
             log.error("Error listando insumo " + ex.getMessage());

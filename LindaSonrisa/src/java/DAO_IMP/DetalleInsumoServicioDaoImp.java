@@ -83,6 +83,7 @@ public class DetalleInsumoServicioDaoImp implements IDetalleInsumoServicio {
 
     @Override
     public DetalleInsumoServicioDto buscar(DetalleInsumoServicioDto obj) {
+        //no aplica
         return null;
     }
 

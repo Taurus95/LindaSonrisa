@@ -10,7 +10,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import DAO_IMP.InsumoDaoImp;
 import DTO.InsumoDto;
 
 /**
@@ -26,11 +25,8 @@ public class DetalleInsumoDaoImp implements IBaseDao<DetalleInsumoDto> {
     //cantidad
     //devolvera el detalle insumo del cual consume un servicio
     public DetalleInsumoDto buscarMasAntiguoConCantidad(int id_insumo) {
-        String query = "SELECT * FROM detalle_insumo WHERE fecha_vencimiento=(SELECT MIN(fecha_vencimiento) FROM"
-                + "detalle insumo) AND cantidad_actual != 0 AND id_insumo=?";
-        //QUERY QUE SI FUNCIONA
-        //select * from detalle_insumo where fecha_vencimiento=
-        //(select min(fecha_vencimiento) from detalle_insumo  where id_insumo=? and Cantidad_Actual not in (0));
+        String query = "SELECT * FROM detalle_insumo WHERE fecha_vencimiento=(SELECT MIN(fecha_vencimiento)"
+                + " FROM detalle_insumo  WHERE id_insumo=? and Cantidad_Actual not in (0)) AND id_insumo=? AND Cantidad_Actual not in (0)";
 
         try (Connection coneccion = Conexion.getConexion()) {
             PreparedStatement sql = coneccion.prepareStatement(query);

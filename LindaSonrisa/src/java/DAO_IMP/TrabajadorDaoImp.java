@@ -82,14 +82,14 @@ public class TrabajadorDaoImp implements ITrabajadorDao {
                 + "contraseña=?,tipo=?,especialidad=?,habilitado=? WHERE rut=? ";
         try (Connection connection = Conexion.getConexion()) {
             PreparedStatement sql = connection.prepareStatement(query);
-                        
+
             sql.setString(9, trabajador.getRut());
             sql.setString(1, trabajador.getNombre());
-            sql.setDate(2, (Date) trabajador.getFechaNacimiento());            
+            sql.setDate(2, (Date) trabajador.getFechaNacimiento());
             sql.setString(3, trabajador.getSexo());
             sql.setString(4, trabajador.getCorreo());
             sql.setString(5, trabajador.getDireccion());
-            sql.setString(6, trabajador.getTelefono());            
+            sql.setString(6, trabajador.getTelefono());
             sql.setString(7, trabajador.getContrasenia());
             sql.setString(8, trabajador.getTipo());
             sql.setString(9, trabajador.getEspecialidad());
@@ -126,11 +126,12 @@ public class TrabajadorDaoImp implements ITrabajadorDao {
                     trabajador.setCorreo(results.getString("correo"));
                     trabajador.setDireccion(results.getString("direccion"));
                     trabajador.setTelefono(results.getString("telefono"));
-                    trabajador.setContrasenia(results.getString("contraseña"));                    
+                    trabajador.setContrasenia(results.getString("contraseña"));
                     trabajador.setTipo(results.getString("tipo"));
-                    trabajador.setEspecialidad(results.getString("especialidad"));                    
+                    trabajador.setEspecialidad(results.getString("especialidad"));
                     trabajador.setHabilitado(results.getBoolean("habilitado"));
-                    
+                    return trabajador;
+
                 }
             } catch (Exception e) {
                 log.error("Error al obtener resultset de buscar: " + e.getMessage());
@@ -141,10 +142,8 @@ public class TrabajadorDaoImp implements ITrabajadorDao {
             log.error("Error SQL buscando trabajador " + s.getMessage());
         } catch (Exception e) {
             log.error("Error al buscar trabajador " + e.getMessage());
-        } finally {
-            
-            return trabajador;
         }
+        return null;
     }
 
     @Override

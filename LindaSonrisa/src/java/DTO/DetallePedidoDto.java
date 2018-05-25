@@ -1,22 +1,32 @@
-
 package DTO;
 
+import java.sql.Date;
 
 public class DetallePedidoDto {
-    
+
     private int idPedido;//FK
     private int idInsumo;
     private int cantidad;
     private int precioUnidad;
+    private Date fecha_vencimiento;
 
     public DetallePedidoDto() {
     }
 
-    public DetallePedidoDto(int idPedido, int idInsumo, int cantidad, int precioUnidad) {
+    public DetallePedidoDto(int idPedido, int idInsumo, int cantidad, int precioUnidad, Date fecha_vencimiento) {
         this.idPedido = idPedido;
         this.idInsumo = idInsumo;
         this.cantidad = cantidad;
         this.precioUnidad = precioUnidad;
+        this.fecha_vencimiento = fecha_vencimiento;
+    }
+
+    public Date getFecha_vencimiento() {
+        return fecha_vencimiento;
+    }
+
+    public void setFecha_vencimiento(Date fecha_vencimiento) {
+        this.fecha_vencimiento = fecha_vencimiento;
     }
 
     public int getIdPedido() {
@@ -53,10 +63,7 @@ public class DetallePedidoDto {
 
     @Override
     public String toString() {
-        return "DetallePedidoDto{" + "idPedido=" + idPedido + ", idInsumo=" + idInsumo + ", cantidad=" + cantidad + ", precioUnidad=" + precioUnidad + '}';
+        return "DetallePedidoDto{" + "idPedido=" + idPedido + ", idInsumo=" + idInsumo + ", cantidad=" + cantidad + ", precioUnidad=" + precioUnidad + ", fecha_vencimiento=" + fecha_vencimiento + '}';
     }
-    
-    
-    
-    
+
 }

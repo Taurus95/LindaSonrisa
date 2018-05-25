@@ -8,7 +8,7 @@ create table Cliente(
     direccion varchar(100) not null,
     telefono varchar(20) not null,
     fecha_nacimiento date not null,
-    contraseña varchar(150)not null,
+    contraseï¿½a varchar(150)not null,
     habilitado number(2)not null);               
 
 create  table Insumo (
@@ -33,7 +33,7 @@ create  table Trabajador (
   correo varchar2(50),
   direccion varchar2(100)  NOT NULL,
   telefono varchar2(20)  NOT NULL,
-  contraseña varchar(100)  NOT NULL,
+  contraseï¿½a varchar(100)  NOT NULL,
   tipo varchar2(20)  NOT NULL,
   especialidad varchar(50) not null,
   habilitado number(1) NOT NULL);
@@ -103,6 +103,7 @@ create table Detalle_Pedido (
   id_insumo number(11) NOT NULL,
   cantidad number(11) NOT NULL,
   precio_unidad number(11) NOT NULL,
+  fecha_vencimiento date,
 	constraint Detalle_Pedido_Pedido_fk foreign key(id_pedido) references Pedido(id_pedido));
     
 
@@ -173,7 +174,7 @@ INSERT INTO Servicio (nombre,descripcion,precio,habilitado) VALUES ('Odontologia
 
 INSERT INTO Trabajador VALUES ('11.756.660-9', 'Roberto Gonzales Feliciano', '19/02/1987', 'M', 'Roberto.GF@hotmail.com', 'Independencia N1167, Santiago', '9 828273546', '66df9ccc4f5eda4b4fff1a68e3f3dbcd', 'Dentista', 'General', 1);
 INSERT INTO Trabajador VALUES ('13.831.883-4', 'Diana Rodriguez Papala', '01/01/1998', 'F', 'DianaR@outlook.com', 'Av. Perez N872, Buin', '9 82937452', '38693b6fab3e37d602488565b8e28736', 'Secretaria', 'Endodoncia', 1);
-INSERT INTO Trabajador VALUES('16.014.886-1', 'Luis Fernandez Hurtado', '10/11/1985', 'M', 'LuisFer@outlook.com', 'Las hermanas N333, Paine', '9 63527163', '65f86f5d73caeb793c777836dfa01c7b', 'Administrativo', 'Odontopediatría', 1);
+INSERT INTO Trabajador VALUES('16.014.886-1', 'Luis Fernandez Hurtado', '10/11/1985', 'M', 'LuisFer@outlook.com', 'Las hermanas N333, Paine', '9 63527163', '65f86f5d73caeb793c777836dfa01c7b', 'Administrativo', 'Odontopediatrï¿½a', 1);
 
 INSERT INTO Consulta (id_servicio,fecha,rut_cliente,rut_trabajador,estado,total) VALUES( 1, '11/05/2017', '18.876.827-3', '11.756.660-9', 'Realizada', 15000);
 INSERT INTO Consulta (id_servicio,fecha,rut_cliente,rut_trabajador,estado,total) VALUES( 2, '19/11/2017', '19.017.683-5', '11.756.660-9', 'Realizada', 25000);

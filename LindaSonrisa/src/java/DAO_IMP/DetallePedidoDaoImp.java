@@ -15,7 +15,7 @@ import java.sql.ResultSet;
  * @author andres
  */
 public class DetallePedidoDaoImp implements IBaseDao<DetallePedidoDto> {
-
+    
     private static final org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger(Principal.class);
 
     //no aplica
@@ -23,16 +23,17 @@ public class DetallePedidoDaoImp implements IBaseDao<DetallePedidoDto> {
     public List<DetallePedidoDto> listar() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    
     @Override
     public boolean agregar(DetallePedidoDto obj) {
-        String query = "INSERT INTO detalle_pedido (?,?,?,?)";
+        String query = "INSERT INTO detalle_pedido (?,?,?,?,?)";
         try (Connection conexion = Conexion.getConexion()) {
             PreparedStatement sql = conexion.prepareStatement(query);
             sql.setInt(1, obj.getIdPedido());
             sql.setInt(2, obj.getIdInsumo());
             sql.setInt(3, obj.getCantidad());
             sql.setInt(4, obj.getPrecioUnidad());
+            sql.setDate(5, obj.getFecha_vencimiento());
             if (sql.execute()) {
                 conexion.close();
                 return true;
@@ -44,16 +45,17 @@ public class DetallePedidoDaoImp implements IBaseDao<DetallePedidoDto> {
         }
         return false;
     }
-
+    
     @Override
     public boolean modificar(DetallePedidoDto obj) {
-        String query = "UPDATE detalle_pedido SET cantidad=?,precio_unidad=? WHERE id_pedido=? AND id_insumo=?";
+        String query = "UPDATE detalle_pedido SET cantidad=?,precio_unidad=?,fecha_vencimiento=? WHERE id_pedido=? AND id_insumo=?";
         try (Connection conexion = Conexion.getConexion()) {
             PreparedStatement sql = conexion.prepareStatement(query);
             sql.setInt(1, obj.getCantidad());
             sql.setInt(2, obj.getPrecioUnidad());
-            sql.setInt(3, obj.getIdPedido());
-            sql.setInt(4, obj.getIdInsumo());
+            sql.setInt(4, obj.getIdPedido());
+            sql.setInt(5, obj.getIdInsumo());
+            sql.setDate(3, obj.getFecha_vencimiento());
             if (sql.executeUpdate() == 1) {
                 conexion.close();
                 return true;
@@ -65,18 +67,19 @@ public class DetallePedidoDaoImp implements IBaseDao<DetallePedidoDto> {
         }
         return false;
     }
-
+    
     @Override
     public DetallePedidoDto buscar(DetallePedidoDto obj) {
         String query = "SELECT * FROM detalle_pedido WHERE id_pedido=?";
         try (Connection conexion = Conexion.getConexion()) {
             PreparedStatement sql = conexion.prepareStatement(query);
             sql.setInt(1, obj.getIdPedido());
-            sql.setInt(2, obj.getIdInsumo());
             ResultSet result = sql.executeQuery();
             while (result.next()) {
                 obj.setCantidad(result.getInt("cantidad"));
                 obj.setPrecioUnidad(result.getInt("precio_unidad"));
+                obj.setFecha_vencimiento(result.getDate("fecha_vencimiento"));
+                obj.setIdInsumo(result.getInt("id_insumo"));
                 conexion.close();
                 return obj;
             }
@@ -87,5 +90,5 @@ public class DetallePedidoDaoImp implements IBaseDao<DetallePedidoDto> {
         }
         return null;
     }
-
+    
 }

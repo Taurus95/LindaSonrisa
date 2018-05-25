@@ -13,9 +13,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import DAO_IMP.DetallePedidoDaoImp;
 import DTO.DetalleInsumoDto;
-import DAO_IMP.DetalleInsumoDaoImp;
 import DTO.DetallePedidoDto;
 
 /**
@@ -140,11 +138,16 @@ public class PedidoDaoImp implements IPedidoDao {
             if (sql.executeUpdate() == 1) {
                 //si el estado se actualiza a recibido, entonces agregaremos el detalle de este pedido como un
                 //detalle de insumo para qie pase a ser parte del inventario
-                if ("recibido".equals(obj.getEstado())) {
-                    DetallePedidoDto aux = new DetallePedidoDto(obj.getIdPedido(), 0, 0, 0);
+                if ("Realizada".equals(obj.getEstado())) {
+                    DetallePedidoDto aux = new DetallePedidoDto(obj.getIdPedido(), 0, 0, 0, null);
                     aux = new DetallePedidoDaoImp().buscar(aux);
+                    String codigo = obj.getRutProveedor() + aux.getIdInsumo() + ((aux.getFecha_vencimiento() != null) ? aux.getFecha_vencimiento() : " ");
+                    DetalleInsumoDto detalleInsumo = new DetalleInsumoDto(codigo, aux.getIdInsumo(), aux.getCantidad(), aux.getFecha_vencimiento(),
+                            aux.getPrecioUnidad(), aux.getFecha_vencimiento());
+                    if (new DetalleInsumoDaoImp().agregar(detalleInsumo)) {
+                        log.info("Pedido actualizado a realizado y detalle insumo agregado correctamente.");
 
-                    //DetalleInsumoDto detalleInsumo = new DetalleInsumoDto(, 0, 0, null, 0, null);
+                    }
                 }
                 conexion.close();
                 return true;

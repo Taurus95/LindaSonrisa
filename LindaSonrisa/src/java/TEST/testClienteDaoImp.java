@@ -21,7 +21,7 @@ public class testClienteDaoImp {
         log.info("Iniciando pruebas de clienteDaoImp");
         //objeto de prueba
         ClienteDto nuevo = new ClienteDto();
-        nuevo.setRut("24.017.683-5");
+        nuevo.setRut("31.017.683-5");
         nuevo.setNombre("Andres Chacon");
         nuevo.setCorreo("andresch95@gmail.com");
         nuevo.setDireccion("Santa Julia 180");
@@ -40,7 +40,7 @@ public class testClienteDaoImp {
         nuevo.setCorreo("modificado@gmail.com");
         implement.modificar(nuevo);
         ClienteDto aux = new ClienteDto();
-        aux.setRut("24.017.683-5");
+        aux.setRut("31.017.683-5");
         log.info("buscando elemento modificado: " + implement.buscar(aux).toString());
         implement.deshabilitar(aux);
         log.info("buscando elemento deshabilitado: " + implement.buscar(aux).toString());

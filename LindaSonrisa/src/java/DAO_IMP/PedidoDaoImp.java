@@ -99,8 +99,9 @@ public class PedidoDaoImp implements IPedidoDao {
 
     @Override
     public boolean agregar(PedidoDto obj) {
-        String query = "INSERT INTO pedido(fecha_pedido,fecha_entrega,valor_total,estado,rut_trabajador,rut_proveedor)"
-                + " VALUES(?F,?,?,?,?,?)";
+        String query = "INSERT INTO pedido(fecha_pedido,fecha_entrega,valor_total,estado,rut_trabajador,"
+                + "rut_proveedor,comentario)"
+                + " VALUES(?,?,?,?,?,?,?)";
         try (Connection conexion = Conexion.getConexion()) {
             PreparedStatement sql = conexion.prepareStatement(query);
             sql.setDate(1, obj.getFechaPedido());
@@ -109,14 +110,16 @@ public class PedidoDaoImp implements IPedidoDao {
             sql.setString(4, obj.getEstado());
             sql.setString(5, obj.getRutTrabajador());
             sql.setString(6, obj.getRutProveedor());
+            sql.setString(7, obj.getComentario());
             if (sql.execute()) {
+                log.info("despues de agregar");
                 conexion.close();
                 return true;
             }
         } catch (SQLException s) {
-            log.error("Error SQL agregar servicio " + s.getMessage());
+            log.error("Error SQL agregar pedido " + s.getMessage());
         } catch (Exception e) {
-            log.error("Error al agregar servicio " + e.getMessage());
+            log.error("Error al agregar pedido " + e.getMessage());
         }
         return false;
     }

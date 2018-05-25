@@ -22,8 +22,8 @@ public class testPedido {
      */
     public static void main(String[] args) {
         PedidoDto pedidoNuevo = new PedidoDto();
-        pedidoNuevo.setFechaPedido(new Date(2018, 06, 27));
-        pedidoNuevo.setFechaEntrega(new Date(2018, 07, 12));
+        pedidoNuevo.setFechaPedido(new Date(0));
+        pedidoNuevo.setFechaEntrega(new Date(0));
         pedidoNuevo.setEstado("Pediente");
         pedidoNuevo.setRutProveedor("10.726.928-5");
         pedidoNuevo.setRutTrabajador("11.756.660-9");

@@ -100,7 +100,7 @@ public class PedidoDaoImp implements IPedidoDao {
     @Override
     public boolean agregar(PedidoDto obj) {
         String query = "INSERT INTO pedido(fecha_pedido,fecha_entrega,valor_total,estado,rut_trabajador,rut_proveedor)"
-                + " VALUES(?,?,?,?,?,?)";
+                + " VALUES(?F,?,?,?,?,?)";
         try (Connection conexion = Conexion.getConexion()) {
             PreparedStatement sql = conexion.prepareStatement(query);
             sql.setDate(1, obj.getFechaPedido());
@@ -146,7 +146,6 @@ public class PedidoDaoImp implements IPedidoDao {
                             aux.getPrecioUnidad(), aux.getFecha_vencimiento());
                     if (new DetalleInsumoDaoImp().agregar(detalleInsumo)) {
                         log.info("Pedido actualizado a realizado y detalle insumo agregado correctamente.");
-
                     }
                 }
                 conexion.close();
@@ -183,6 +182,24 @@ public class PedidoDaoImp implements IPedidoDao {
             log.error("Error al buscar pedido " + e.getMessage());
         }
         return null;
+    }
+
+    public int ultimoId() {
+        String query = "SELECT MAX(id_pedido) as id FROM pedido";
+        try (Connection conexion = Conexion.getConexion()) {
+            PreparedStatement sql = conexion.prepareStatement(query);
+            ResultSet results = sql.executeQuery();
+            while (results.next()) {
+                return results.getInt("id");
+            }
+            conexion.close();
+
+        } catch (SQLException ex) {
+            log.error("Error buscando ultimo id_pedido " + ex.getMessage());
+        } catch (Exception e) {
+            log.error("Error buscando ultimo id_pedido " + e.getMessage());
+        }
+        return 0;
     }
 
 }

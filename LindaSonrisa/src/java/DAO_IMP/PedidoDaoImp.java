@@ -10,7 +10,13 @@ import java.util.List;
 import BBDD.Conexion;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import DAO_IMP.DetallePedidoDaoImp;
+import DTO.DetalleInsumoDto;
+import DAO_IMP.DetalleInsumoDaoImp;
+import DTO.DetallePedidoDto;
 
 /**
  *
@@ -42,12 +48,55 @@ public class PedidoDaoImp implements IPedidoDao {
 
     @Override
     public List<PedidoDto> listarPorEstado(String aux) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String query = "SELECT * FROM pedido WHERE estado=?";
+        List<PedidoDto> list = new ArrayList<>();
+        try (Connection conexion = Conexion.getConexion()) {
+            PreparedStatement sql = conexion.prepareStatement(query);
+            sql.setString(1, aux);
+            ResultSet result = sql.executeQuery();
+            while (result.next()) {
+                PedidoDto obj = new PedidoDto();
+                obj.setRutTrabajador(result.getString("rut_trabajador"));
+                obj.setRutProveedor(result.getString("rut_trabajador"));
+                obj.setComentario(result.getString("comentario"));
+                obj.setEstado(result.getString("estado"));
+                obj.setValorTotal(result.getInt("valor_total"));
+                obj.setFechaEntrega(result.getDate("fecha_entrega"));
+                obj.setFechaPedido(result.getDate("fecha_pedido"));
+                list.add(obj);
+            }
+        } catch (SQLException s) {
+            log.error("Error SQL al listar pedido " + s.getMessage());
+        } catch (Exception e) {
+            log.error("Error al listar pedido " + e.getMessage());
+        }
+        return list;
     }
 
     @Override
     public List<PedidoDto> listar() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String query = "SELECT * FROM pedido";
+        List<PedidoDto> list = new ArrayList<>();
+        try (Connection conexion = Conexion.getConexion()) {
+            PreparedStatement sql = conexion.prepareStatement(query);
+            ResultSet result = sql.executeQuery();
+            while (result.next()) {
+                PedidoDto obj = new PedidoDto();
+                obj.setRutTrabajador(result.getString("rut_trabajador"));
+                obj.setRutProveedor(result.getString("rut_trabajador"));
+                obj.setComentario(result.getString("comentario"));
+                obj.setEstado(result.getString("estado"));
+                obj.setValorTotal(result.getInt("valor_total"));
+                obj.setFechaEntrega(result.getDate("fecha_entrega"));
+                obj.setFechaPedido(result.getDate("fecha_pedido"));
+                list.add(obj);
+            }
+        } catch (SQLException s) {
+            log.error("Error SQL al listar pedido " + s.getMessage());
+        } catch (Exception e) {
+            log.error("Error al listar pedido " + e.getMessage());
+        }
+        return list;
     }
 
     @Override
@@ -87,7 +136,16 @@ public class PedidoDaoImp implements IPedidoDao {
             sql.setString(5, obj.getRutTrabajador());
             sql.setString(6, obj.getRutProveedor());
             sql.setInt(7, obj.getIdPedido());
+
             if (sql.executeUpdate() == 1) {
+                //si el estado se actualiza a recibido, entonces agregaremos el detalle de este pedido como un
+                //detalle de insumo para qie pase a ser parte del inventario
+                if ("recibido".equals(obj.getEstado())) {
+                    DetallePedidoDto aux = new DetallePedidoDto(obj.getIdPedido(), 0, 0, 0);
+                    aux = new DetallePedidoDaoImp().buscar(aux);
+
+                    //DetalleInsumoDto detalleInsumo = new DetalleInsumoDto(, 0, 0, null, 0, null);
+                }
                 conexion.close();
                 return true;
             }
@@ -104,11 +162,22 @@ public class PedidoDaoImp implements IPedidoDao {
         String query = "SELECT * FROM pedido WHERE id_pedido=?";
         try (Connection conexion = Conexion.getConexion()) {
             PreparedStatement sql = conexion.prepareStatement(query);
-
+            sql.setInt(1, obj.getIdPedido());
+            ResultSet result = sql.executeQuery();
+            while (result.next()) {
+                obj.setRutTrabajador(result.getString("rut_trabajador"));
+                obj.setRutProveedor(result.getString("rut_trabajador"));
+                obj.setComentario(result.getString("comentario"));
+                obj.setEstado(result.getString("estado"));
+                obj.setValorTotal(result.getInt("valor_total"));
+                obj.setFechaEntrega(result.getDate("fecha_entrega"));
+                obj.setFechaPedido(result.getDate("fecha_pedido"));
+                return obj;
+            }
         } catch (SQLException s) {
-            log.error("Error SQL al buscar servicio " + s.getMessage());
+            log.error("Error SQL al buscar pedido " + s.getMessage());
         } catch (Exception e) {
-            log.error("Error al buscar servicio " + e.getMessage());
+            log.error("Error al buscar pedido " + e.getMessage());
         }
         return null;
     }

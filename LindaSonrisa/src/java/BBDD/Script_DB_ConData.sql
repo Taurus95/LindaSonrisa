@@ -231,16 +231,16 @@ INSERT INTO Pedido (fecha_pedido,fecha_entrega,valor_total,estado,rut_trabajador
 INSERT INTO Pedido (fecha_pedido,fecha_entrega,valor_total,estado,rut_trabajador,rut_proveedor,comentario) VALUES ('28/10/2017', '16/11/2017', 95800, 'Recibido', '16.014.886-1', '50.782.872-9', 'Este pedido llego con exito.');
 
 
-INSERT INTO Detalle_Pedido VALUES (1, 1, 50, 3000);
-INSERT INTO Detalle_Pedido VALUES (2, 1, 50, 2590);
-INSERT INTO Detalle_Pedido VALUES (3, 2, 100, 5690);
-INSERT INTO Detalle_Pedido VALUES (4, 3, 50, 490);
-INSERT INTO Detalle_Pedido VALUES (5, 3, 150, 410);
-INSERT INTO Detalle_Pedido VALUES (6, 3, 100, 390);
-INSERT INTO Detalle_Pedido VALUES (7, 4, 120, 1560);
-INSERT INTO Detalle_Pedido VALUES (8, 4, 100, 1480);
-INSERT INTO Detalle_Pedido VALUES (9, 4, 50, 1670);
-INSERT INTO Detalle_Pedido VALUES (10, 5, 70, 4490);
-INSERT INTO Detalle_Pedido VALUES (11, 6, 50, 490);
-INSERT INTO Detalle_Pedido VALUES (12, 6, 50, 450);
-INSERT INTO Detalle_Pedido VALUES (13, 7, 20, 4790);
+INSERT INTO Detalle_Pedido VALUES (1, 1, 50, 3000,null);
+INSERT INTO Detalle_Pedido VALUES (2, 1, 50, 2590,null);
+INSERT INTO Detalle_Pedido VALUES (3, 2, 100, 5690,null);
+INSERT INTO Detalle_Pedido VALUES (4, 3, 50, 490,null);
+INSERT INTO Detalle_Pedido VALUES (5, 3, 150, 410,null);
+INSERT INTO Detalle_Pedido VALUES (6, 3, 100, 390,null);
+INSERT INTO Detalle_Pedido VALUES (7, 4, 120, 1560,null);
+INSERT INTO Detalle_Pedido VALUES (8, 4, 100, 1480,null);
+INSERT INTO Detalle_Pedido VALUES (9, 4, 50, 1670,null);
+INSERT INTO Detalle_Pedido VALUES (10, 5, 70, 4490,null);
+INSERT INTO Detalle_Pedido VALUES (11, 6, 50, 490,null);
+INSERT INTO Detalle_Pedido VALUES (12, 6, 50, 450,null);
+INSERT INTO Detalle_Pedido VALUES (13, 7, 20, 4790,null);

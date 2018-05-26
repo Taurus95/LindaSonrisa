@@ -111,16 +111,17 @@ public class PedidoDaoImp implements IPedidoDao {
             sql.setString(5, obj.getRutTrabajador());
             sql.setString(6, obj.getRutProveedor());
             sql.setString(7, obj.getComentario());
-            if (sql.execute()) {
-                log.info("despues de agregar");
-                conexion.close();
-                return true;
-            }
+            sql.execute();
+            log.info("despues de agregar");
+            conexion.close();
+            return true;
+
         } catch (SQLException s) {
             log.error("Error SQL agregar pedido " + s.getMessage());
         } catch (Exception e) {
             log.error("Error al agregar pedido " + e.getMessage());
         }
+
         return false;
     }
 
@@ -144,9 +145,11 @@ public class PedidoDaoImp implements IPedidoDao {
                 if ("Realizada".equals(obj.getEstado())) {
                     DetallePedidoDto aux = new DetallePedidoDto(obj.getIdPedido(), 0, 0, 0, null);
                     aux = new DetallePedidoDaoImp().buscar(aux);
-                    String codigo = obj.getRutProveedor() + aux.getIdInsumo() + ((aux.getFecha_vencimiento() != null) ? aux.getFecha_vencimiento() : " ");
+                    //codigo del detalle insumo
+                    String codigo = obj.getRutProveedor() + aux.getIdInsumo() + obj.getIdPedido()
+                            + ((aux.getFecha_vencimiento() != null) ? aux.getFecha_vencimiento() : " ");
                     DetalleInsumoDto detalleInsumo = new DetalleInsumoDto(codigo, aux.getIdInsumo(), aux.getCantidad(), aux.getFecha_vencimiento(),
-                            aux.getPrecioUnidad(), aux.getFecha_vencimiento());
+                            aux.getPrecioUnidad(), obj.getFechaEntrega());
                     if (new DetalleInsumoDaoImp().agregar(detalleInsumo)) {
                         log.info("Pedido actualizado a realizado y detalle insumo agregado correctamente.");
                     }

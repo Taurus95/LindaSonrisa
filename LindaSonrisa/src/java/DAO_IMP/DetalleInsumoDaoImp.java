@@ -88,16 +88,15 @@ public class DetalleInsumoDaoImp implements IBaseDao<DetalleInsumoDto> {
             sql.setDate(6, obj.getFechaLlegada());
 
             //aca debemos actualizar el stock general al cual se suma este detalle
-            if (sql.execute()) { //siempre que este correcto el agregar detalle insumo
-                InsumoDto aux = new InsumoDto(); //creo un objeto para buscar
-                aux.setIdInsumo(obj.getIdInsumo()); //setteo el id
-                aux = new InsumoDaoImp().buscar(aux); // busco por ese id
-                aux.setCantidadActual(aux.getCantidadActual() + obj.getCantidadActual()); //sumo a la cantidad actual
-                if (new InsumoDaoImp().modificar(aux)) { //modifico
-                    //actualizamos stock general y terminamos
-                    coneccion.close();
-                    return true;
-                }
+            sql.execute();
+            InsumoDto aux = new InsumoDto(); //creo un objeto para buscar
+            aux.setIdInsumo(obj.getIdInsumo()); //setteo el id
+            aux = new InsumoDaoImp().buscar(aux); // busco por ese id
+            aux.setCantidadActual(aux.getCantidadActual() + obj.getCantidadActual()); //sumo a la cantidad actual
+            if (new InsumoDaoImp().modificar(aux)) { //modifico
+                //actualizamos stock general y terminamos
+                coneccion.close();
+                return true;
             }
 
         } catch (SQLException s) {

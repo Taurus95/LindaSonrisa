@@ -45,6 +45,8 @@ public class testPedido {
                 log.info("cambiando estado del pedido, deberia agregar a detalle insumo y agregarse la cantiddad al insumo 6");
                 PedidoDaoImp imp = new PedidoDaoImp();
                 pedidoNuevo.setEstado("Realizada");
+                pedidoNuevo.setIdPedido(new PedidoDaoImp().ultimoId());
+                log.info("Pedido modificado: " + pedidoNuevo.toString());
                 imp.modificar(pedidoNuevo);
                 log.info("SI todo salio correcto deberia estar agregado el detalleInsumo");
             }

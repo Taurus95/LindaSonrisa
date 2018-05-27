@@ -11,6 +11,8 @@ import javax.servlet.http.HttpSession;
 import DAO_IMP.ClienteDaoImp;
 import DTO.ClienteDto;
 
+import org.apache.commons.codec.digest.DigestUtils;
+
 /**
  *
  * @author andres
@@ -35,15 +37,35 @@ public class loginConRut extends HttpServlet {
             //abrimos una sesion
             HttpSession session = request.getSession();
             //cliente aux
-            ClienteDto clienteAux = new ClienteDto();
-            clienteAux.setRut(request.getParameter("txtRut"));
-            clienteAux.setHabilitado(false);
-            clienteAux = new ClienteDaoImp().buscar(clienteAux);
-            if (clienteAux.isHabilitado()) {
-                session.setAttribute("cliente", clienteAux);
-                response.sendRedirect("/PAGES/ingresarRut.jsp)");
+            if (session.getAttribute("cliente") != null) {
+                ClienteDto aux = (ClienteDto) session.getAttribute("cliente");
+                //osea que ya estamos recibiendo contraseña
+                //crearemos un atributo para informar que el logeo se hiso de forma correcta
+                String pass = request.getParameter("txtPass");
+                //ciframos contraseña del formulario y la comprobamos con la acutal
+                if (aux.getContrasenia().equals(DigestUtils.md5Hex(pass))) {
+                    //ahora se debera comprobar si este atributo existe en la sesion
+                    session.setAttribute("acceso", 1);
+                    response.sendRedirect("PAGES/AgendarHora.jsp");
+                } else {
+                    session.setAttribute("acceso", 0);
+                    response.sendRedirect("PAGES/IngresarRut.jsp");
+                }
             } else {
-                response.sendRedirect("/PAGES/registroCliente.jsp)");
+                ClienteDto clienteAux = new ClienteDto();
+                clienteAux.setRut(request.getParameter("txtRut"));
+                clienteAux.setHabilitado(false);
+                clienteAux = new ClienteDaoImp().buscar(clienteAux);
+                if (clienteAux.isHabilitado()) {
+                    session.setAttribute("cliente", clienteAux);
+                    response.sendRedirect("/PAGES/ingresarRut.jsp");
+                } else {
+                    response.sendRedirect("/PAGES/registroCliente.jsp");
+                }
+//                //probando despliege de rut
+//                clienteAux.setContrasenia("132");
+//                session.setAttribute("cliente", clienteAux);
+//                response.sendRedirect("PAGES/IngresarRut.jsp");
             }
 
         }

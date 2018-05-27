@@ -85,7 +85,7 @@ function checkRutGenerico(campo, isEmpresa)
         else
             invertido = invertido + drut.charAt(i);
     }
-    document.getElementById("rutEmpresa").value = invertido;
+    document.getElementById("txtRut").value = invertido;
 
     if (!checkDV(rut))
     {

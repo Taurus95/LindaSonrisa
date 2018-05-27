@@ -11,21 +11,22 @@
     <div class="container well">
         <h1 class="text-center">Agenda Consulta</h1>
         <body>
-            <form class="form-inline"  method="post" onsubmit="return checkRutGenerico(rutEmpresa.value, false);"  >
+            <form class="form-inline"  method="post" action="/LindaSonrisa/loginConRut" onsubmit="return checkRutGenerico(txtRut.value, false);"  >
                 <div class="form-group">
                     <c:if test="${cliente==null}">
                         <label for="rut">Ingrese su Rut</label>                    
-                        <input type="text" name="txtRut" class="form-control" id="rut" onkeypress="return soloRUT(event)" 
-                               onblur="checkRutGenerico(rutEmpresa.value, false)"
+                        <input type="text" name="txtRut" class="form-control" id="txtRut" onkeypress="return soloRUT(event)" 
+                               onblur="checkRutGenerico(txtRut.value, false)"
                                placeholder="EJ: 19.123.456-k" autofocus="">
                     </c:if>
                     <c:if test="${cliente!=null}">
                         <label for="rut">Ingrese su Rut</label>                    
                         <input type="text" name="txtRut" maxlength="20" value="<c:out value="${cliente.getRut()}" />" disabled="" >
+                        <br>
                         <label for="rut">Ingrese su contraseña</label>                    
-                        <input type="password" name="txtRut" maxlength="20" class="form-control" id="pass" placeholder="" autofocus="">
+                        <input type="password" name="txtPass" maxlength="20" class="form-control" id="txtPass" placeholder="" autofocus="">
+                        <c:if test="${acceso==0}" ><span>Contraseña incorrecta</span></c:if>
                     </c:if>
-
                 </div>
                 <button type="submit" class="btn btn-primary">Continuar</button>
             </form>

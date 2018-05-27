@@ -18,9 +18,9 @@ import java.util.ArrayList;
  * @author andres
  */
 public class ConsultaDaoImp implements IBaseDao<ConsultaDto> {
-
+    
     private static final org.apache.log4j.Logger log = org.apache.log4j.Logger.getLogger(Principal.class);
-
+    
     @Override
     public List<ConsultaDto> listar() {
         String query = "SELECT * FROM consulta";
@@ -45,7 +45,7 @@ public class ConsultaDaoImp implements IBaseDao<ConsultaDto> {
         }
         return list;
     }
-
+    
     @Override
     public boolean agregar(ConsultaDto obj) {
         String query = "INSERT INTO consulta(id_servicio,fecha,rut_cliente,rut_trabajador,estado,total) VALUES(?,?,?,?,?,?)";
@@ -57,12 +57,12 @@ public class ConsultaDaoImp implements IBaseDao<ConsultaDto> {
             sql.setString(4, obj.getRutTrabajador());
             sql.setString(5, obj.getEstado());
             sql.setInt(6, obj.getTotal());
-
+            
             sql.execute();
             this.restaInsumosServicio(obj.getIdServicio());
             conexion.close();
             return true;
-
+            
         } catch (SQLException s) {
             log.error("Error SQL al agregar consulta: " + s.getMessage());
         } catch (Exception e) {
@@ -70,7 +70,7 @@ public class ConsultaDaoImp implements IBaseDao<ConsultaDto> {
         }
         return false;
     }
-
+    
     @Override
     public boolean modificar(ConsultaDto obj) {
         String query = "UPDATE consulta SET id_servicio=?,rut_cliente=?,rut_trabajador=?,fecha=?,estado=?,total=?"
@@ -83,6 +83,7 @@ public class ConsultaDaoImp implements IBaseDao<ConsultaDto> {
             sql.setString(3, obj.getRutTrabajador());
             sql.setString(5, obj.getEstado());
             sql.setInt(6, obj.getTotal());
+            sql.setInt(7, obj.getIdConsulta());
             if (sql.executeUpdate() == 1) {
                 if (obj.getEstado().equals("cancelada")) {
                     this.sumaInsumosServicio(obj.getIdServicio());
@@ -97,7 +98,7 @@ public class ConsultaDaoImp implements IBaseDao<ConsultaDto> {
         }
         return false;
     }
-
+    
     @Override
     public ConsultaDto buscar(ConsultaDto obj) {
         String query = "SELECT * FROM consulta WHERE id_consulta=?";
@@ -121,7 +122,7 @@ public class ConsultaDaoImp implements IBaseDao<ConsultaDto> {
         }
         return null;
     }
-
+    
     public boolean restaInsumosServicio(int id_servicio) {
         //para cada detalle del servicio se deben restar los insumos correspondientes
         for (DetalleInsumoServicioDto detalle : new DetalleInsumoServicioDaoImp().listarPorServicio(id_servicio)) {
@@ -136,7 +137,6 @@ public class ConsultaDaoImp implements IBaseDao<ConsultaDto> {
                 new DetalleInsumoDaoImp().modificar(detalleInsumo);
                 //actualizamos stock para tal insumo
                 new InsumoDaoImp().actualizarStock(detalleInsumo.getIdInsumo());
-                return true;
             } else {
                 while (resta < 0) {
                     //setiamos a 0 el detalle insumo actual
@@ -156,16 +156,15 @@ public class ConsultaDaoImp implements IBaseDao<ConsultaDto> {
                         new DetalleInsumoDaoImp().modificar(detalleInsumo);
                         //actualizamos stock general con lo que quedo
                         new InsumoDaoImp().actualizarStock(detalleInsumo.getIdInsumo());
-
-                        return true;
+                        
                     }
-
+                    
                 }
             }
         }
-        return false;
+        return true;
     }
-
+    
     public boolean sumaInsumosServicio(int id_servicio) {
         //para cada detalle del servicio se deben restar los insumos correspondientes
         for (DetalleInsumoServicioDto detalle : new DetalleInsumoServicioDaoImp().listarPorServicio(id_servicio)) {
@@ -179,11 +178,11 @@ public class ConsultaDaoImp implements IBaseDao<ConsultaDto> {
             new DetalleInsumoDaoImp().modificar(detalleInsumo);
             //actualizamos stock para tal insumo
             new InsumoDaoImp().actualizarStock(detalleInsumo.getIdInsumo());
-
+            
         }
         return true;
     }
-
+    
     public int ultimoId() {
         String query = "SELECT MAX(id_consulta) as id FROM consulta";
         try (Connection conexion = Conexion.getConexion()) {
@@ -193,7 +192,7 @@ public class ConsultaDaoImp implements IBaseDao<ConsultaDto> {
                 return results.getInt("id");
             }
             conexion.close();
-
+            
         } catch (SQLException ex) {
             log.error("Error buscando ultimo id_consulyta " + ex.getMessage());
         } catch (Exception e) {

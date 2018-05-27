@@ -25,11 +25,14 @@ public class DetalleInsumoDaoImp implements IBaseDao<DetalleInsumoDto> {
     //devolvera el detalle insumo del cual consume un servicio
     public DetalleInsumoDto buscarMasAntiguoConCantidad(int id_insumo) {
         String query = "SELECT * FROM detalle_insumo WHERE fecha_vencimiento=(SELECT MIN(fecha_vencimiento)"
-                + " FROM detalle_insumo  WHERE id_insumo=? and Cantidad_Actual not in (0)) AND id_insumo=? AND Cantidad_Actual not in (0)";
+                + " FROM detalle_insumo  WHERE id_insumo=? and Cantidad_Actual not in (0))"
+                + "OR fecha_vencimiento IS NULL AND id_insumo=? AND Cantidad_Actual not in (0)"
+                + "ORDER BY fecha_llegada DESC";
 
         try (Connection coneccion = Conexion.getConexion()) {
             PreparedStatement sql = coneccion.prepareStatement(query);
             sql.setInt(1, id_insumo);
+            sql.setInt(2, id_insumo);
             ResultSet result = sql.executeQuery();
             while (result.next()) {
                 DetalleInsumoDto aux = new DetalleInsumoDto();

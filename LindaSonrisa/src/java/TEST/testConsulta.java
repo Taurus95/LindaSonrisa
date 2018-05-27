@@ -24,15 +24,15 @@ public class testConsulta {
         nueva.setEstado("agendada");
         nueva.setRutCliente("18.876.827-3");
         nueva.setRutTrabajador("11.756.660-9");
-        log.info("Nueva consulta: "+nueva.toString());
-        implementacionConsulta.agregar(nueva);
-        log.info("Agregada! revisar en bd si se descontaron insumos");
+//        log.info("Nueva consulta: "+nueva.toString());
+//        implementacionConsulta.agregar(nueva);
+//        log.info("Agregada! revisar en bd si se descontaron insumos");
         
-//        log.info("Actualizando estado");
-//        nueva.setIdConsulta(implementacionConsulta.ultimoId());
-//        nueva.setEstado("cancelada");
-//        implementacionConsulta.modificar(nueva);
-//        log.info("Modificado! revisar bd si volvieron insumos");
+        log.info("Actualizando estado");
+        nueva.setIdConsulta(implementacionConsulta.ultimoId());
+        nueva.setEstado("cancelada");
+        implementacionConsulta.modificar(nueva);
+        log.info("Modificado! revisar bd si volvieron insumos");
     }
 
 }

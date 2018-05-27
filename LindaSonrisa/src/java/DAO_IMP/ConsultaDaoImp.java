@@ -4,6 +4,8 @@ import DTO.ConsultaDto;
 import DAO.IBaseDao;
 import java.util.List;
 import BBDD.Conexion;
+import DTO.DetalleInsumoDto;
+import DTO.DetalleInsumoServicioDto;
 import java.security.Principal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -56,10 +58,10 @@ public class ConsultaDaoImp implements IBaseDao<ConsultaDto> {
             sql.setString(5, obj.getEstado());
             sql.setInt(6, obj.getTotal());
 
-            if (sql.execute()) {
-                conexion.close();
-                return true;
-            }
+            sql.execute();
+            this.restaInsumosServicio(obj.getIdServicio());
+            conexion.close();
+            return true;
 
         } catch (SQLException s) {
             log.error("Error SQL al agregar consulta: " + s.getMessage());
@@ -82,6 +84,9 @@ public class ConsultaDaoImp implements IBaseDao<ConsultaDto> {
             sql.setString(5, obj.getEstado());
             sql.setInt(6, obj.getTotal());
             if (sql.executeUpdate() == 1) {
+                if (obj.getEstado().equals("cancelada")) {
+                    this.sumaInsumosServicio(obj.getIdServicio());
+                }
                 conexion.close();
                 return true;
             }
@@ -117,4 +122,83 @@ public class ConsultaDaoImp implements IBaseDao<ConsultaDto> {
         return null;
     }
 
+    public boolean restaInsumosServicio(int id_servicio) {
+        //para cada detalle del servicio se deben restar los insumos correspondientes
+        for (DetalleInsumoServicioDto detalle : new DetalleInsumoServicioDaoImp().listarPorServicio(id_servicio)) {
+            //se obtiene detalleDe insumo al que se restara stock
+            DetalleInsumoDto detalleInsumo = new DetalleInsumoDaoImp().buscarMasAntiguoConCantidad(detalle.getIdInsumo());
+            //se realiza resta
+            int resta = detalleInsumo.getCantidadActual() - detalle.getCantidadInsumo();
+            //se comprueba que tenga la cantidad necesaria para hacer la resta completa
+            if (resta >= 0) {
+                detalleInsumo.setCantidadActual(resta);
+                //cargamos el detalle insumo con datos actualizados
+                new DetalleInsumoDaoImp().modificar(detalleInsumo);
+                //actualizamos stock para tal insumo
+                new InsumoDaoImp().actualizarStock(detalleInsumo.getIdInsumo());
+                return true;
+            } else {
+                while (resta < 0) {
+                    //setiamos a 0 el detalle insumo actual
+                    detalleInsumo.setCantidadActual(0);
+                    //cargamos el detalle insumo con datos actualizados
+                    new DetalleInsumoDaoImp().modificar(detalleInsumo);
+                    //buscamos un detalle insumo nuevo al que restarle
+                    detalleInsumo = new DetalleInsumoDaoImp().buscarMasAntiguoConCantidad(detalle.getIdInsumo());
+
+                    //restamos al nuevo
+                    resta = detalleInsumo.getCantidadActual() - Math.abs(resta);
+                    //si esta vez la cantidad actual sirvio la resta sera positiva
+                    if (resta > 0) {
+                        //actualizamos con resta
+                        detalleInsumo.setCantidadActual(resta);
+                        //cargamos el detalle insumo con datos actualizados
+                        new DetalleInsumoDaoImp().modificar(detalleInsumo);
+                        //actualizamos stock general con lo que quedo
+                        new InsumoDaoImp().actualizarStock(detalleInsumo.getIdInsumo());
+
+                        return true;
+                    }
+
+                }
+            }
+        }
+        return false;
+    }
+
+    public boolean sumaInsumosServicio(int id_servicio) {
+        //para cada detalle del servicio se deben restar los insumos correspondientes
+        for (DetalleInsumoServicioDto detalle : new DetalleInsumoServicioDaoImp().listarPorServicio(id_servicio)) {
+            //se obtiene detalleDe insumo al que se restara stock
+            DetalleInsumoDto detalleInsumo = new DetalleInsumoDaoImp().buscarMasAntiguoConCantidad(detalle.getIdInsumo());
+            //se realiza suma
+            int suma = detalleInsumo.getCantidadActual() + detalle.getCantidadInsumo();
+            //setiamos nueva cantidad
+            detalleInsumo.setCantidadActual(suma);
+            //cargamos el detalle insumo con datos actualizados
+            new DetalleInsumoDaoImp().modificar(detalleInsumo);
+            //actualizamos stock para tal insumo
+            new InsumoDaoImp().actualizarStock(detalleInsumo.getIdInsumo());
+
+        }
+        return true;
+    }
+
+    public int ultimoId() {
+        String query = "SELECT MAX(id_consulta) as id FROM consulta";
+        try (Connection conexion = Conexion.getConexion()) {
+            PreparedStatement sql = conexion.prepareStatement(query);
+            ResultSet results = sql.executeQuery();
+            while (results.next()) {
+                return results.getInt("id");
+            }
+            conexion.close();
+
+        } catch (SQLException ex) {
+            log.error("Error buscando ultimo id_consulyta " + ex.getMessage());
+        } catch (Exception e) {
+            log.error("Error buscando ultimo id_consulta " + e.getMessage());
+        }
+        return 0;
+    }
 }

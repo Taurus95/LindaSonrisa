@@ -190,4 +190,26 @@ public class InsumoDaoImp implements IInsumoDao {
         return 0;
     }
 
+    public boolean actualizarStock(int id_insumo) {
+        InsumoDto aux = new InsumoDto(id_insumo, "", 0, 0, 0);
+        aux = this.buscar(aux);
+        String query = "SELECT sum(cantidad_actual) as cantidad FROM detalle_insumo WHERE id_insumo=?";
+        try (Connection conexion = Conexion.getConexion()) {
+            PreparedStatement sql = conexion.prepareStatement(query);
+            sql.setInt(1, id_insumo);
+            ResultSet result = sql.executeQuery();
+            while (result.next()) {
+                aux.setCantidadActual(result.getInt("cantidad"));
+                this.modificar(aux);
+                conexion.close();
+                return true;
+            }
+        } catch (SQLException ex) {
+            log.error("Error actualizando stock " + ex.getMessage());
+        } catch (Exception e) {
+            log.error("Error actualizando stock " + e.getMessage());
+        }
+        return false;
+    }
+
 }

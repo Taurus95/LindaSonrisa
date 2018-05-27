@@ -10,7 +10,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import DTO.InsumoDto;
 
 /**
  *
@@ -89,15 +88,9 @@ public class DetalleInsumoDaoImp implements IBaseDao<DetalleInsumoDto> {
 
             //aca debemos actualizar el stock general al cual se suma este detalle
             sql.execute();
-            InsumoDto aux = new InsumoDto(); //creo un objeto para buscar
-            aux.setIdInsumo(obj.getIdInsumo()); //setteo el id
-            aux = new InsumoDaoImp().buscar(aux); // busco por ese id
-            aux.setCantidadActual(aux.getCantidadActual() + obj.getCantidadActual()); //sumo a la cantidad actual
-            if (new InsumoDaoImp().modificar(aux)) { //modifico
-                //actualizamos stock general y terminamos
-                coneccion.close();
-                return true;
-            }
+            new InsumoDaoImp().actualizarStock(obj.getIdInsumo());//actualizamos stock para tal insumo con metodo
+            coneccion.close();
+            return true;
 
         } catch (SQLException s) {
             log.error("Error SQL insertando detalle insumo " + s.getMessage());

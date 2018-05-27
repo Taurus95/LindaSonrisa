@@ -8,6 +8,7 @@ import DTO.DetalleInsumoDto;
 import DTO.DetalleInsumoServicioDto;
 import java.security.Principal;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -36,6 +37,8 @@ public class ConsultaDaoImp implements IBaseDao<ConsultaDto> {
                 obj.setFecha(result.getDate("fecha"));
                 obj.setEstado(result.getString("estado"));
                 obj.setTotal(result.getInt("total"));
+                obj.setHora(result.getInt("hora"));
+                obj.setMinuto(result.getInt("minuto"));
                 list.add(obj);
             }
         } catch (SQLException s) {
@@ -48,7 +51,7 @@ public class ConsultaDaoImp implements IBaseDao<ConsultaDto> {
     
     @Override
     public boolean agregar(ConsultaDto obj) {
-        String query = "INSERT INTO consulta(id_servicio,fecha,rut_cliente,rut_trabajador,estado,total) VALUES(?,?,?,?,?,?)";
+        String query = "INSERT INTO consulta(id_servicio,fecha,rut_cliente,rut_trabajador,estado,total,hora,minuto) VALUES(?,?,?,?,?,?,?,?)";
         try (Connection conexion = Conexion.getConexion()) {
             PreparedStatement sql = conexion.prepareStatement(query);
             sql.setInt(1, obj.getIdServicio());
@@ -57,6 +60,8 @@ public class ConsultaDaoImp implements IBaseDao<ConsultaDto> {
             sql.setString(4, obj.getRutTrabajador());
             sql.setString(5, obj.getEstado());
             sql.setInt(6, obj.getTotal());
+            sql.setInt(7, obj.getHora());
+            sql.setInt(8, obj.getMinuto());
             
             sql.execute();
             this.restaInsumosServicio(obj.getIdServicio());
@@ -74,6 +79,7 @@ public class ConsultaDaoImp implements IBaseDao<ConsultaDto> {
     @Override
     public boolean modificar(ConsultaDto obj) {
         String query = "UPDATE consulta SET id_servicio=?,rut_cliente=?,rut_trabajador=?,fecha=?,estado=?,total=?"
+                + ",hora=?,minuto=?"
                 + "WHERE id_consulta=? ";
         try (Connection conexion = Conexion.getConexion()) {
             PreparedStatement sql = conexion.prepareStatement(query);
@@ -83,7 +89,10 @@ public class ConsultaDaoImp implements IBaseDao<ConsultaDto> {
             sql.setString(3, obj.getRutTrabajador());
             sql.setString(5, obj.getEstado());
             sql.setInt(6, obj.getTotal());
-            sql.setInt(7, obj.getIdConsulta());
+            sql.setInt(7, obj.getHora());
+            sql.setInt(8, obj.getMinuto());
+            sql.setInt(9, obj.getIdConsulta());
+            
             if (sql.executeUpdate() == 1) {
                 if (obj.getEstado().equals("cancelada")) {
                     this.sumaInsumosServicio(obj.getIdServicio());
@@ -113,6 +122,8 @@ public class ConsultaDaoImp implements IBaseDao<ConsultaDto> {
                 obj.setFecha(result.getDate("fecha"));
                 obj.setEstado(result.getString("estado"));
                 obj.setTotal(result.getInt("total"));
+                obj.setHora(result.getInt("hora"));
+                obj.setMinuto(result.getInt("minuto"));
                 return obj;
             }
         } catch (SQLException s) {

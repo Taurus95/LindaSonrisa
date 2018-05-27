@@ -1,23 +1,23 @@
-
 package DTO;
 
 import java.sql.Date;
 
-
 public class ConsultaDto {
-    
+
     private int idConsulta;//PK
     private int idServicio;//FK
-    private java.util.Date fecha;
+    private java.sql.Date fecha;
     private String rutCliente;//FK
     private String rutTrabajador;//FK
     private String estado;
     private int total;
+    private int hora;
+    private int minuto;
 
     public ConsultaDto() {
     }
 
-    public ConsultaDto(int idConsulta, int idServicio, Date fecha, String rutCliente, String rutTrabajador, String estado, int total) {
+    public ConsultaDto(int idConsulta, int idServicio, java.sql.Date fecha, String rutCliente, String rutTrabajador, String estado, int total, int hora, int minuto) {
         this.idConsulta = idConsulta;
         this.idServicio = idServicio;
         this.fecha = fecha;
@@ -25,6 +25,12 @@ public class ConsultaDto {
         this.rutTrabajador = rutTrabajador;
         this.estado = estado;
         this.total = total;
+        this.minuto = minuto;
+        this.hora = hora;
+    }
+
+    public Date getFecha() {
+        return fecha;
     }
 
     public int getIdConsulta() {
@@ -41,14 +47,6 @@ public class ConsultaDto {
 
     public void setIdServicio(int idServicio) {
         this.idServicio = idServicio;
-    }
-
-    public Date getFecha() {
-        return (Date) fecha;
-    }
-
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
     }
 
     public String getRutCliente() {
@@ -83,36 +81,29 @@ public class ConsultaDto {
         this.total = total;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 37 * hash + this.idConsulta;
-        return hash;
+    public int getHora() {
+        return hora;
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final ConsultaDto other = (ConsultaDto) obj;
-        if (this.idConsulta != other.idConsulta) {
-            return false;
-        }
-        return true;
+    public void setHora(int hora) {
+        this.hora = hora;
+    }
+
+    public int getMinuto() {
+        return minuto;
+    }
+
+    public void setMinuto(int minuto) {
+        this.minuto = minuto;
     }
 
     @Override
     public String toString() {
-        return "ConsultaDto{" + "idConsulta=" + idConsulta + ", idServicio=" + idServicio + ", fecha=" + fecha + ", rutCliente=" + rutCliente + ", rutTrabajador=" + rutTrabajador + ", estado=" + estado + ", total=" + total + '}';
+        return "ConsultaDto{" + "idConsulta=" + idConsulta + ", idServicio=" + idServicio + ", fecha=" + fecha + ", rutCliente=" + rutCliente + ", rutTrabajador=" + rutTrabajador + ", estado=" + estado + ", total=" + total + ", hora=" + hora + ", minuto=" + minuto + '}';
     }
-    
-    
-    
+
+    public void setFecha(Date date) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

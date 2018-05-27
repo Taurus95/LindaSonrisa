@@ -46,6 +46,8 @@ create table Consulta (
   rut_trabajador varchar(20)  NOT NULL,
   estado varchar(10)  NOT NULL,
   total number(11) NOT NULL,
+  hora number(11),
+  minuto number(11),
 	Constraint Consulta_Servicio_fk foreign key (id_servicio) references Servicio (id_servicio),
 	CONSTRAINT Consulta_Cliente_fk FOREIGN KEY(rut_cliente)	REFERENCES Cliente(rut),
 	constraint Consulta_Trabajador_fk foreign key(rut_trabajador) references Trabajador(rut));

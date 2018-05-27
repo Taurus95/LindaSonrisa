@@ -46,7 +46,7 @@ public class loginConRut extends HttpServlet {
                 if (aux.getContrasenia().equals(DigestUtils.md5Hex(pass))) {
                     //ahora se debera comprobar si este atributo existe en la sesion
                     session.setAttribute("acceso", 1);
-                    response.sendRedirect("PAGES/AgendarHora.jsp");
+                    response.sendRedirect("PAGES/EspecialidadDoctor.jsp");
                 } else {
                     session.setAttribute("acceso", 0);
                     response.sendRedirect("PAGES/IngresarRut.jsp");

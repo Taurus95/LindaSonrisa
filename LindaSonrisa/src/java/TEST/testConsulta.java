@@ -27,7 +27,7 @@ public class testConsulta {
 //        log.info("Nueva consulta: "+nueva.toString());
 //        implementacionConsulta.agregar(nueva);
 //        log.info("Agregada! revisar en bd si se descontaron insumos");
-        
+
         log.info("Actualizando estado");
         nueva.setIdConsulta(implementacionConsulta.ultimoId());
         nueva.setEstado("cancelada");

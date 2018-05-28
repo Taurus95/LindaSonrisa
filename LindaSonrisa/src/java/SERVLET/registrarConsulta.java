@@ -11,8 +11,6 @@ import java.io.PrintWriter;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -59,6 +57,7 @@ public class registrarConsulta extends HttpServlet {
                     nuevaConsulta.setRutTrabajador(dentista.getRut());
                     nuevaConsulta.setTotal(servicio.getPrecio());
                     if (new ConsultaDaoImp().agregar(nuevaConsulta)) {
+                        session.setAttribute("consulta", nuevaConsulta);
                         response.sendRedirect("PAGES/InformacionConsulta.jsp");
                     }
                 } catch (ParseException ex) {

@@ -1,8 +1,4 @@
-<%-- 
-    Document   : RegistroCliente
-    Created on : 27-05-2018, 13:14:00
-    Author     : andres
---%>
+
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>

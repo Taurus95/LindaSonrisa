@@ -101,5 +101,5 @@
   <p>Clínica Linda Sonrisa™ todos los derechos reservados</p>
 </div>
 
-</body>
+
 </html>

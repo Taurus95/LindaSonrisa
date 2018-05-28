@@ -1,12 +1,9 @@
 package SERVLET;
 
 import DAO_IMP.TrabajadorDaoImp;
-import DTO.ClienteDto;
 import DTO.TrabajadorDto;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Date;
-import java.text.SimpleDateFormat;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -48,7 +45,7 @@ public class buscarHoras extends HttpServlet {
             } else {
                 response.sendRedirect("PAGES/Home.jsp");
             }
-            
+
         }
     }
 

@@ -1,23 +1,31 @@
 package SERVLET;
 
+import DAO_IMP.ConsultaDaoImp;
+import DAO_IMP.ServicioDaoImp;
+import DTO.ClienteDto;
+import DTO.ConsultaDto;
+import DTO.ServicioDto;
+import DTO.TrabajadorDto;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import DTO.TrabajadorDto;
-import DAO_IMP.TrabajadorDaoImp;
-import java.util.ArrayList;
 import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author andres
  */
-@WebServlet(name = "buscarDentistas", urlPatterns = {"/buscarDentistas"})
-public class buscarDentistas extends HttpServlet {
+@WebServlet(name = "registrarConsulta", urlPatterns = {"/registrarConsulta"})
+public class registrarConsulta extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,11 +42,28 @@ public class buscarDentistas extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             HttpSession session = request.getSession();
             if ((int) session.getAttribute("acceso") == 1) {
-                String especialidad = request.getParameter("especialidad");
-                ArrayList<TrabajadorDto> lista = (ArrayList<TrabajadorDto>) new TrabajadorDaoImp().listarDentistaEspecialidad(especialidad);
-                session.setAttribute("especialidad", especialidad);
-                session.setAttribute("dentistas", lista);
-                response.sendRedirect("PAGES/EspecialidadDoctor.jsp");
+                ClienteDto cliente = (ClienteDto) request.getAttribute("cliente");
+                TrabajadorDto dentista = (TrabajadorDto) request.getAttribute("dentista");
+                ServicioDto servicio = new ServicioDaoImp().buscarIdServicio((String) session.getAttribute("especialidad"));
+                try {
+                    Date fecha = (Date) new SimpleDateFormat("dd-mm-yyyy").parse(request.getParameter("dateDia"));
+                    int hora = (int) request.getAttribute("hora");
+                    int minuto = (int) request.getAttribute("minuto");
+                    ConsultaDto nuevaConsulta = new ConsultaDto();
+                    nuevaConsulta.setIdServicio(servicio.getIdServicio());
+                    nuevaConsulta.setFecha(fecha);
+                    nuevaConsulta.setEstado("Pendiente");
+                    nuevaConsulta.setHora(hora);
+                    nuevaConsulta.setMinuto(minuto);
+                    nuevaConsulta.setRutCliente(cliente.getRut());
+                    nuevaConsulta.setRutTrabajador(dentista.getRut());
+                    nuevaConsulta.setTotal(servicio.getPrecio());
+                    if (new ConsultaDaoImp().agregar(nuevaConsulta)) {
+                        response.sendRedirect("PAGES/InformacionConsulta.jsp");
+                    }
+                } catch (ParseException ex) {
+                    System.out.println("Error parseando fecha");
+                }
             } else {
                 response.sendRedirect("PAGES/Home.jsp");
             }

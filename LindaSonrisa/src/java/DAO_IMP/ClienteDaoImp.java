@@ -154,19 +154,19 @@ public class ClienteDaoImp implements IClienteDao {
                     obj.setFechaNacimiento(results.getDate("fecha_nacimiento"));
                     obj.setHabilitado(results.getBoolean("habilitado"));
                     obj.setContrasenia(results.getString("contraseña"));
+                    connection.close();
+                    return obj;
                 }
             } catch (Exception e) {
                 log.error("Error al obtener resultset de buscar: " + e.getMessage());
             }
-            connection.close();
-
+            
         } catch (SQLException s) {
             log.error("Error SQL buscando cliente " + s.getMessage());
         } catch (Exception e) {
             log.error("Error al buscar cliente " + e.getMessage());
-        } finally {
-            return obj;
         }
+        return obj;
     }
 
     //habilitamos cliente con su rut

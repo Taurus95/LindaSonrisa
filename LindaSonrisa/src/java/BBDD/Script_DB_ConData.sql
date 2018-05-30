@@ -8,7 +8,7 @@ create table Cliente(
     direccion varchar(100) not null,
     telefono varchar(20) not null,
     fecha_nacimiento date not null,
-    contrase�a varchar(150)not null,
+    contraseña varchar(150)not null,
     habilitado number(2)not null);               
 
 create  table Insumo (

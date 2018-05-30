@@ -33,9 +33,9 @@ create  table Trabajador (
   correo varchar2(50),
   direccion varchar2(100)  NOT NULL,
   telefono varchar2(20)  NOT NULL,
-  contrase�a varchar(100)  NOT NULL,
+  contraseña varchar(100)  NOT NULL,
   tipo varchar2(20)  NOT NULL,
-  especialidad varchar(50) not null,
+  especialidad varchar(50), 
   habilitado number(1) NOT NULL);
 
 create table Consulta (
@@ -173,10 +173,18 @@ INSERT INTO Insumo (descripcion,cantidad_actual,cantidad_critica, cantidad_maxim
 INSERT INTO Servicio (nombre,descripcion,precio,habilitado) VALUES ('Ortodoncia', 'La ortodoncia es la ciencia que se encarga del estudio, prevencionn, diagnostico y tratamiento de  las anomalias de forma, posicion, relacion y funcion de las estructuras dentomaxilofaciales.', 15000, 1);
 INSERT INTO Servicio (nombre,descripcion,precio,habilitado) VALUES ('Endodoncia', 'La endodoncia es aquella parte de la odontologia que se ocupa de la etiologia, prevencion,   patologia, diagnostico y tratamiento de las enfermedades de la pulpa dental.', 25000, 1);
 INSERT INTO Servicio (nombre,descripcion,precio,habilitado) VALUES ('Odontologia General', 'Odontologia o Estomatologia es una rama de las ciencias de la salud que se encarga del diagnostico, tratamiento y prevencion de las enfermedades del aparato estomatognitico', 10000, 1);
+INSERT INTO Servicio (nombre,descripcion,precio,habilitado) VALUES ('Odontopediatria', 'Es el odontólogo especializado en la prevención y realización de procedimientos dentales, generalmente, en niños de hasta 14 años de edad', 15000, 1);
+INSERT INTO Servicio (nombre,descripcion,precio,habilitado) VALUES ('Implantologia', 'Especialista a cargo de reponer piezas dentales perdidas o que están por pasar a ese estado', 25000, 1);
 
-INSERT INTO Trabajador VALUES ('11.756.660-9', 'Roberto Gonzales Feliciano', '19/02/1987', 'M', 'Roberto.GF@hotmail.com', 'Independencia N1167, Santiago', '9 828273546', '66df9ccc4f5eda4b4fff1a68e3f3dbcd', 'Dentista', 'General', 1);
-INSERT INTO Trabajador VALUES ('13.831.883-4', 'Diana Rodriguez Papala', '01/01/1998', 'F', 'DianaR@outlook.com', 'Av. Perez N872, Buin', '9 82937452', '38693b6fab3e37d602488565b8e28736', 'Secretaria', 'Endodoncia', 1);
-INSERT INTO Trabajador VALUES('16.014.886-1', 'Luis Fernandez Hurtado', '10/11/1985', 'M', 'LuisFer@outlook.com', 'Las hermanas N333, Paine', '9 63527163', '65f86f5d73caeb793c777836dfa01c7b', 'Administrativo', 'Odontopediatr�a', 1);
+INSERT INTO Trabajador VALUES ('11.756.660-9', 'Roberto Gonzales Feliciano', '19/02/1987', 'M', 'Roberto.GF@hotmail.com', 'Independencia N1167, Santiago', '9 828273546', '66df9ccc4f5eda4b4fff1a68e3f3dbcd', 'Dentista', 'Odontologia General', 1);
+INSERT INTO Trabajador VALUES ('13.831.883-4', 'Diana Rodriguez Papala', '01/01/1998', 'F', 'DianaR@outlook.com', 'Av. Perez N872, Buin', '9 82937452', '38693b6fab3e37d602488565b8e28736', 'Secretaria', 'null', 1);
+INSERT INTO Trabajador VALUES('16.014.886-1', 'Luis Fernandez Hurtado', '10/11/1985', 'M', 'LuisFer@outlook.com', 'Las hermanas N333, Paine', '9 63527163', '65f86f5d73caeb793c777836dfa01c7b', 'Administrativo', 'null', 1);
+INSERT INTO Trabajador VALUES('17.031.885-4', 'Pedro Molina Soto', '10/11/1981', 'M', 'PedroM@outlook.com', 'Las hermanas N333, Paine', '9 63527163', '65f86f5d73caeb793c777836dfa01c7b', 'Dentista', 'Ortodoncia', 1);
+INSERT INTO Trabajador VALUES('16.014.886-1', 'Cecilia Ortiz Mena', '15/04/1981', 'F', 'CeciliaO@outlook.com', 'Las hermanas N333, Paine', '9 6518921', '65f86f5d73caeb793c777836dfa01c7b', 'Dentista', 'Implantologia', 1);
+INSERT INTO Trabajador VALUES('17.885.123-K', 'Valeria Molina Aviles', '17/05/1987', 'F', 'ValeriaM@outlook.com', 'Las primas N123, Paine', '9 63527163', '65f86f5d73caeb793c777836dfa01c7b', 'Dentista', 'Endodoncia', 1);
+INSERT INTO Trabajador VALUES('15.675.243-8', 'Camila huentecura Solis', '19/04/1985', 'F', 'CamilaH@outlook.com', 'Los hermanos 456, Paine', '9 6518921', '65f86f5d73caeb793c777836dfa01c7b', 'Dentista', 'Odontopediatria', 1);
+
+
 
 INSERT INTO Consulta (id_servicio,fecha,rut_cliente,rut_trabajador,estado,total) VALUES( 1, '11/05/2017', '18.876.827-3', '11.756.660-9', 'Realizada', 15000);
 INSERT INTO Consulta (id_servicio,fecha,rut_cliente,rut_trabajador,estado,total) VALUES( 2, '19/11/2017', '19.017.683-5', '11.756.660-9', 'Realizada', 25000);

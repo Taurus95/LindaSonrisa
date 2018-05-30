@@ -34,7 +34,7 @@
   <div class="collapse navbar-collapse" id="collapsibleNavbar">
     <ul class="navbar-nav">
       <li class="nav-item">
-          <a class="nav-link" href="test.jsp">Servicios</a>
+          <a class="nav-link" href="#">Servicios</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#">Quienes somos</a>
@@ -61,7 +61,10 @@
     <div class="col-sm-4">
       <h2>Linda Sonrisa</h2>
       <h5>Foto</h5>
-      <div class="fakeimg">Fake Image</div>
+      <div class="Logo" style="backGround:white" >
+       <img src="../IMAGES/Logo.png"/>   
+      </div>
+      
       <p>Ofrecemos los mejores servicios</p>
       <h3>Links de interes</h3>
       <p>Cosas de la clinica</p>
@@ -85,14 +88,14 @@
       <h2>CLINICA LINDA SONRISA</h2>
       <h5>Mayo 2018</h5>
       <div class="fakeimg">Fake Image</div>
-      <p>Somos la mejor clinica de chile</p>
-      <p>Texot explicando porque somos la mejor clinica de chile </p>
+      <p><i>Le entregamos lo mejor</i></p>
+      <p class="text-center">Somos una clínica odontológica integral y especializada, brindando la atención personalizada que usted necesita.</p>
       <br>
       <h2>Nuestro equipo</h2>
       <h5>Los mejores profesionales a tu disposición</h5>
       <div class="fakeimg">Fake Image</div>
-      <p>Garantia de calidad</p>
-      <p>Saquese las muelas con nosotros </p>
+      <p><i>Garantia de calidad</i></p>
+      <p>*Pequeña Reseña*</p>
     </div>
   </div>
 </div>

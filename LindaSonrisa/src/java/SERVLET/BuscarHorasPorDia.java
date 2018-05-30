@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package SERVLET;
 
 import DAO_IMP.ConsultaDaoImp;
@@ -13,6 +8,7 @@ import DTO.TrabajadorDto;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
@@ -46,10 +42,11 @@ public class BuscarHorasPorDia extends HttpServlet {
             if ((int) session.getAttribute("acceso") == 1) {
                 //obtenemos dentista para buscar sus horas disponibles
                 TrabajadorDto dentista = (TrabajadorDto) session.getAttribute("dentista");
-                
                 try {
                     //obtenemos fecha para la cual buscaremos horas disponibles
-                    Date fecha = (Date) new SimpleDateFormat("dd-mm-yyyy").parse(request.getParameter("dateDia"));
+                    java.util.Date fechaUtil = new SimpleDateFormat("dd-mm-yyyy").parse(request.getParameter("dateDia"));
+                    java.sql.Date fecha = new java.sql.Date(fechaUtil.getTime());
+                    session.setAttribute("fecha", fecha);
                     //horas ocupadas para tal dentista en tal hora
                     ArrayList<ConsultaDto> horasOcupadas = (ArrayList<ConsultaDto>) new ConsultaDaoImp().listarPorDiaDoctor(dentista.getRut(), fecha);
                     //lista donde agregar horas disponibles
@@ -71,16 +68,16 @@ public class BuscarHorasPorDia extends HttpServlet {
                             }
                             horasDisponibles.add(horaConsulta);
                         }
-                        
+
                     }
                     //se agrega la lista con horas disponibles a la session
                     session.setAttribute("horasDisponibles", horasDisponibles);
                     response.sendRedirect("PAGES/AgendarHora.jsp");
-                    
-                } catch (Exception ex) {
+
+                } catch (ParseException ex) {
                     System.out.println("Error en servlet parsenado fecha");
                 }
-                
+
             } else {
                 response.sendRedirect("PAGES/Home.jsp");
             }

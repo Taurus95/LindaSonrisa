@@ -48,8 +48,8 @@ public class ConsultaDaoImp implements IBaseDao<ConsultaDto> {
         return list;
     }
 
-    public List<ConsultaDto> listarPorDiaDoctor(String rut,java.sql.Date fecha) {
-        String query = "SELECT * FROM consulta WHERE fecha=? AND estado=Pediente AND rut_trabajador=?";
+    public List<ConsultaDto> listarPorDiaDoctor(String rut, java.sql.Date fecha) {
+        String query = "SELECT * FROM consulta WHERE fecha=? AND estado='Pendiente' AND rut_trabajador=?";
         List<ConsultaDto> list = new ArrayList<>();
         try (Connection conexion = Conexion.getConexion()) {
             PreparedStatement sql = conexion.prepareStatement(query);

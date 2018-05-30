@@ -26,25 +26,26 @@
             <p>Agendar Consulta</p> 
         </div>
         <div class="container" style="margin-top:30px">
-
-
-            <div class="dropdown">
-                <h1>Seleccione especialidad y dentista</h1>
-                <button class="btn btn-secondary dropdown-toggle" type="button" name="btnEspecialidad" id="dropdownEspecialidad" data-toggle="dropdown" aria-extended="true">
-                    Especialidad...
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownEspecialidad">
-                    <c:forEach var="var" items="${service.listar()}">
-                        <form action="/LindaSonrisa/buscarDentistas" method="POST">
-                            <input type="hidden" value="${var.nombre}" name="especialidad">
-                            <button class="dropdown-item" type="submit" ><c:out value="${var.nombre}"/></button>
-                        </form>
-                    </c:forEach>
+            <c:if test="${dentistas==null}">
+                <div class="dropdown">
+                    <h1>Seleccione especialidad</h1>
+                    <button class="btn btn-secondary dropdown-toggle" type="button" name="btnEspecialidad" id="dropdownEspecialidad" data-toggle="dropdown" aria-extended="true">
+                        Especialidad...
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownEspecialidad">
+                        <c:forEach var="var" items="${service.listar()}">
+                            <form action="/LindaSonrisa/buscarDentistas" method="POST">
+                                <input type="hidden" value="${var.nombre}" name="especialidad">
+                                <button class="dropdown-item" type="submit" ><c:out value="${var.nombre}"/></button>
+                            </form>
+                        </c:forEach>
+                    </div>
                 </div>
-            </div>
+            </c:if>
             <br>
-            <div class="dropdown">
-                <c:if test="${dentistas!=null}" >
+            <c:if test="${dentistas!=null}" >
+                <div class="dropdown">
+                    <h1>Seleccione dentista</h1>
                     <button class="btn btn-secondary dropdown-toggle" type="button" name="btnDoctor" id="dropdownDentista" data-toggle="dropdown" aria-extended="true"  >
                         Dentista...
                     </button>
@@ -56,11 +57,9 @@
                             </form>
                         </c:forEach>
                     </div>
-                </c:if>
-            </div>
-            
+                </div>
+            </c:if>
 
         </div>
-
     </div>    
 </html>

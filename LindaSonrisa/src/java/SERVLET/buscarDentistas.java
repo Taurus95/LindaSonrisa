@@ -33,6 +33,10 @@ public class buscarDentistas extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             HttpSession session = request.getSession();
+            if (session.getAttribute("acceso") == null) {
+                response.sendRedirect("PAGES/Home.jsp");
+                return;
+            }
             if ((int) session.getAttribute("acceso") == 1) {
                 String especialidad = request.getParameter("especialidad");
                 ArrayList<TrabajadorDto> lista = (ArrayList<TrabajadorDto>) new TrabajadorDaoImp().listarDentistaEspecialidad(especialidad);

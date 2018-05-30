@@ -34,7 +34,7 @@
                             <input type="text" name="txtRut" class="form-control" id="txtRut" onkeypress="return soloRUT(event)" 
                                    onblur="checkRutGenerico(txtRut.value, false)"
                                    placeholder="EJ: 19.123.456-k" autofocus="">
-                            <c:if test="${mes!=null}" ><span>a<c:out value="${mes}"/></span></c:if>
+                            <c:if test="${mes!=null}" ><span><c:out value="${mes}"/></span></c:if>
                         </c:if>
                         <c:if test="${cliente!=null}">
                             <label for="rut">Ingrese su Rut</label>                    

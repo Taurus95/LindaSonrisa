@@ -1,5 +1,7 @@
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<jsp:useBean id="service" scope="page" class="DAO_IMP.ServicioDaoImp" />
 <!DOCTYPE html>
 <html>
     <head>
@@ -24,28 +26,40 @@
             <p>Agendar Consulta</p> 
         </div>
         <div class="container" style="margin-top:30px">
+
+
             <div class="dropdown">
                 <h1>Seleccione especialidad y dentista</h1>
                 <button class="btn btn-secondary dropdown-toggle" type="button" name="btnEspecialidad" id="dropdownEspecialidad" data-toggle="dropdown" aria-extended="true">
                     Especialidad...
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownEspecialidad">
-                    <button class="dropdown-item" type="button">Especialidad 1</button>
-                    <button class="dropdown-item" type="button">Especialidad 2</button>
-                    <button class="dropdown-item" type="button">Especialidad 3</button>
+                    <c:forEach var="var" items="${service.listar()}">
+                        <form action="/LindaSonrisa/buscarDentistas" method="POST">
+                            <input type="hidden" value="${var.nombre}" name="especialidad">
+                            <button class="dropdown-item" type="submit" ><c:out value="${var.nombre}"/></button>
+                        </form>
+                    </c:forEach>
                 </div>
-
-                <button class="btn btn-secondary dropdown-toggle" type="button" name="btnDoctor" id="dropdownDentista" data-toggle="dropdown" aria-extended="true"  >
-                    Dentista...
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownDentista">
-                    <button class="dropdown-item" type="button">Dentista 1</button>
-                    <button class="dropdown-item" type="button">Dentista 2</button>
-                    <button class="dropdown-item" type="button">Dentista 3</button>
-                </div>
-                <button type="submit" class="btn btn-primary">Continuar</button>
             </div>
-                
+            <br>
+            <div class="dropdown">
+                <c:if test="${dentistas!=null}" >
+                    <button class="btn btn-secondary dropdown-toggle" type="button" name="btnDoctor" id="dropdownDentista" data-toggle="dropdown" aria-extended="true"  >
+                        Dentista...
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownDentista">
+                        <c:forEach var="den" items="${dentistas}">
+                            <form action="/LindaSonrisa/buscarHoras" method="POST">
+                                <input type="hidden" value="${den.rut}" name="rutDentista">
+                                <button class="dropdown-item" type="submit" ><c:out value="${den.nombre}"/></button>
+                            </form>
+                        </c:forEach>
+                    </div>
+                </c:if>
+            </div>
+            
+
         </div>
 
     </div>    

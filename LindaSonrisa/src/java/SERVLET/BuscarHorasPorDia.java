@@ -44,7 +44,7 @@ public class BuscarHorasPorDia extends HttpServlet {
                 TrabajadorDto dentista = (TrabajadorDto) session.getAttribute("dentista");
                 try {
                     //obtenemos fecha para la cual buscaremos horas disponibles
-                    java.util.Date fechaUtil = new SimpleDateFormat("dd-mm-yyyy").parse(request.getParameter("dateDia"));
+                    java.util.Date fechaUtil = new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("dateDia"));
                     java.sql.Date fecha = new java.sql.Date(fechaUtil.getTime());
                     session.setAttribute("fecha", fecha);
                     //horas ocupadas para tal dentista en tal hora
@@ -52,32 +52,32 @@ public class BuscarHorasPorDia extends HttpServlet {
                     //lista donde agregar horas disponibles
                     ArrayList<HorasAldia> horasDisponibles = new ArrayList<>();
                     //horas de trabajo
-                    int horas[] = {9, 10, 11, 12, 13, 14, 15, 16, 17, 18};
+                    int horas[] = {9, 10, 11, 12, 13, 14, 15, 16, 17};
                     //minutos
                     int minutos[] = {0, 31};
                     //para todas las horas del dia
                     for (int hora : horas) {
                         for (int minuto : minutos) {
                             HorasAldia horaConsulta = new HorasAldia(hora, minuto, "Disponible", dentista.getNombre());
-                            for (ConsultaDto consulta : horasOcupadas) {
-                                //si la hora se encuentra dentro de una consulta ya creada se cambia estado
-                                if (consulta.getHora() == hora && consulta.getMinuto() == minuto) {
-                                    horaConsulta.setEstado("Ocupada");
-                                    break;
+                            System.out.println("Hora a agregar: " + horaConsulta.toString());
+                            if (!horasOcupadas.isEmpty()) {
+                                for (ConsultaDto consulta : horasOcupadas) {
+                                    //si la hora se encuentra dentro de una consulta ya creada se cambia estado
+                                    if (consulta.getHora() == hora && consulta.getMinuto() == minuto) {
+                                        horaConsulta.setEstado("Ocupada");
+                                        break;
+                                    }
                                 }
                             }
                             horasDisponibles.add(horaConsulta);
                         }
-
                     }
                     //se agrega la lista con horas disponibles a la session
                     session.setAttribute("horasDisponibles", horasDisponibles);
                     response.sendRedirect("PAGES/AgendarHora.jsp");
-
                 } catch (ParseException ex) {
                     System.out.println("Error en servlet parsenado fecha");
                 }
-
             } else {
                 response.sendRedirect("PAGES/Home.jsp");
             }

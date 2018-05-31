@@ -29,6 +29,11 @@ public class HorasAldia {
         this.hora = hora;
     }
 
+    @Override
+    public String toString() {
+        return "HorasAldia{" + "hora=" + hora + ", minutos=" + minutos + ", estado=" + estado + ", doctor=" + doctor + '}';
+    }
+
     public int getMinutos() {
         return minutos;
     }

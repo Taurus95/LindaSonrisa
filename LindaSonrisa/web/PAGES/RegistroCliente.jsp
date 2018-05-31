@@ -11,6 +11,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+        <script src="../js/validacionesRut.js" type="text/javascript"></script>
         <style>
 
             body{
@@ -25,12 +26,13 @@
                 <h1>Clinica Odontológica Linda Sonrisa</h1>
                 <p>Registro Cliente</p> 
             </div> 
-            <form action="LindaSonrisa/nuevoCliente" method="POST">
+            <form action="LindaSonrisa/nuevoCliente" method="POST" onsubmit="return checkRutGenerico(txtRut.value, false);">
                 <form>
                     <div class="form-row">
                         <div class="col-md-4 mb-3">
                             <label for="validationServer01">Rut</label>
-                            <input type="text" name="txtRut" class="form-control is-valid" id="validationServer01" placeholder="13.123.456-K"  required>
+                            <input type="text" name="txtRut" onkeypress="return soloRUT(event)" 
+                                   onblur="checkRutGenerico(txtRut.value, false) class ="form-control is-valid" id="validationServer01" placeholder="13.123.456-K"  required>
 
                         </div>
                         <div class="col-md-4 mb-3">

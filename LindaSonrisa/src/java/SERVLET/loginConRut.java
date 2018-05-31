@@ -63,7 +63,6 @@ public class loginConRut extends HttpServlet {
                 clienteAux.setRut(request.getParameter("txtRut"));
                 clienteAux.setHabilitado(false);
                 clienteAux = new ClienteDaoImp().buscar(clienteAux);
-                System.out.println("cliente: " + clienteAux.toString());
                 if (clienteAux.isHabilitado()) {
                     session.setAttribute("cliente", clienteAux);
                     response.sendRedirect("PAGES/IngresarRut.jsp");

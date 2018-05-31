@@ -43,21 +43,23 @@
                 <table class="table table-hover">
                     <thead>
                         <tr>
-                            <th scope="col">#</th>
                             <th scope="col">Dia</th>
                             <th scope="col">Hora</th>
                             <th scope="col">Doctor</th>
                             <th scope="col">Estado</th>
-                            <th scope="col"></th>
+                            <th scope="col">Accion</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <c:forEach var="hora" items="horasDisponibles">
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>><c:out value="${fecha}" /></td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
+                        <c:forEach var="horaDisponible" items="${horasDisponibles}">
+                            <tr> 
+                                <td><c:out value="${fecha}" /></td>
+                                <td><c:out value="${horaDisponible.hora}:${horaDisponible.minutos}" /></td>
+                                <td><c:out value="${horaDisponible.doctor}"/></td>
+                                <td><c:out value="${horaDisponible.estado}"/></td>
+                                <c:if test="${horaDisponible.estado=='Disponible'}">
+                                    <td><input type="submit" value="Pedir"></td>
+                                    </c:if>
                             </tr>
                         </c:forEach>
                     </tbody>

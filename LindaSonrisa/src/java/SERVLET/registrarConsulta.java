@@ -40,28 +40,24 @@ public class registrarConsulta extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             HttpSession session = request.getSession();
             if ((int) session.getAttribute("acceso") == 1) {
-                ClienteDto cliente = (ClienteDto) request.getAttribute("cliente");
-                TrabajadorDto dentista = (TrabajadorDto) request.getAttribute("dentista");
+                ClienteDto cliente = (ClienteDto) session.getAttribute("cliente");
+                TrabajadorDto dentista = (TrabajadorDto) session.getAttribute("dentista");
                 ServicioDto servicio = new ServicioDaoImp().buscarIdServicio((String) session.getAttribute("especialidad"));
-                try {
-                    Date fecha = (Date) new SimpleDateFormat("dd-mm-yyyy").parse(request.getParameter("dateDia"));
-                    int hora = (int) request.getAttribute("hora");
-                    int minuto = (int) request.getAttribute("minuto");
-                    ConsultaDto nuevaConsulta = new ConsultaDto();
-                    nuevaConsulta.setIdServicio(servicio.getIdServicio());
-                    nuevaConsulta.setFecha(fecha);
-                    nuevaConsulta.setEstado("Pendiente");
-                    nuevaConsulta.setHora(hora);
-                    nuevaConsulta.setMinuto(minuto);
-                    nuevaConsulta.setRutCliente(cliente.getRut());
-                    nuevaConsulta.setRutTrabajador(dentista.getRut());
-                    nuevaConsulta.setTotal(servicio.getPrecio());
-                    if (new ConsultaDaoImp().agregar(nuevaConsulta)) {
-                        session.setAttribute("consulta", nuevaConsulta);
-                        response.sendRedirect("PAGES/InformacionConsulta.jsp");
-                    }
-                } catch (ParseException ex) {
-                    System.out.println("Error parseando fecha");
+                Date fecha = (Date) session.getAttribute("fecha");
+                int hora = (int) request.getAttribute("hora");
+                int minuto = (int) request.getAttribute("minutos");
+                ConsultaDto nuevaConsulta = new ConsultaDto();
+                nuevaConsulta.setIdServicio(servicio.getIdServicio());
+                nuevaConsulta.setFecha(fecha);
+                nuevaConsulta.setEstado("Pendiente");
+                nuevaConsulta.setHora(hora);
+                nuevaConsulta.setMinuto(minuto);
+                nuevaConsulta.setRutCliente(cliente.getRut());
+                nuevaConsulta.setRutTrabajador(dentista.getRut());
+                nuevaConsulta.setTotal(servicio.getPrecio());
+                if (new ConsultaDaoImp().agregar(nuevaConsulta)) {
+                    session.setAttribute("consulta", nuevaConsulta);
+                    response.sendRedirect("PAGES/InformacionConsulta.jsp");
                 }
             } else {
                 response.sendRedirect("PAGES/Home.jsp");

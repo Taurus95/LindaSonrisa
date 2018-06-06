@@ -54,12 +54,18 @@
                         <c:forEach var="horaDisponible" items="${horasDisponibles}">
                             <tr> 
                                 <td><c:out value="${fecha}" /></td>
-                                <td><c:out value="${horaDisponible.hora}:${horaDisponible.minutos}" /></td>
+                                <td><c:out value="${horaDisponible.hora}:" /><c:if test="${horaDisponible.minutos==0}" >00</c:if>
+                                    <c:if test="${horaDisponible.minutos==31}">31</c:if></td>
                                 <td><c:out value="${horaDisponible.doctor}"/></td>
                                 <td><c:out value="${horaDisponible.estado}"/></td>
                                 <c:if test="${horaDisponible.estado=='Disponible'}">
-                                    <td><input type="submit" value="Pedir"></td>
-                                    </c:if>
+                                    <td><form method="POST" action="/LindaSonrisa/registrarConsulta.php">
+                                            <input type="hidden" name="hora" value="${horaDisponible.hora}" >
+                                            <input type="hidden" name="minutos" value="${horaDisponible.minutos}" >
+                                            <input type="submit" value="Pedir">
+                                        </form>
+                                    </td>
+                                </c:if>
                             </tr>
                         </c:forEach>
                     </tbody>

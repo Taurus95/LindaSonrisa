@@ -102,8 +102,9 @@ public class ConsultaDto {
         return "ConsultaDto{" + "idConsulta=" + idConsulta + ", idServicio=" + idServicio + ", fecha=" + fecha + ", rutCliente=" + rutCliente + ", rutTrabajador=" + rutTrabajador + ", estado=" + estado + ", total=" + total + ", hora=" + hora + ", minuto=" + minuto + '}';
     }
 
-    public void setFecha(Date date) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
     }
+
 
 }

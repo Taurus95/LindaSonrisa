@@ -7,6 +7,6 @@
         <title>Consulta</title>
     </head>
     <body>
-        <h1></h1>
+        <h1>Informacion Consulta</h1>
     </body>
 </html>

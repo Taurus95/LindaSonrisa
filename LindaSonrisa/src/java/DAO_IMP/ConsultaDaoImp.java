@@ -238,4 +238,31 @@ public class ConsultaDaoImp implements IBaseDao<ConsultaDto> {
         }
         return 0;
     }
+    
+    public ConsultaDto consultaPendienteCliente(String rut){
+        String query = "SELECT * FROM consulta WHERE rut_cliente=? AND estado='Pendiente'"
+                + " AND ROWNUM=1 ORDER BY fecha desc";
+        try (Connection conexion = Conexion.getConexion()) {
+            PreparedStatement sql = conexion.prepareStatement(query);
+            sql.setString(1, rut);
+            ResultSet result = sql.executeQuery();
+            while (result.next()) {
+                ConsultaDto obj = new ConsultaDto();
+                obj.setIdServicio(result.getInt("id_servicio"));
+                obj.setRutCliente(result.getString("rut_cliente"));
+                obj.setRutTrabajador(result.getString("rut_trabajador"));
+                obj.setFecha(result.getDate("fecha"));
+                obj.setEstado(result.getString("estado"));
+                obj.setTotal(result.getInt("total"));
+                obj.setHora(result.getInt("hora"));
+                obj.setMinuto(result.getInt("minuto"));
+                return obj;
+            }
+        } catch (SQLException s) {
+            log.error("Error SQL al buscar consulta: " + s.getMessage());
+        } catch (Exception e) {
+            log.error("Error al buscar consulta" + e.getMessage());
+        }
+        return null;
+    }
 }

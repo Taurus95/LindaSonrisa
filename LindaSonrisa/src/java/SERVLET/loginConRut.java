@@ -9,7 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import DAO_IMP.ClienteDaoImp;
+import DAO_IMP.ConsultaDaoImp;
 import DTO.ClienteDto;
+import DTO.ConsultaDto;
 
 import org.apache.commons.codec.digest.DigestUtils;
 
@@ -48,10 +50,20 @@ public class loginConRut extends HttpServlet {
                 if (aux.getContrasenia().equals(DigestUtils.md5Hex(pass))) {
                     //ahora se debera comprobar si este atributo existe en la sesion
                     if (aux.isHabilitado()) {
-                        session.setAttribute("acceso", 1);
-                        response.sendRedirect("PAGES/EspecialidadDoctor.jsp");
+                        //comprobamos si tengo una consulta agendadda hasta el momento
+                        ConsultaDto consulta = new ConsultaDaoImp().consultaPendienteCliente(aux.getRut());
+                        System.out.println("consulta " + consulta.toString());
+                        if (null == consulta) {
+                            session.setAttribute("acceso", 1);
+                            response.sendRedirect("PAGES/EspecialidadDoctor.jsp");
+                        } else {
+                            session.setAttribute("acceso", 1);
+                            session.setAttribute("consulta", consulta);
+                            response.sendRedirect("PAGES/InformacionConsulta.jsp");
+                        }
+
                     } else {
-                        
+
                         session.setAttribute("acceso", 0);
                         response.sendRedirect("PAGES/IngresarRut.jsp");
                     }
@@ -74,7 +86,7 @@ public class loginConRut extends HttpServlet {
                     response.sendRedirect("PAGES/RegistroCliente.jsp");
                 }
             }
-            
+
         }
     }
 

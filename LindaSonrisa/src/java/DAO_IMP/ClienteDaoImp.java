@@ -92,10 +92,10 @@ public class ClienteDaoImp implements IClienteDao {
             sql.setString(8, obj.getContrasenia());
             sql.setBoolean(9, obj.isHabilitado());
             //Si retorna true agregamos correcto
-            if (sql.execute()) {
-                connection.close();
-                return true;
-            }
+            sql.execute();
+            connection.close();
+            return true;
+
         } catch (SQLException s) {
             log.error("Error SQL al agregar cliente: " + s.getMessage());
         } catch (Exception e) {
@@ -160,7 +160,7 @@ public class ClienteDaoImp implements IClienteDao {
             } catch (Exception e) {
                 log.error("Error al obtener resultset de buscar: " + e.getMessage());
             }
-            
+
         } catch (SQLException s) {
             log.error("Error SQL buscando cliente " + s.getMessage());
         } catch (Exception e) {

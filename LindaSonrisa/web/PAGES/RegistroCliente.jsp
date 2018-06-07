@@ -26,12 +26,12 @@
                 <h1>Clinica Odontológica Linda Sonrisa</h1>
                 <p>Registro Cliente</p> 
             </div> 
-            <form action="LindaSonrisa/nuevoCliente" method="POST" onsubmit="return checkRutGenerico(txtRut.value, false);">
+            <form action="/LindaSonrisa/nuevoCliente" method="POST" onsubmit="return checkRutGenerico(txtRut.value, false);">
                 <form>
                     <div class="form-row">
                         <div class="col-md-4 mb-3">
                             <label for="validationServer01">Rut</label>
-                            <input type="text" disabled="" name="txtRut" value="${rut}"> 
+                            <input type="text" disabled="" name="rut" value="${rut}"> 
                         </div>
                         <div class="col-md-4 mb-3">
                             <label for="validationServer02">Nombre</label>

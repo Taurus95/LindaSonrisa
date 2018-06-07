@@ -1,8 +1,13 @@
 package SERVLET;
 
+import DAO_IMP.ClienteDaoImp;
 import DTO.ClienteDto;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -35,11 +40,30 @@ public class nuevoCliente extends HttpServlet {
             HttpSession session = request.getSession();
             ClienteDto nuevo = new ClienteDto();
             nuevo.setRut((String) session.getAttribute("rut"));
-            nuevo.setNombre(trim((String) request.getAttribute("txtNombre")));
-            nuevo.setCorreo(trim((String) request.getAttribute("txtCorreo")));
+            nuevo.setNombre(trim((String) request.getParameter("txtNombre")));
+            nuevo.setCorreo(trim((String) request.getParameter("txtCorreo")));
             nuevo.setHabilitado(true);
-            nuevo.setTelefono(trim((String) request.getAttribute("txtTelefono")));
-            nuevo.setContrasenia(DigestUtils.md5Hex(trim((String) request.getAttribute("txtContrasenia"))));
+            nuevo.setTelefono(trim((String) request.getParameter("txtTelefono")));
+            nuevo.setContrasenia(DigestUtils.md5Hex(trim((String) request.getParameter("txtContrasenia"))));
+            nuevo.setSexo(trim((String) request.getParameter("cmbSexo")));
+            nuevo.setDireccion((String) request.getParameter("txtDireccion"));
+            System.out.println("nuevo " + nuevo.toString());
+            //try para agregar fecha 
+            try {
+                java.util.Date fechaUtil = new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("calNacimiento"));
+                java.sql.Date fecha = new java.sql.Date(fechaUtil.getTime());
+                nuevo.setFechaNacimiento(fecha);
+            } catch (ParseException ex) {
+                Logger.getLogger(nuevoCliente.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            if (new ClienteDaoImp().agregar(nuevo)) {
+                session.setAttribute("cliente", nuevo);
+                session.setAttribute("acceso", 1);
+                response.sendRedirect("PAGES/EspecialidadDoctor.jsp");
+            } else {
+                session.invalidate();
+                response.sendRedirect("PAGES/Home.jsp");
+            }
 
         }
     }

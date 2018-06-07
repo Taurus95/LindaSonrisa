@@ -1,4 +1,4 @@
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -8,5 +8,8 @@
     </head>
     <body>
         <h1>Informacion Consulta</h1>
+        <c:if test="${Consulta!=null}">
+            
+        </c:if>
     </body>
 </html>

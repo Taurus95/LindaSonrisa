@@ -47,7 +47,6 @@ public class nuevoCliente extends HttpServlet {
             nuevo.setContrasenia(DigestUtils.md5Hex(trim((String) request.getParameter("txtContrasenia"))));
             nuevo.setSexo(trim((String) request.getParameter("cmbSexo")));
             nuevo.setDireccion((String) request.getParameter("txtDireccion"));
-            System.out.println("nuevo " + nuevo.toString());
             //try para agregar fecha 
             try {
                 java.util.Date fechaUtil = new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("calNacimiento"));

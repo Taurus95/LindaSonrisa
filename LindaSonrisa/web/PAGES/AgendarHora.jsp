@@ -59,7 +59,7 @@
                                 <td><c:out value="${horaDisponible.doctor}"/></td>
                                 <td><c:out value="${horaDisponible.estado}"/></td>
                                 <c:if test="${horaDisponible.estado=='Disponible'}">
-                                    <td><form method="POST" action="/LindaSonrisa/registrarConsulta.php">
+                                    <td><form method="POST" action="/LindaSonrisa/registrarConsulta">
                                             <input type="hidden" name="hora" value="${horaDisponible.hora}" >
                                             <input type="hidden" name="minutos" value="${horaDisponible.minutos}" >
                                             <input type="submit" value="Pedir">

@@ -31,9 +31,7 @@
                     <div class="form-row">
                         <div class="col-md-4 mb-3">
                             <label for="validationServer01">Rut</label>
-                            <input type="text" name="txtRut" onkeypress="return soloRUT(event)" 
-                                   onblur="checkRutGenerico(txtRut.value, false) class ="form-control is-valid" id="validationServer01" placeholder="13.123.456-K"  required>
-
+                            <input type="text" disabled="" name="txtRut" value="${rut}"> 
                         </div>
                         <div class="col-md-4 mb-3">
                             <label for="validationServer02">Nombre</label>
@@ -43,7 +41,6 @@
                         <div class="col-md-4 mb-3">
                             <label for="validationServer03">Correo</label>
                             <input type="text" name="txtCorreo" class="form-control is-valid" id="validationServer03" placeholder="JoseVega@correo.cl"  required>
-
                         </div>
                     </div>
                     <div class="form-row">

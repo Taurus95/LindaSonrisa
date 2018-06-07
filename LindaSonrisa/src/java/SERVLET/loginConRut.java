@@ -36,7 +36,8 @@ public class loginConRut extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             //abrimos una sesion
             HttpSession session = request.getSession();
-            session.setAttribute("mes", null);
+            session.setAttribute("mj", null);
+            session.setAttribute("rut", request.getParameter("txtRut"));
             //cliente aux
             if (session.getAttribute("cliente") != null) {
                 ClienteDto aux = (ClienteDto) session.getAttribute("cliente");
@@ -50,7 +51,7 @@ public class loginConRut extends HttpServlet {
                         session.setAttribute("acceso", 1);
                         response.sendRedirect("PAGES/EspecialidadDoctor.jsp");
                     } else {
-
+                        
                         session.setAttribute("acceso", 0);
                         response.sendRedirect("PAGES/IngresarRut.jsp");
                     }
@@ -60,20 +61,20 @@ public class loginConRut extends HttpServlet {
                 }
             } else {
                 ClienteDto clienteAux = new ClienteDto();
-                clienteAux.setRut(request.getParameter("txtRut"));
+                clienteAux.setRut((String) session.getAttribute("rut"));
                 clienteAux.setHabilitado(false);
                 clienteAux = new ClienteDaoImp().buscar(clienteAux);
                 if (clienteAux.isHabilitado()) {
                     session.setAttribute("cliente", clienteAux);
                     response.sendRedirect("PAGES/IngresarRut.jsp");
                 } else if (!clienteAux.isHabilitado() && clienteAux.getNombre() != null) {
-                    session.setAttribute("mes", "Su usuario esta deshabilitado");
+                    session.setAttribute("mj", "Su usuario esta deshabilitado");
                     response.sendRedirect("PAGES/IngresarRut.jsp");
                 } else {
                     response.sendRedirect("PAGES/RegistroCliente.jsp");
                 }
             }
-
+            
         }
     }
 

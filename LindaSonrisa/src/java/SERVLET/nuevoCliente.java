@@ -1,5 +1,6 @@
 package SERVLET;
 
+import DTO.ClienteDto;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -7,6 +8,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import static org.apache.taglibs.standard.functions.Functions.trim;
+import org.apache.commons.codec.digest.DigestUtils;
 
 /**
  *
@@ -28,17 +32,15 @@ public class nuevoCliente extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet nuevoCliente</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet nuevoCliente at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+            HttpSession session = request.getSession();
+            ClienteDto nuevo = new ClienteDto();
+            nuevo.setRut((String) session.getAttribute("rut"));
+            nuevo.setNombre(trim((String) request.getAttribute("txtNombre")));
+            nuevo.setCorreo(trim((String) request.getAttribute("txtCorreo")));
+            nuevo.setHabilitado(true);
+            nuevo.setTelefono(trim((String) request.getAttribute("txtTelefono")));
+            nuevo.setContrasenia(DigestUtils.md5Hex(trim((String) request.getAttribute("txtContrasenia"))));
+
         }
     }
 

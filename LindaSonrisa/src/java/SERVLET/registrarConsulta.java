@@ -54,6 +54,7 @@ public class registrarConsulta extends HttpServlet {
                 nuevaConsulta.setRutTrabajador(dentista.getRut());
                 nuevaConsulta.setTotal(servicio.getPrecio());
                 if (new ConsultaDaoImp().agregar(nuevaConsulta)) {
+                    nuevaConsulta.setIdConsulta(new ConsultaDaoImp().ultimoId());
                     session.setAttribute("consulta", nuevaConsulta);
                     response.sendRedirect("PAGES/InformacionConsulta.jsp");
                 }

@@ -248,6 +248,7 @@ public class ConsultaDaoImp implements IBaseDao<ConsultaDto> {
             ResultSet result = sql.executeQuery();
             while (result.next()) {
                 ConsultaDto obj = new ConsultaDto();
+                obj.setIdConsulta(result.getInt("id_consulta"));
                 obj.setIdServicio(result.getInt("id_servicio"));
                 obj.setRutCliente(result.getString("rut_cliente"));
                 obj.setRutTrabajador(result.getString("rut_trabajador"));

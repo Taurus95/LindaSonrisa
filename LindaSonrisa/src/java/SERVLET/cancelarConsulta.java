@@ -38,14 +38,15 @@ public class cancelarConsulta extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             HttpSession session = request.getSession();
             ConsultaDto consulta = (ConsultaDto) session.getAttribute("consulta");
+            System.out.println("Consulta a cancelar: " + consulta.toString());
             consulta.setEstado("Cancelada");
-            if(new ConsultaDaoImp().modificar(consulta)){
+            if (new ConsultaDaoImp().modificar(consulta)) {
                 session.invalidate();
-                response.sendRedirect("PAGES/Home.jsp");  
-            }else{
-                response.sendRedirect("PAGES/Home.jsp");  
+                response.sendRedirect("PAGES/Home.jsp");
+            } else {
+                response.sendRedirect("PAGES/Home.jsp");
             }
-            
+
         }
     }
 

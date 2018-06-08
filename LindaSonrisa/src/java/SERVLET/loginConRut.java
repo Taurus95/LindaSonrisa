@@ -52,7 +52,7 @@ public class loginConRut extends HttpServlet {
                     if (aux.isHabilitado()) {
                         //comprobamos si tengo una consulta agendadda hasta el momento
                         ConsultaDto consulta = new ConsultaDaoImp().consultaPendienteCliente(aux.getRut());
-                        System.out.println("consulta " + consulta.toString());
+                        
                         if (null == consulta) {
                             session.setAttribute("acceso", 1);
                             response.sendRedirect("PAGES/EspecialidadDoctor.jsp");

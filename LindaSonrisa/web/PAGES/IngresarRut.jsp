@@ -4,50 +4,86 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Clinica Linda Sonrisa</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>        
-        <script src="../vendor/bootstrap/js/validacionesRut.js" type="text/javascript"></script>
-        <style>
+        <title>Clinica Odontológica LINDA SONRISA</title>
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta content="" name="keywords">
+        <meta content="" name="description">
 
-            body{
-                background: #31D6D5;
-            }
+        <!-- Favicons -->
+        <link href="../img/favicon.png" rel="icon">
+        <link href="../img/apple-touch-icon.png" rel="apple-touch-icon">
 
-        </style>
+        <!-- Google Fonts -->
+        <link href="../https://fonts.googleapis.com/css?family=Montserrat:300,400,500,700|Open+Sans:300,300i,400,400i,700,700i" rel="stylesheet">
+
+        <!-- Bootstrap CSS File -->
+        <link href="../lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- Libraries CSS Files -->
+        <link href="../lib/animate/animate.min.css" rel="stylesheet">
+        <link href="../lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+        <link href="../lib/ionicons/css/ionicons.min.css" rel="stylesheet">
+        <link href="../lib/magnific-popup/magnific-popup.css" rel="stylesheet">
+
+        <!-- Main Stylesheet File -->
+        <link href="../css/style.css" rel="stylesheet">       
+
+
     </head>
-    <div class="container well">
-        <div class="jumbotron text-center" style="margin-bottom:0">
-            <h1>Clinica Odontológica Linda Sonrisa</h1>
-            <p>Agendar Consulta</p> 
-        </div>
+    <body>
+        <header id="header">
+            <div class="container">
 
-        <form class="form-inline"  method="post" action="/LindaSonrisa/loginConRut" onsubmit="return checkRutGenerico(txtRut.value, false);"  >
-            <div class="container" style="margin-top:30px">
-                <div class="row">
-                    <div class="col-sm-4">
-                        <c:if test="${cliente==null}">
-                            <h1>Ingrese su rut</h1>                    
-                            <input type="text" name="txtRut" class="form-control" id="txtRut" onkeypress="return soloRUT(event)" 
-                                   onblur="checkRutGenerico(txtRut.value, false)"
-                                   placeholder="EJ: 19.123.456-k" autofocus="">
-                            <c:if test="${mj!=null}" ><span><c:out value="${mj}"/></span></c:if>
-                        </c:if>
-                        <c:if test="${cliente!=null}">
-                            <label for="rut">Ingrese su Rut</label>                    
-                            <input type="text" name="txtRut" maxlength="20" value="<c:out value="${cliente.getRut()}" />" disabled="" >
-                            <label for="rut">Ingrese su contraseña</label>                    
-                            <input type="password" name="txtPass" maxlength="20" class="form-control" id="txtPass" placeholder="" autofocus="">
-                            <c:if test="${acceso==0}" ><span>Contraseña incorrecta</span></c:if>
+                <div id="logo" class="pull-left">
+                    <h1><a href="#intro" class="scrollto">Linda Sonrisa</a></h1>
+                    <!-- Uncomment below if you prefer to use an image logo -->
+                    <!-- <a href="#intro"><img src="img/logo.png" alt="" title=""></a> -->
+                </div>
 
-                        </c:if>
-                        <button type="submit" class="btn btn-primary">Continuar</button>    
-                    </div>
-                </div>        
+                <nav id="nav-menu-container">
+                    <ul class="nav-menu">                                              
+                        <li><a href="#contact">Cancelar</a></li>
+                    </ul>
+                </nav><!-- #nav-menu-container -->
             </div>
-        </form>
-    </div>
+        </header>
+        <form role="form" class="contactForm" method="POST" action="/LindaSonrisa/loginConRut" onsubmit="return checkRutGenerico(txtRut.value, false);">
+            <section id="intro">
+
+                <div class="intro-text">
+                    <h2>Agenda tu hora</h2>
+                    <div class="form-group col-lg-6">
+                        <input type="text" name="txtRut" class="form-control" placeholder="19031885K" id="txtRut" onkeypress="return soloRUT(event)" onblur="checkRutGenerico(txtRut.value, false)"  />
+                         <button class="btn-get-started scrollto" >Siguiente</button>   
+                    </div>
+                    
+                </div>
+
+                <div class="product-screens">
+
+
+
+                </div>
+
+            </section><!-- #intro -->
+        </form> 
+
+
+        <!-- JavaScript Libraries -->
+        <script src="../lib/jquery/jquery.min.js"></script>
+        <script src="../lib/jquery/jquery-migrate.min.js"></script>
+        <script src="../lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <script src="../lib/easing/easing.min.js"></script>
+        <script src="../lib/wow/wow.min.js"></script>
+        <script src="../lib/superfish/hoverIntent.js"></script>
+        <script src="../lib/superfish/superfish.min.js"></script>
+        <script src="../lib/magnific-popup/magnific-popup.min.js"></script>
+        <script src="../lib/bootstrap/js/validacionesRut.js" type="text/javascript"></script>
+
+        <!-- Contact Form JavaScript File -->
+        <script src="../contactform/contactform.js"></script>
+
+        <!-- Template Main Javascript File -->
+        <script src="../js/main.js"></script>
+    </body>    
 </html>

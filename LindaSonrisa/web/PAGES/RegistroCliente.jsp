@@ -77,171 +77,45 @@
 
                 </div>-->
 
-        <!--    </section><!-- #intro -->
-        <!--</form> -->
+        <!--    </section><!-- #intro -->        
+        <!--</form> -->      
         
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        <div class="limiter">
-            <div class="container-registro">
-                <div class="wrap-registro">
-                    <form class="login100-form validate-form p-l-55 p-r-55 p-t-160" method="POST" action="./registrarUserFile.php">
-                        <span class="login100-form-title">
-                            Formulario de registro
-                        </span>
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <div class="wrap-input100 validate-input" data-validate = "Porfavor ingresa tu rut" >
-                                    <input class="input100" type="text" id="txtRut" name="txtRut" placeholder="Rut" onkeypress="return soloRUT(event)"
-                                           onblur="checkRutGenerico(txtRut.value, false)" >
-                                    <span class="focus-input100"></span>
-                                </div>
-                                <br>
-                                <div class="wrap-input100 validate-input" data-validate = "Porfavor ingresa tu nombre" >
-                                    <input class="input100" type="text" name="txtNombre" placeholder="Nombres" >
-                                    <span class="focus-input100"></span>
-                                </div>
-                                <br>
-                                <div class="wrap-input100 validate-input" data-validate = "Porfavor ingresa tu apellido" >
-                                    <input class="input100" type="text" name="txtApellidoP" placeholder="Apellido paterno">
-                                    <span class="focus-input100"></span>
-                                </div>
-                                <br>
-                                <div class="wrap-input100 validate-input" data-validate = "Porfavor ingresa tu apellido">
-                                    <input class="input100" type="text" name="txtApellidoM" placeholder="Apellido materno" >
-                                    <span class="focus-input100"></span>
-                                </div>
-                                <br>
-                                <div class="wrap-input100 validate-input" data-validate = "Porfavor ingresa tu fecha de nacimiento">
-                                    <input class="input100" type="text" onfocus="(this.type = 'date')" onblur="(this.type = 'text')"
-                                           name="dateFechaN"  placeholder="Fecha nacimiento" >
-                                    <span class="focus-input100"></span>
-                                </div>
-                                <br>
-                                <div class="wrap-input100 validate-input" data-validate = "Porfavor indica tu sexo biologico">
-                                    <span>Porfavor indica tu sexo biologico:</span>
-                                    <div class="radio">
-                                        <label style="font-size: 1em">
-                                            <input type="radio" name="sexo" value="hombre" checked="">
-                                            <span class="cr"><i class="cr-icon fa fa-circle"></i></span>
-                                            Hombre
-                                        </label>
-                                        <label style="font-size: 1em">
-                                            <input type="radio" name="sexo" value="mujer">
-                                            <span class="cr"><i class="cr-icon fa fa-circle"></i></span>
-                                            Mujer
-                                        </label>
-                                    </div>
-                                </div>
-                                <br>
-                            </div>
-                            <div class="col-sm-6" >
-
-                                <div class="wrap-input100 validate-input" data-validate = "Porfavor ingresa tu telefono">
-                                    <input class="input100" type="number" name="numTelefono" placeholder="Numero de telefono"
-                                           onkeypress="return soloNum(event)">
-                                    <span class="focus-input100"></span>
-                                </div>
-                                <br>
-                                <div class="row">
-                                    <div class="col-sm-6">
-                                        <div class="wrap-input100 validate-input" data-validate = "Porfavor ingresa tu direccion">
-                                            <input class="input100" type="text" name="txtDireccion" placeholder="Direccion" >
-                                            <span class="focus-input100"></span>
+        <section id="contact">
+                <div class="container">
+                    <div class="row wow fadeInUp">                
+                        
+                        <div class="col-lg-5 col-md-8">
+                            <div class="form">
+                                <div id="sendmessage">Your message has been sent. Thank you!</div>
+                                <div id="errormessage"></div>
+                                <form action="" method="post" role="form" class="contactForm">
+                                    <div class="form-row">
+                                        <div class="form-group col-lg-6">
+                                            <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
+                                            <div class="validation"></div>
+                                        </div>
+                                        <div class="form-group col-lg-6">
+                                            <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" data-rule="email" data-msg="Please enter a valid email" />
+                                            <div class="validation"></div>
                                         </div>
                                     </div>
-                                    <div class="col-sm-6">
-                                        <select class="custom-select input100" name="comuna" required="">
-                                            <option value="0" selected>Comuna</option>
-                                            <option value="Cerrillos">Cerrillos</option>
-                                            <option value="Cerro Navia">Cerro Navia</option>
-                                            <option value="Conchalí">Conchalí</option>
-                                            <option value="El Bosque">El Bosque</option>
-                                            <option value="Estación Central">Estación Central</option>
-                                            <option value="Huechuraba">Huechuraba</option>
-                                            <option value="Independencia">Independencia</option>
-                                            <option value="La Cisterna">La Cisterna</option>
-                                            <option value="La Florida">La Florida</option>
-                                            <option value="La Granja">La Granja</option>
-                                            <option value="La Pintana">La Pintana</option>
-                                            <option value="La Reina">La Reina</option>
-                                            <option value="Las Condes">Las Condes</option>
-                                            <option value="Lo Barnechea">Lo Barnechea</option>
-                                            <option value="Lo Espejo">Lo Espejo</option>
-                                            <option value="Lo Prado">Lo Prado</option>
-                                            <option value="Macul">Macul</option>
-                                            <option value="Maipú">Maipú</option>
-                                            <option value="Ñuñoa">Ñuñoa</option>
-                                            <option value="Padre Hurtado">Padre Hurtado</option>
-                                            <option value="Pedro Aguirre Cerda">Pedro Aguirre Cerda</option>
-                                            <option value="Peñalolén">Peñalolén</option>
-                                            <option value="Providencia">Providencia</option>
-                                            <option value="Pudahuel">Pudahuel</option>
-                                            <option value="Puente Alto">Puente Alto</option>
-                                            <option value="Quilicura">Quilicura</option>
-                                            <option value="Quinta Normal">Quinta Normal</option>
-                                            <option value="Recoleta">Recoleta</option>
-                                            <option value="Renca">Renca</option>
-                                            <option value="San Bernardo">San Bernardo</option>
-                                            <option value="San Joaquín">San Joaquín</option>
-                                            <option value="San Miguel">San Miguel</option>
-                                            <option value="San Ramón">San Ramón</option>
-                                            <option value="Santiago">Santiago</option>
-                                            <option value="Vitacura">Vitacura</option>
-                                        </select>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject" />
+                                        <div class="validation"></div>
                                     </div>
-                                </div>
-
-                                <br>
-                                <div class="wrap-input100 validate-input" data-validate = "Porfavor ingresa tu correo">
-                                    <input class="input100" type="email" name="txtCorreo" placeholder="Correo electronico" >
-                                    <span class="focus-input100"></span>
-                                </div>
-                                <br>
-                                <div class="wrap-input100 validate-input" data-validate = "Porfavor ingresa tu contraseña">
-                                    <input class="input100" type="password" name="txtPass" placeholder="Contraseña" >
-                                    <span class="focus-input100"></span>
-                                </div>
-                                <br>
-                                <div class="wrap-input100 validate-input" data-validate = "Las contraseñas no coinciden" >
-                                    <input class="input100" type="password" name="txtRepPass" placeholder="Repetir contraseña" >
-                                    <span class="focus-input100"></span>
-                                </div>
-                                <br>
+                                    <div class="form-group">
+                                        <textarea class="form-control" name="message" rows="5" data-rule="required" data-msg="Please write something for us" placeholder="Message"></textarea>
+                                        <div class="validation"></div>
+                                    </div>
+                                    <div class="text-center"><button type="submit" title="Send Message">Send Message</button></div>
+                                </form>
                             </div>
                         </div>
-                        <div class="container-login100-form-btn">
-                            <button class="login100-form-btn">
-                                Registrarme
-                            </button>
-                        </div>
-                        <br>
-                    </form>
+
+                    </div>
+
                 </div>
-            </div>
-        </div>
-        
-        
-        
-        
-        
+            </section><!-- #contact -->
         
 
 

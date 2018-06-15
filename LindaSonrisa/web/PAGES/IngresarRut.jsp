@@ -35,34 +35,35 @@
             <div class="container">
 
                 <div id="logo" class="pull-left">
-                    <h1><a href="#intro" class="scrollto">Linda Sonrisa</a></h1>
+                    <h1><a href="./Home.jsp" class="scrollto">Linda Sonrisa</a></h1>
                     <!-- Uncomment below if you prefer to use an image logo -->
                     <!-- <a href="#intro"><img src="img/logo.png" alt="" title=""></a> -->
                 </div>
 
                 <nav id="nav-menu-container">
                     <ul class="nav-menu">                                              
-                        <li><a href="#../index.html">Cancelar</a></li>
+                        <li><a href="./Home.jsp">Cancelar</a></li>
                     </ul>
                 </nav><!-- #nav-menu-container -->
             </div>
         </header>
-        <form role="form" class="contactForm" method="POST" action="/LindaSonrisa/loginConRut" onsubmit="return checkRutGenerico(txtRut.value, false);">
+        <form role="form" class="contactForm" name="formulario" method="POST" action="/LindaSonrisa/loginConRut" onsubmit="return checkRutGenerico(txtRut.value, false);">
             <section id="intro">
 
                 <div class="intro-text">
                     <h2>Agenda tu hora</h2>
                     <div class="form-group col-lg-6">
-                        <input type="text" name="txtRut" class="form-control" placeholder="Ingrese su RUT ej: 19031885K" id="txtRut" onkeypress="return soloRUT(event)" onblur="checkRutGenerico(txtRut.value, false)"  />
-                         <button class="btn-get-started scrollto" >Siguiente</button>   
+                        <c:if test="${cliente==null}">
+                            <input type="text" name="txtRut" class="form-control" placeholder="Ingrese su tu Rut" required="" id="txtRut" onkeypress="return soloRUT(event)" onblur="checkRutGenerico(txtRut.value, false)"  />
+                            <a href="#" class="btn-get-started scrollto" onclick="document.formulario.submit()" >Siguiente</a>
+                        </c:if>
+                        <c:if test="${cliente!=null}">
+                            <input type="text" name="txtRut" class="form-control" placeholder="Ingrese su tu Rut" required="" id="txtRut" onkeypress="return soloRUT(event)" onblur="checkRutGenerico(txtRut.value, false)"  />
+                            <br>
+                            <input type="pass" name="pass" class="form-control" placeholder="Contraseña" required="">
+                            <a href="#" class="btn-get-started scrollto" onclick="document.formulario.submit()" >Siguiente</a>
+                        </c:if>
                     </div>
-                    
-                </div>
-
-                <div class="product-screens">
-
-
-
                 </div>
 
             </section><!-- #intro -->

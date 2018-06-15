@@ -52,27 +52,10 @@
         <ul class="nav-menu">
           <li class="menu-active"><a href="#intro">Inicio</a></li>
           <li><a href="#about">Sobre Nosotros</a></li>
-          <li><a href="#features">Features</a></li>
-          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#features">Servicios</a></li>
+          <li><a href="#pricing">Precios</a></li>
           <li><a href="#team">Equipo</a></li>
           <li><a href="#gallery">Gallery</a></li>
-          <li class="menu-has-children"><a href="">Drop Down</a>
-            <ul>
-              <li><a href="#">Drop Down 1</a></li>
-              <li class="menu-has-children"><a href="#">Drop Down 2</a>
-                <ul>
-                  <li><a href="#">Deep Drop Down 1</a></li>
-                  <li><a href="#">Deep Drop Down 2</a></li>
-                  <li><a href="#">Deep Drop Down 3</a></li>
-                  <li><a href="#">Deep Drop Down 4</a></li>
-                  <li><a href="#">Deep Drop Down 5</a></li>
-                </ul>
-              </li>
-              <li><a href="#">Drop Down 3</a></li>
-              <li><a href="#">Drop Down 4</a></li>
-              <li><a href="#">Drop Down 5</a></li>
-            </ul>
-          </li>
           <li><a href="#contact">Contact Us</a></li>
         </ul>
       </nav><!-- #nav-menu-container -->
@@ -87,7 +70,7 @@
     <div class="intro-text">
       <h2>Bienvenido</h2>
       <p>Clinica Linda Sonrisa te ofrece los mejores servicios</p>
-      <a href="IngresaRut.jsp" class="btn-get-started scrollto">Pide tu hora</a>
+      <a href="./IngresarRut.jsp" class="btn-get-started scrollto">Pide tu hora</a>
     </div>
 
     <!--<div class="product-screens">
@@ -161,7 +144,7 @@
 
           <div class="col-lg-8 offset-lg-4">
             <div class="section-header wow fadeIn" data-wow-duration="1s">
-              <h3 class="section-title">Product Featuress</h3>
+              <h3 class="section-title">Servicios</h3>
               <span class="section-divider"></span>
             </div>
           </div>
@@ -176,7 +159,7 @@
 
               <div class="col-lg-6 col-md-6 box wow fadeInRight">
                 <div class="icon"><i class="ion-ios-speedometer-outline"></i></div>
-                <h4 class="title"><a href="">Lorem Ipsum</a></h4>
+                <h4 class="title"><a href="">Odontologia general</a></h4>
                 <p class="description">Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident clarida perendo.</p>
               </div>
               <div class="col-lg-6 col-md-6 box wow fadeInRight" data-wow-delay="0.1s">
@@ -184,7 +167,7 @@
                 <h4 class="title"><a href="">Dolor Sitema</a></h4>
                 <p class="description">Minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat tarad limino ata noble dynala mark.</p>
               </div>
-              <div class="col-lg-6 col-md-6 box wow fadeInRight data-wow-delay="0.2s">
+              <div class="col-lg-6 col-md-6 box wow fadeInRight" data-wow-delay="0.2s">
                 <div class="icon"><i class="ion-social-buffer-outline"></i></div>
                 <h4 class="title"><a href="">Sed ut perspiciatis</a></h4>
                 <p class="description">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur teleca starter sinode park ledo.</p>
@@ -739,8 +722,7 @@
           <nav class="footer-links text-lg-right text-center pt-2 pt-lg-0">
             <a href="#intro" class="scrollto">Home</a>
             <a href="#about" class="scrollto">About</a>
-            <a href="#">Privacy Policy</a>
-            <a href="#">Terms of Use</a>
+            <a href="./loginTrabajador.jsp">Trabajadores</a>
           </nav>
         </div>
       </div>

@@ -42,7 +42,7 @@
 
                 <nav id="nav-menu-container">
                     <ul class="nav-menu">                                              
-                        <li><a href="#contact">Cancelar</a></li>
+                        <li><a href="#../index.html">Cancelar</a></li>
                     </ul>
                 </nav><!-- #nav-menu-container -->
             </div>
@@ -53,7 +53,7 @@
                 <div class="intro-text">
                     <h2>Agenda tu hora</h2>
                     <div class="form-group col-lg-6">
-                        <input type="text" name="txtRut" class="form-control" placeholder="19031885K" id="txtRut" onkeypress="return soloRUT(event)" onblur="checkRutGenerico(txtRut.value, false)"  />
+                        <input type="text" name="txtRut" class="form-control" placeholder="Ingrese su RUT ej: 19031885K" id="txtRut" onkeypress="return soloRUT(event)" onblur="checkRutGenerico(txtRut.value, false)"  />
                          <button class="btn-get-started scrollto" >Siguiente</button>   
                     </div>
                     

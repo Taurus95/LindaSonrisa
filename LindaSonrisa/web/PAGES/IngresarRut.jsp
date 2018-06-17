@@ -35,14 +35,14 @@
             <div class="container">
 
                 <div id="logo" class="pull-left">
-                    <h1><a href="./Home.jsp" class="scrollto">Linda Sonrisa</a></h1>
+                    <h1><a href="../index.html" class="scrollto">Linda Sonrisa</a></h1>
                     <!-- Uncomment below if you prefer to use an image logo -->
                     <!-- <a href="#intro"><img src="img/logo.png" alt="" title=""></a> -->
                 </div>
 
                 <nav id="nav-menu-container">
                     <ul class="nav-menu">                                              
-                        <li><a href="./Home.jsp">Cancelar</a></li>
+                        <li><a href="../index.html">Cancelar</a></li>
                     </ul>
                 </nav><!-- #nav-menu-container -->
             </div>

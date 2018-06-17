@@ -124,6 +124,23 @@ public class ServicioDaoImp implements IServicioDao {
         }
         return null;
     }
+    
+    public String buscarNombre(int id) {
+        String query = "SELECT * FROM servicio WHERE id_servicio=?";
+        try (Connection conexion = Conexion.getConexion()) {
+            PreparedStatement sql = conexion.prepareStatement(query);
+            sql.setInt(1, id);
+            ResultSet result = sql.executeQuery();
+            while (result.next()) {
+                return result.getString("nombre");
+            }
+        } catch (SQLException s) {
+            log.error("Error SQL buscando nombre servicio " + s.getMessage());
+        } catch (Exception e) {
+            log.error("Error al buscando nombre servicio " + e.getMessage());
+        }
+        return "";
+    }
 
     @Override
     public boolean habilitar(ServicioDto obj) {

@@ -37,8 +37,13 @@ public class cancelarConsulta extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             HttpSession session = request.getSession();
+
+            if (session.getAttribute("consulta") == null) {
+                session.invalidate();
+                response.sendRedirect("PAGES/Home.jsp");
+                return;
+            }
             ConsultaDto consulta = (ConsultaDto) session.getAttribute("consulta");
-            System.out.println("Consulta a cancelar: " + consulta.toString());
             consulta.setEstado("Cancelada");
             if (new ConsultaDaoImp().modificar(consulta)) {
                 session.invalidate();

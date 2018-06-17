@@ -61,7 +61,8 @@
                             <input type="text" name="txtRut" class="form-control" placeholder="Ingrese su Rut" required="" id="txtRut" onkeypress="return soloRUT(event)" onblur="checkRutGenerico(txtRut.value, false)"  />
                             <br>
                             <input type="pass" name="pass" class="form-control" placeholder="Contraseña" required="">
-                            <a href="#" class="btn-get-started scrollto" onclick="document.formulario.submit()" >Siguiente</a>
+                            <c:if test="${acceso==0}" ><span>Contraseña incorrecta</span></c:if>
+                                <a href="#" class="btn-get-started scrollto" onclick="document.formulario.submit()" >Siguiente</a>
                         </c:if>
                     </div>
                 </div>

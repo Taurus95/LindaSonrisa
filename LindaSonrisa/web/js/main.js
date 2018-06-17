@@ -128,6 +128,8 @@ function hiddeMessageError() {
     document.getElementById("error").innerHTML = "<span id='error'></span>";
 }
 
-function confirm() {
-    return confirm("¿Estas seguro de que quieres cancelar la consulta?");
+function confirmCancelar() {
+    if(confirm("¿Estas seguro de que quieres cancelar la consulta?")){
+        document.formulario.submit();
+    }
 }

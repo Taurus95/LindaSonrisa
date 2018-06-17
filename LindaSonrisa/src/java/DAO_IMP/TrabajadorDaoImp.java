@@ -205,5 +205,30 @@ public class TrabajadorDaoImp implements ITrabajadorDao {
         }
         return list;
     }
+    
+     public String buscarNombre(String rut) {
+        String query = "SELECT * FROM trabajador WHERE rut = ?";
+        try (Connection connection = Conexion.getConexion()) {
+
+            PreparedStatement sql = connection.prepareStatement(query);
+            sql.setString(1, rut);
+
+            try (ResultSet results = sql.executeQuery()) {
+                while (results.next()) {
+                    return results.getString("nombre");
+
+                }
+            } catch (Exception e) {
+                log.error("Error al obtener resultset de buscar: " + e.getMessage());
+            }
+            connection.close();
+
+        } catch (SQLException s) {
+            log.error("Error SQL buscando nombre trabajador " + s.getMessage());
+        } catch (Exception e) {
+            log.error("Error al buscar nombre trabajador " + e.getMessage());
+        }
+        return null;
+    }
 
 }

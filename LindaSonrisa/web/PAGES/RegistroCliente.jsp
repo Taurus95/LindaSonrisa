@@ -31,8 +31,8 @@
 
     </head>
     <body>
-        <header id="header">
-            <div class="container">
+        <header id="header" >
+            <div class="container" >
 
                 <div id="logo" class="pull-left">
                     <h1><a href="#intro" class="scrollto">Linda Sonrisa</a></h1>
@@ -45,40 +45,12 @@
                         <li><a href="../index.html">Cancelar</a></li>
                     </ul>
                 </nav><!-- #nav-menu-container -->
-            </div>
-        </header>
-        <!--<form role="form" class="contactForm" method="POST" action="/LindaSonrisa/nuevoCliente" onsubmit="return checkRutGenerico(txtRut.value, false);">
-            <section id="intro">
-                <div class="row">    
-                    <div class="intro-text">
-                        <h2>Registro Nuevo Cliente</h2>
-                        <div class="form-group col-lg-3">
-                            <input type="text" name="txtRut" class="form-control" placeholder="Rut" id="txtRut" onkeypress="return soloRUT(event)" onblur="checkRutGenerico(txtRut.value, false)"  />                            
-                        </div>
-                        <div class="form-group col-lg-3">
-                            <input type="text" name="txtNombre" class="form-control" placeholder="Nombre" />
-                        </div>
-                        <div class="form-group col-lg-3">
-                            <input type="text" name="txtCorreo" class="form-control" placeholder="Correo" />
-                        </div>
-                        <div class="form-group col-lg-3">
-                            <input type="text" name="cmbSexo" class="form-control" placeholder="Sexo Biológico" />
-                        </div>
-                        <select name="sexo">
-                            <option></option>
-                            <option></option>
-                        </select>
-                    </div>
-                </div>>  
+            </div>          
+            
+        </header> 
 
-        <!--<div class="product-screens">
-
-
-
-        </div>-->
-
-        <!--    </section><!-- #intro -->        
-        <!--</form> -->      
+        
+        <!--</form>       
         <div class="container">
             <section id="contact">
                 <div class="container">
@@ -119,11 +91,13 @@
                                             <input type="text" name="txtTelefono" required="" placeholder="Teléfono">
                                         </div>
                                         <div>
-                                            <input type="file" placeholder="Documentación" name="">
+                                            <input type="file"  multiple="" >
                                         </div>
                                     </div>
 
-                                    <div class="text-center"><button type="submit" title="Registar">Registrar</button></div>
+                                    <div class="text-center">
+                                        <button type="submit" title="Registar">Registrar</button>
+                                    </div>
                                 </form>
                             </div>
                         </div>
@@ -131,9 +105,9 @@
                     </div>
 
                 </div>
-            </section><!-- #contact -->
+            </section>
         </div>
-
+        -->
 
         <!-- JavaScript Libraries -->
         <script src="../lib/jquery/jquery.min.js"></script>

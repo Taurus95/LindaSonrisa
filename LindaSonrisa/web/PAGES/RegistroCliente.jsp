@@ -49,9 +49,9 @@
             </div>
         </header>
         <form role="form" class="contactForm" name="formularioRegistro" method="POST" action="/LindaSonrisa/nuevoCliente" >
-            <section id="intro">
+            <section id="intro">                
                 <div class="intro-text">
-
+                    <!--<h2>Registro Cliente</h2> -->
                     <div class="form-row">
                         <div class="form-group col-lg-6">
                             <input type="text" name="txtNombre" class="form-control" id="name" placeholder="Nombre" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />

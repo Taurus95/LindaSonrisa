@@ -52,8 +52,6 @@
 
         <section id="intro">
             <div class="contactForm">
-
-
                 <div class="intro-text">
                     <h2>Consulta</h2>
                     <div class="form-group col-lg-4">

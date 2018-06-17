@@ -79,7 +79,7 @@ public class BuscarHorasPorDia extends HttpServlet {
                     System.out.println("Error en servlet parsenado fecha");
                 }
             } else {
-                response.sendRedirect("PAGES/Home.jsp");
+                response.sendRedirect("index.html");
             }
         }
     }

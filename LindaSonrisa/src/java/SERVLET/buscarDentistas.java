@@ -34,7 +34,7 @@ public class buscarDentistas extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             HttpSession session = request.getSession();
             if (session.getAttribute("acceso") == null) {
-                response.sendRedirect("PAGES/Home.jsp");
+                response.sendRedirect("index.html");
                 return;
             }
             if ((int) session.getAttribute("acceso") == 1) {
@@ -44,7 +44,7 @@ public class buscarDentistas extends HttpServlet {
                 session.setAttribute("dentistas", lista);
                 response.sendRedirect("PAGES/EspecialidadDoctor.jsp");
             } else {
-                response.sendRedirect("PAGES/Home.jsp");
+                response.sendRedirect("index.html");
             }
         }
     }

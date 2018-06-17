@@ -59,7 +59,7 @@ public class registrarConsulta extends HttpServlet {
                     response.sendRedirect("PAGES/InformacionConsulta.jsp");
                 }
             } else {
-                response.sendRedirect("PAGES/Home.jsp");
+                response.sendRedirect("index.html");
             }
         }
     }

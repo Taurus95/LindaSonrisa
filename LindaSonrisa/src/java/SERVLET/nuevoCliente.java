@@ -61,7 +61,7 @@ public class nuevoCliente extends HttpServlet {
                 response.sendRedirect("PAGES/EspecialidadDoctor.jsp");
             } else {
                 session.invalidate();
-                response.sendRedirect("PAGES/Home.jsp");
+                response.sendRedirect("index.html");
             }
 
         }

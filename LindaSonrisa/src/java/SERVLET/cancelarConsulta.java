@@ -40,16 +40,16 @@ public class cancelarConsulta extends HttpServlet {
 
             if (session.getAttribute("consulta") == null) {
                 session.invalidate();
-                response.sendRedirect("PAGES/Home.jsp");
+                response.sendRedirect("index.html");
                 return;
             }
             ConsultaDto consulta = (ConsultaDto) session.getAttribute("consulta");
             consulta.setEstado("Cancelada");
             if (new ConsultaDaoImp().modificar(consulta)) {
                 session.invalidate();
-                response.sendRedirect("PAGES/Home.jsp");
+                response.sendRedirect("index.html");
             } else {
-                response.sendRedirect("PAGES/Home.jsp");
+                response.sendRedirect("index.html");
             }
 
         }

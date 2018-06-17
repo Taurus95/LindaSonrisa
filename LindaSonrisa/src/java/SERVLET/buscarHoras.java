@@ -37,7 +37,7 @@ public class buscarHoras extends HttpServlet {
             HttpSession session = request.getSession();
             if (session.getAttribute("acceso") == null) {
                 session.invalidate();
-                response.sendRedirect("PAGES/Home.jsp");
+                response.sendRedirect("index.html");
                 return;
             }
             if ((int) session.getAttribute("acceso") == 1) {
@@ -48,7 +48,7 @@ public class buscarHoras extends HttpServlet {
                 session.setAttribute("dentista", dentista);
                 response.sendRedirect("PAGES/AgendarHora.jsp#about");
             } else {
-                response.sendRedirect("PAGES/Home.jsp");
+                response.sendRedirect("index.html");
             }
 
         }

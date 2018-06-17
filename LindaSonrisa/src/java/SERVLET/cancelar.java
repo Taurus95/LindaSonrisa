@@ -36,7 +36,7 @@ public class cancelar extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             HttpSession session = request.getSession();
             session.invalidate();
-            response.sendRedirect("PAGES/Home.jsp");
+            response.sendRedirect("index.html");
         }
     }
 

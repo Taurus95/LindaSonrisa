@@ -31,25 +31,79 @@
 
     </head>
     <body>
-        <header id="header" >
-            <div class="container" >
+    <body>
+        <header id="header">
+            <div class="container">
 
                 <div id="logo" class="pull-left">
-                    <h1><a href="#intro" class="scrollto">Linda Sonrisa</a></h1>
+                    <h1><a href="./Home.jsp" class="scrollto">Linda Sonrisa</a></h1>
                     <!-- Uncomment below if you prefer to use an image logo -->
                     <!-- <a href="#intro"><img src="img/logo.png" alt="" title=""></a> -->
                 </div>
 
                 <nav id="nav-menu-container">
                     <ul class="nav-menu">                                              
-                        <li><a href="../index.html">Cancelar</a></li>
+                        <li><a href="./Home.jsp">Cancelar</a></li>
                     </ul>
                 </nav><!-- #nav-menu-container -->
-            </div>          
-            
-        </header> 
+            </div>
+        </header>
+        <form role="form" class="contactForm" name="formularioRegistro" method="POST" action="/LindaSonrisa/nuevoCliente" >
+            <section id="intro">
+                <div class="intro-text">
 
-        
+                    <div class="form-row">
+                        <div class="form-group col-lg-6">
+                            <input type="text" name="txtNombre" class="form-control" id="name" placeholder="Nombre" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
+                            <div class="validation"></div>
+                        </div>
+                        <div class="form-group col-lg-6">
+                            <input type="email" class="form-control" name="email" id="email" placeholder="Correo" data-rule="email" data-msg="Please enter a valid email" />
+                            <div class="validation"></div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-lg-6">
+                            <input type="text" name="txtDireccion" class="form-control"  id="direccion" placeholder="Dirección" data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject" />
+                            <div class="validation"></div>
+                        </div>
+                        <div class="form-group col-lg-6">
+                            <input type="text" name="txtTelefono" class="form-control" id="telefono" placeholder="Teléfono" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
+                            <div class="validation"></div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-lg-3">                                           
+                            <select name="cmbSexo" >
+                                <option>Femenino</option>
+                                <option>Masculino</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-lg-3">
+                            <input type="date" name="calNacimieno" required="">
+                        </div>
+
+                    </div>
+                    <div class="from-row">
+                        <div class="form-group col-auto">
+                            <input type="text" name="txtTelefono" required="" placeholder="Teléfono">
+                        </div>
+                        <div>
+                            <input type="file"  multiple="" >
+                        </div>
+                    </div>
+
+                    <div class="text-center">
+                        <button type="submit" title="Registar">Registrar</button>
+                    </div>
+
+
+
+                </div>
+            </section>
+        </form> 
+
+
         <!--</form>       
         <div class="container">
             <section id="contact">

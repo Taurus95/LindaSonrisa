@@ -54,11 +54,11 @@
                     <h2>Agenda tu hora</h2>
                     <div class="form-group col-lg-6">
                         <c:if test="${cliente==null}">
-                            <input type="text" name="txtRut" class="form-control" placeholder="Ingrese su Rut" required="" id="txtRut" onkeypress="return soloRUT(event)" onblur="checkRutGenerico(txtRut.value, false)"  />
+                            <input type="text" name="txtRut" class="form-control" placeholder="Ingrese su rut ej:15123456k" required="" id="txtRut" onkeypress="return soloRUT(event)" onblur="checkRutGenerico(txtRut.value, false)"  />
                             <a href="#" class="btn-get-started scrollto" onclick="document.formulario.submit()" >Siguiente</a>
                         </c:if>
                         <c:if test="${cliente!=null}">
-                            <input type="text" name="txtRut" class="form-control" placeholder="Ingrese su Rut" required="" id="txtRut" onkeypress="return soloRUT(event)" onblur="checkRutGenerico(txtRut.value, false)"  />
+                            <input type="text" name="txtRut" class="form-control" placeholder="Ingrese su rut ej:15123456k" required="" id="txtRut" onkeypress="return soloRUT(event)" onblur="checkRutGenerico(txtRut.value, false)"  />
                             <br>
                             <input type="pass" name="pass" class="form-control" placeholder="Contraseña" required="">
                             <c:if test="${acceso==0}" ><span>Contraseña incorrecta</span></c:if>
@@ -67,7 +67,7 @@
                     </div>
                 </div>
 
-            </section><!-- #intro -->
+            </section>
         </form> 
 
 

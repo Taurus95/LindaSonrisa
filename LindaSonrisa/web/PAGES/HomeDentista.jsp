@@ -48,7 +48,7 @@
 
                 <nav id="nav-menu-container">
                     <ul class="nav-menu">                                              
-                        <li><a href="./Home.jsp">Volver</a></li>
+                        <li><a href="/LindaSonrisa/cancelar">Salir</a></li>
                     </ul>
                 </nav><!-- #nav-menu-container -->
             </div>

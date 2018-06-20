@@ -59,7 +59,6 @@ public class BuscarHorasPorDia extends HttpServlet {
                     for (int hora : horas) {
                         for (int minuto : minutos) {
                             HorasAldia horaConsulta = new HorasAldia(hora, minuto, "Disponible", dentista.getNombre());
-                            System.out.println("Hora a agregar: " + horaConsulta.toString());
                             if (!horasOcupadas.isEmpty()) {
                                 for (ConsultaDto consulta : horasOcupadas) {
                                     //si la hora se encuentra dentro de una consulta ya creada se cambia estado

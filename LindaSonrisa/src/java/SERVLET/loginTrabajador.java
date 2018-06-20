@@ -39,13 +39,17 @@ public class loginTrabajador extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             HttpSession session = request.getSession();
             String rut = request.getParameter("txtRut");
+            //tomamos y ciframos pass
             String pass = DigestUtils.md5Hex(request.getParameter("pass"));
             TrabajadorDaoImp implement = new TrabajadorDaoImp();
             TrabajadorDto trabajador = new TrabajadorDto();
             trabajador.setRut(rut);
             trabajador.setHabilitado(false);
-            //trabajador = implement.buscar(trabajador);
+            //buscamos trabajador
+            trabajador = implement.buscar(trabajador);
+            //si esta habilitado cambiara a true
             if (trabajador.isHabilitado()) {
+                //comparamos contraseñas en md5
                 if (trabajador.getContrasenia().equals(pass)) {
                     session.setAttribute("trabajador", trabajador);
                     if (trabajador.getTipo().equalsIgnoreCase("Secretaria")) {

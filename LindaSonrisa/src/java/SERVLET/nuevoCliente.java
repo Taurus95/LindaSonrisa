@@ -58,6 +58,7 @@ public class nuevoCliente extends HttpServlet {
             if (new ClienteDaoImp().agregar(nuevo)) {
                 session.setAttribute("cliente", nuevo);
                 session.setAttribute("acceso", 1);
+                //falta redireccionar cuando se necesita subir docs
                 response.sendRedirect("PAGES/EspecialidadDoctor.jsp");
             } else {
                 session.invalidate();

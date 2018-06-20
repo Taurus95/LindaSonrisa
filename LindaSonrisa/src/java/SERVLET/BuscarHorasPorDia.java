@@ -52,7 +52,7 @@ public class BuscarHorasPorDia extends HttpServlet {
                     //lista donde agregar horas disponibles
                     ArrayList<HorasAldia> horasDisponibles = new ArrayList<>();
                     //horas de trabajo
-                    int horas[] = {9, 10, 11, 12, 13, 14, 15, 16, 17};
+                    int horas[] = {9, 10, 11, 12, 14, 15, 16, 17};
                     //minutos
                     int minutos[] = {0, 31};
                     //para todas las horas del dia
@@ -73,7 +73,7 @@ public class BuscarHorasPorDia extends HttpServlet {
                     }
                     //se agrega la lista con horas disponibles a la session
                     session.setAttribute("horasDisponibles", horasDisponibles);
-                    response.sendRedirect("PAGES/AgendarHora.jsp");
+                    response.sendRedirect("PAGES/AgendarHora.jsp#about");
                 } catch (ParseException ex) {
                     System.out.println("Error en servlet parsenado fecha");
                 }

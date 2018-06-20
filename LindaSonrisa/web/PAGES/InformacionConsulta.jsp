@@ -44,7 +44,7 @@
 
                 <nav id="nav-menu-container">
                     <ul class="nav-menu">                                              
-                        <li><a href="./Home.jsp">Salir</a></li>
+                        <li><a href="/LindaSonrisa/cancelar">Salir</a></li>
                     </ul>
                 </nav><!-- #nav-menu-container -->
             </div>
@@ -53,26 +53,26 @@
         <section id="intro">
             <div class="contactForm">
                 <div class="intro-text">
-                    <h2>Consulta</h2>
+                    <h2>Consulta Agendada</h2>
                     <div class="form-group col-lg-4">
-                        <table class="table-responsive form-control">
+                        <table class="table form-control">
                             <tbody>
                                 <tr>
-                                    <td><h4>Dentista: </h4></td>
-                                    <td><h4><c:out value="${dentista.buscarNombre(consulta.rutTrabajador)}"/></h4></td>
+                                    <td><h5>Dentista: </h5></td>
+                                    <td><h5><c:out value="${dentista.buscarNombre(consulta.rutTrabajador)}"/></h5></td>
                                 </tr>
                                 <tr>
-                                    <td><h4>Servicio: </h4></td>
-                                    <td><h4><c:out value="${service.buscarNombre(consulta.idServicio)}"/></h4></td>
+                                    <td><h5>Servicio: </h5></td>
+                                    <td><h5><c:out value="${service.buscarNombre(consulta.idServicio)}"/></h5></td>
                                 </tr>
                                 <tr>
-                                    <td><h4>Dia:</h4></td>
-                                    <td><h4><c:out value="${consulta.fecha}"></c:out></h4></td>
+                                    <td><h5>Dia:</h5></td>
+                                    <td><h5><c:out value="${consulta.fecha}"></c:out></h5></td>
                                     </tr>
                                     <tr>
-                                        <td><h4>Hora:</h4></td>
-                                        <td><h4><c:out value="${consulta.hora}:" /><c:if test="${consulta.minuto==0}" >00</c:if>
-                                            <c:if test="${consulta.minuto==31}">31</c:if></h4></td>
+                                        <td><h5>Hora:</h5></td>
+                                        <td><h5><c:out value="${consulta.hora}:" /><c:if test="${consulta.minuto==0}" >00</c:if>
+                                            <c:if test="${consulta.minuto==31}">31</c:if></h5></td>
                                     </tr>
                                 </tbody>
                             </table>

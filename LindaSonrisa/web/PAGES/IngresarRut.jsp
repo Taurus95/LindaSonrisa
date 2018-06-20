@@ -54,16 +54,22 @@
                     <h2>Agenda tu hora</h2>
                     <div class="form-group col-lg-6">
                         <c:if test="${cliente==null}">
-                            <input type="text" name="txtRut" class="form-control" placeholder="Ingrese su rut ej:15123456k" required="" id="txtRut" onkeypress="return soloRUT(event)" onblur="checkRutGenerico(txtRut.value, false)"  />
-                            <a href="#" class="btn-get-started scrollto" onclick="document.formulario.submit()" >Siguiente</a>
+                            <input type="text" name="txtRut" class="form-control" 
+                                   placeholder="Ingrese tu rut" required="" id="txtRut"
+                                   onkeypress="return soloRUT(event)" 
+                                   onblur="checkRutGenerico(txtRut.value, false)"  />
                         </c:if>
                         <c:if test="${cliente!=null}">
-                            <input type="text" name="txtRut" class="form-control" placeholder="Ingrese su rut ej:15123456k" required="" id="txtRut" onkeypress="return soloRUT(event)" onblur="checkRutGenerico(txtRut.value, false)"  />
+                            <input type="text" name="txtRut" class="form-control" required="" id="txtRut"
+                                   disabled="" value="<c:out value='${cliente.getRut()}'/>"  />
                             <br>
-                            <input type="pass" name="pass" class="form-control" placeholder="Contraseña" required="">
-                            <c:if test="${acceso==0}" ><span>Contraseña incorrecta</span></c:if>
-                                <a href="#" class="btn-get-started scrollto" onclick="document.formulario.submit()" >Siguiente</a>
+                            <input type="password" name="txtPass" class="form-control"
+                                   placeholder="Contraseña" required="" 
+                                   onkeypress="hiddeMessageError()">
+                            <c:if test="${acceso==0}" ><span  id="error" class="errormessage" style="color: red" >Contraseña incorrecta</span><br></c:if>
                         </c:if>
+                        <c:if test="${mj!=null}" ><span  id="error" class="errormessage" style="color: red" >Usuario inhabilitado</span><br></c:if>
+                        <a href="#" class="btn-get-started scrollto" onclick="document.formulario.submit()" >Siguiente</a>
                     </div>
                 </div>
 

@@ -48,7 +48,7 @@
             </div>
         </header>
         <section id="intro">
-            <form role="form" class="contactForm" name="formulario" method="POST" action="/LindaSonrisa/buscarHoras" >
+            <form role="form" class="contactForm" name="formulario" method="POST" action="/LindaSonrisa/BuscarHorasPorDia" >
                 <div class="intro-text">
                     <h2>Fecha</h2>
                     <div class="form-group col-lg-3">
@@ -67,41 +67,37 @@
                         <p class="section-description">
                             <a href="#intro">Buscar en otra fecha</a>
                         </p>
-                        <div class="contactForm">
-                            <div class="intro-text">
-                                <div class="form-group col-lg-3">
-                                    <table class="form-control table-hover">
-                                        <thead>
-                                            <tr>
-                                                <th scope="col">Dia</th>
-                                                <th scope="col">Hora</th>
-                                                <th scope="col">Doctor</th>
-                                                <th scope="col">Estado</th>
-                                                <th scope="col">Accion</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <c:forEach var="horaDisponible" items="${horasDisponibles}">
-                                                <tr> 
-                                                    <td><c:out value="${fecha}" /></td>
-                                                    <td><c:out value="${horaDisponible.hora}:" /><c:if test="${horaDisponible.minutos==0}" >00</c:if>
-                                                        <c:if test="${horaDisponible.minutos==31}">31</c:if></td>
-                                                    <td><c:out value="${horaDisponible.doctor}"/></td>
-                                                    <td><c:out value="${horaDisponible.estado}"/></td>
-                                                    <c:if test="${horaDisponible.estado=='Disponible'}">
-                                                        <td><form method="POST" action="/LindaSonrisa/registrarConsulta">
-                                                                <input type="hidden" name="hora" value="${horaDisponible.hora}" >
-                                                                <input type="hidden" name="minutos" value="${horaDisponible.minutos}" >
-                                                                <input type="submit" value="Pedir">
-                                                            </form>
-                                                        </td>
-                                                    </c:if>
-                                                </tr>
-                                            </c:forEach>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
+                        <div class="container" align="center" >
+                            <table class="table-responsive-md table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Dia</th>
+                                        <th scope="col">Hora</th>
+                                        <th scope="col">Doctor</th>
+                                        <th scope="col">Estado</th>
+                                        <th scope="col">Accion</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <c:forEach var="horaDisponible" items="${horasDisponibles}">
+                                        <tr> 
+                                            <td><c:out value="${fecha}" /></td>
+                                            <td><c:out value="${horaDisponible.hora}:" /><c:if test="${horaDisponible.minutos==0}" >00</c:if>
+                                                <c:if test="${horaDisponible.minutos==31}">31</c:if></td>
+                                            <td><c:out value="${horaDisponible.doctor}"/></td>
+                                            <td><c:out value="${horaDisponible.estado}"/></td>
+                                            <c:if test="${horaDisponible.estado=='Disponible'}">
+                                                <td><form method="POST" action="/LindaSonrisa/registrarConsulta">
+                                                        <input type="hidden" name="hora" value="${horaDisponible.hora}" >
+                                                        <input type="hidden" name="minutos" value="${horaDisponible.minutos}" >
+                                                        <input type="submit" value="Pedir">
+                                                    </form>
+                                                </td>
+                                            </c:if>
+                                        </tr>
+                                    </c:forEach>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>

@@ -54,18 +54,17 @@
                     <h2>Registrate!</h2>
                     <div class="row">
                         <div class="col-sm-6">
-                            <div class="validate-input" data-validate="Porfavor ingresa tu nombre">
-                                <input type="text" name="txtNombre" class="form-control input100" id="name" placeholder="Nombre"/>
-                            </div>
+                            <input type="text" name="txtNombre" class="form-control input100" id="name" placeholder="Nombre"/>
                             <br>
                             <input type="email" class="form-control" name="txtCorreo" id="email" placeholder="Correo" required=""/>
                             <br>
                             <input type="text" name="txtDireccion" class="form-control"  id="direccion" placeholder="Dirección" required="" />
                             <br>
-                            <input type="text" name="txtTelefono" class="form-control" id="telefono" placeholder="Teléfono" required=""/>
+                            <input type="text" name="txtTelefono" onkeydown="" class="form-control" id="telefono" placeholder="Teléfono" required=""/>
                         </div>
                         <div class="col-sm-6">
-                            <input type="date" class="form-control" name="calNacimiento" required="">
+                            <input type="date" class="form-control" name="calNacimiento"
+                                   id="calNacimiento" onclick="maxDatetoday()" required="">
                             <br>
                             <select name="cmbSexo" class="form-control" required="" >
                                 <option selected="" value="0" disabled="" >Sexo Biologico</option>
@@ -75,20 +74,13 @@
                             <br>
                             <input type="password" class="form-control" name="txtContrasenia" id="txtContrasenia" required="" placeholder="Contraseña">
                             <br>
-                            <input type="password" class="form-control" name="txtconfirmPass" id="txtconfirmPass" onkeyup="comprobarPass()" required="" placeholder="Repetir contraseña">
-                            <span id="passConfirm"></span>
+                            <input type="password" class="form-control" name="txtconfirmPass" id="txtconfirmPass" onkeyup="comprobarPass()" required=""
+                                   placeholder="Repetir contraseña">
+                            <br>
+                            <span id="error"></span>
                         </div>
                         <div class="container" align="center">
-                            <div class="row">
-                                <div class="col-sm-6">
-                                    <a href="#" onclick="validateForm()" class="btn-get-started scrollto">Registrarme</a>
-                                </div>
-                                <div class="col-sm-6">
-                                    <button class="login100-form-btn">
-                                        Registrarme
-                                    </button>
-                                </div>
-                            </div>
+                            <a href="#" onclick="validateForm()" class="btn-get-started scrollto">Registrarme</a>
                         </div>
                     </div>
                 </div>

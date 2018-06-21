@@ -133,3 +133,11 @@ function confirmCancelar() {
         document.formulario.submit();
     }
 }
+
+function comprobarPass(){
+    if(document.getElementsByName("txtContrasenia").valueOf()!=document.getElementsByName("txtconfirmPass").valueOf()){
+        document.getElementById("passConfirm").innerHTML="<span id='passConfirm' >Las contraseñas no coinciden!</span>";
+    }else{
+        document.getElementById("passConfirm").innerHTML="<span id='passConfirm' >Las contraseñas no coinciden!</span>";
+    }
+}

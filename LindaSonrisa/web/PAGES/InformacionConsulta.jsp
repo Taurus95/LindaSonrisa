@@ -37,7 +37,7 @@
             <div class="container">
 
                 <div id="logo" class="pull-left">
-                    <h1><a href="./Home.jsp" class="scrollto">Linda Sonrisa</a></h1>
+                    <h1><a href="/LindaSonrisa/cancelar" class="scrollto">Linda Sonrisa</a></h1>
                     <!-- Uncomment below if you prefer to use an image logo -->
                     <!-- <a href="#intro"><img src="img/logo.png" alt="" title=""></a> -->
                 </div>

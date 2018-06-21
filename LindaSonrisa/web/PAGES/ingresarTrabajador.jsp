@@ -58,7 +58,7 @@
                 <div class="intro-text">
                     <h2>Trabajador</h2>
                     <div class="form-group col-lg-6">
-                        <input type="text" name="txtRut" class="form-control" placeholder="Ingrese su tu Rut" required="" 
+                        <input type="text" name="txtRut" class="form-control" placeholder="Ingrese su Rut" required="" 
                                id="txtRut" onkeypress="return soloRUT(event)" onblur="checkRutGenerico(txtRut.value, false)" 
                                onkeydown="hiddeMessageError()"/>
                         <br>

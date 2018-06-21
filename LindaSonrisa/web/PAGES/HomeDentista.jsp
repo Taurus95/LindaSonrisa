@@ -41,7 +41,7 @@
             <div class="container">
 
                 <div id="logo" class="pull-left">
-                    <h1><a href="./Home.jsp" class="scrollto">Linda Sonrisa</a></h1>
+                    <h1><a href="/LindaSonrisa/cancelar" class="scrollto">Linda Sonrisa</a></h1>
                     <!-- Uncomment below if you prefer to use an image logo -->
                     <!-- <a href="#intro"><img src="img/logo.png" alt="" title=""></a> -->
                 </div>
@@ -53,17 +53,38 @@
                 </nav><!-- #nav-menu-container -->
             </div>
         </header>
-        <form role="form" class="contactForm" name="formulario" method="POST" action="/LindaSonrisa/loginTrabajador" onsubmit="return checkRutGenerico(txtRut.value, false);">
+        <form role="form" class="contactForm" name="formulario" method="POST" action="" >
             <section id="intro">
 
                 <div class="intro-text">
                     <h2>Dentista</h2>
                     <div class="form-group col-lg-6">
-                        
+                        <div class="container" align="center" >
+                            <table class="table-responsive-md table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Dia</th>
+                                        <th scope="col">Hora</th>
+                                        <th scope="col">Doctor</th>
+                                        <th scope="col">Estado</th>                                        
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    
+                                        <tr> 
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                    
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
 
-            </section><!-- #intro -->
+            </section>
         </form> 
 
 

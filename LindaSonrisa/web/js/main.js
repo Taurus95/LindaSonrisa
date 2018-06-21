@@ -119,9 +119,62 @@ jQuery(document).ready(function ($) {
             }
         }
     });
-
     // custom code
+    var input = $('.validate-input .input100');
+    var contrasenia;
+    $('.validate-form').on('submit', function () {
+        var check = true;
+        for (var i = 0; i < input.length; i++) {
+            if (validate(input[i]) == false) {
+                showValidate(input[i]);
+                check = false;
+            }
+        }
 
+        return check;
+    });
+    $('.validate-form .input100').each(function () {
+        $(this).focus(function () {
+            hideValidate(this);
+        });
+    });
+
+    function validate(input) {
+        if ($(input).attr('type') == 'email' || $(input).attr('name') == 'email') {
+            if ($(input).val().trim().match(/^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{1,5}|[0-9]{1,3})(\]?)$/) == null) {
+                return false;
+            }
+        }
+        if ($(input).attr('id') == 'txtRut') {
+            return checkRutGenerico($(input).val().trim(), false);
+        }
+        if ($(input).attr('name') == 'txtPass' && $(input).val().trim() != '') {
+            contrasenia = $(input).val().trim();
+        }
+        if ($(input).attr('name') == 'txtRepPass') {
+            return contrasenia == $(input).val().trim();
+        }
+        if ($(input).attr('type') == 'radio') {
+            return false;
+        } else {
+            if ($(input).val().trim() == '') {
+                return false;
+            }
+        }
+
+    }
+
+    function showValidate(input) {
+        var thisAlert = $(input).parent();
+
+        $(thisAlert).addClass('alert-validate');
+    }
+
+    function hideValidate(input) {
+        var thisAlert = $(input).parent();
+
+        $(thisAlert).removeClass('alert-validate');
+    }
 });
 
 function hiddeMessageError() {
@@ -129,15 +182,49 @@ function hiddeMessageError() {
 }
 
 function confirmCancelar() {
-    if(confirm("¿Estas seguro de que quieres cancelar la consulta?")){
+    if (confirm("¿Estas seguro de que quieres cancelar la consulta?")) {
         document.formulario.submit();
     }
 }
 
-function comprobarPass(){
-    if(document.getElementsByName("txtContrasenia").valueOf()!=document.getElementsByName("txtconfirmPass").valueOf()){
-        document.getElementById("passConfirm").innerHTML="<span id='passConfirm' >Las contraseñas no coinciden!</span>";
-    }else{
-        document.getElementById("passConfirm").innerHTML="<span id='passConfirm' >Las contraseñas no coinciden!</span>";
+function comprobarPass() {
+    if (document.getElementsByName("txtContrasenia").valueOf() != document.getElementsByName("txtconfirmPass").valueOf()) {
+        document.getElementById("passConfirm").innerHTML = "<span id='passConfirm' >Las contraseñas no coinciden!</span>";
+    } else {
+        document.getElementById("passConfirm").innerHTML = "<span id='passConfirm' >Las contraseñas no coinciden!</span>";
     }
 }
+//max date
+function maxDatetoday() {
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth() + 1; //January is 0!
+    var yyyy = today.getFullYear();
+    if (dd < 10) {
+        dd = '0' + dd
+    }
+    if (mm < 10) {
+        mm = '0' + mm
+    }
+
+    today = yyyy + '-' + mm + '-' + dd;
+    document.getElementById("dateDia").setAttribute("min", today);
+}
+//no hay disponibilidad findesemana
+function notWeekend() {
+    var day = new Date(document.getElementById("dateDia").value).getUTCDay();
+
+    // Days in JS range from 0-6 where 0 is Sunday and 6 is Saturday
+
+    if (day == 6 || day == 0) {
+        document.getElementById("error").innerHTML =
+                "<span  id='error' class='errormessage' style='color: red' >No\n\
+     trabajamos findesemana, porfavor selecciona otro dia.</span><br>";
+        return false;
+    }
+    document.formulario.submit();
+}
+
+
+
+

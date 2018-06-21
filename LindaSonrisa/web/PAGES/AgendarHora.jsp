@@ -52,8 +52,9 @@
                 <div class="intro-text">
                     <h2>Fecha</h2>
                     <div class="form-group col-lg-3">
-                        <input id="dateDia" class="form-control" type="date" name="dateDia" value="" />
-                        <a href="#about" class="btn-get-started scrollto" onclick="document.formulario.submit()" >Buscar</a>
+                        <input id="dateDia" onclick="maxDatetoday()" onchange="hiddeMessageError()" class="form-control" type="date" name="dateDia" value="" />
+                        <span  id="error"></span><br>
+                        <a href="#about" class="btn-get-started scrollto" onclick="notWeekend()" >Buscar</a>
                     </div>
                 </div>
             </form> 

@@ -53,7 +53,7 @@
 
             <div class="intro-text">
                 <h2>Servicio y dentista</h2>
-                <div class="form-group col-lg-6">
+                <div class="form-group col-lg-4">
                     <c:if test="${dentistas==null}">
                         <form role="form" class="contactForm" name="formulario" method="POST" action="/LindaSonrisa/buscarDentistas" >
                             <select class="form-control" name="especialidad" >

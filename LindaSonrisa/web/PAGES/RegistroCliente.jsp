@@ -49,12 +49,14 @@
             </div>
         </header>
         <section id="intro">
-            <form role="form" name="formulario" method="POST" action="/LindaSonrisa/nuevoCliente" >
-                <div class="intro-text">
+            <form class="login100-form validate-form" name="formulario" method="POST" action="/LindaSonrisa/nuevoCliente" >
+                <div class="inform-text">
                     <h2>Registrate!</h2>
                     <div class="row">
                         <div class="col-sm-6">
-                            <input type="text" name="txtNombre" class="form-control" id="name" placeholder="Nombre" required="" />
+                            <div class="validate-input" data-validate="Porfavor ingresa tu nombre">
+                                <input type="text" name="txtNombre" class="form-control input100" id="name" placeholder="Nombre"/>
+                            </div>
                             <br>
                             <input type="email" class="form-control" name="txtCorreo" id="email" placeholder="Correo" required=""/>
                             <br>
@@ -79,10 +81,12 @@
                         <div class="container" align="center">
                             <div class="row">
                                 <div class="col-sm-6">
-                                    <a href="#" onclick="document.formulario.submit()" class="btn-get-started scrollto">Registrarme</a>
+                                    <a href="#" onclick="validateForm()" class="btn-get-started scrollto">Registrarme</a>
                                 </div>
                                 <div class="col-sm-6">
-                                    <a href="#" onclick="document.formulario.submit()" class="btn-get-started scrollto">Registrarme y Acreditar situacion</a>
+                                    <button class="login100-form-btn">
+                                        Registrarme
+                                    </button>
                                 </div>
                             </div>
                         </div>

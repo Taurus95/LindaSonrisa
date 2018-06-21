@@ -52,10 +52,10 @@
 
         <section id="intro">
             <div class="contactForm">
-                <div class="intro-text">
+                <div class="inform-text">
                     <h2>Consulta Agendada</h2>
                     <div class="form-group col-lg-4">
-                        <table class="table form-control">
+                        <table class="table form-control" aling="center">
                             <tbody>
                                 <tr>
                                     <td><h5>Dentista: </h5></td>

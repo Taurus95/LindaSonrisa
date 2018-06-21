@@ -35,14 +35,14 @@
             <div class="container">
 
                 <div id="logo" class="pull-left">
-                    <h1><a href="../index.html" class="scrollto">Linda Sonrisa</a></h1>
+                    <h1><a href="/LindaSonrisa/cancelar" class="scrollto">Linda Sonrisa</a></h1>
                     <!-- Uncomment below if you prefer to use an image logo -->
                     <!-- <a href="#intro"><img src="img/logo.png" alt="" title=""></a> -->
                 </div>
 
                 <nav id="nav-menu-container">
                     <ul class="nav-menu">                                              
-                        <li><a href="../index.html">Cancelar</a></li>
+                        <li><a href="/LindaSonrisa/cancelar">Cancelar</a></li>
                     </ul>
                 </nav><!-- #nav-menu-container -->
             </div>
@@ -52,7 +52,7 @@
 
                 <div class="intro-text">
                     <h2>Agenda tu hora</h2>
-                    <div class="form-group col-lg-6">
+                    <div class="form-group col-lg-4">
                         <c:if test="${cliente==null}">
                             <input type="text" name="txtRut" class="form-control" 
                                    placeholder="Ingrese tu rut" required="" id="txtRut"

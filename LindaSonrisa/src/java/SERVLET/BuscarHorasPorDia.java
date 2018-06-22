@@ -1,7 +1,6 @@
 package SERVLET;
 
 import DAO_IMP.ConsultaDaoImp;
-import DTO.ClienteDto;
 import DTO.ConsultaDto;
 import DTO.HorasAldia;
 import DTO.TrabajadorDto;
@@ -11,6 +10,9 @@ import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -39,6 +41,21 @@ public class BuscarHorasPorDia extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             HttpSession session = request.getSession();
+            //variables
+            //horas de trabajo
+            List<Integer> horas = new ArrayList<>();
+            horas.add(9);
+            horas.add(10);
+            horas.add(11);
+            horas.add(12);
+            horas.add(13);
+            horas.add(14);
+            horas.add(15);
+            horas.add(16);
+            horas.add(17);
+            //int horas[] = {9, 10, 11, 12, 14, 15, 16, 17};
+            //minutos
+            int minutos[] = {0, 31};
             if ((int) session.getAttribute("acceso") == 1) {
                 //obtenemos dentista para buscar sus horas disponibles
                 TrabajadorDto dentista = (TrabajadorDto) session.getAttribute("dentista");
@@ -51,10 +68,28 @@ public class BuscarHorasPorDia extends HttpServlet {
                     ArrayList<ConsultaDto> horasOcupadas = (ArrayList<ConsultaDto>) new ConsultaDaoImp().listarPorDiaDoctor(dentista.getRut(), fecha);
                     //lista donde agregar horas disponibles
                     ArrayList<HorasAldia> horasDisponibles = new ArrayList<>();
-                    //horas de trabajo
-                    int horas[] = {9, 10, 11, 12, 14, 15, 16, 17};
-                    //minutos
-                    int minutos[] = {0, 31};
+                    //tenemos que comprobar si el dia es el actual, por lo tanto las horas solo seran desde la hora actual en adelan
+                    Calendar calendario = new GregorianCalendar();
+                    Calendar calendarioToday = new GregorianCalendar();
+                    calendario.setTimeInMillis(fechaUtil.getTime());
+                    int diaSeleccionado = calendario.get(Calendar.DAY_OF_MONTH);
+                    int mesSeleccionado = calendario.get(Calendar.MONTH);
+                    int annoSeleccionado = calendario.get(Calendar.YEAR);
+                    //si el dia corresponde al dia actual se comparan horas
+                    if (diaSeleccionado == calendarioToday.get(Calendar.DAY_OF_MONTH) && mesSeleccionado == calendarioToday.get(Calendar.MONTH)
+                            && annoSeleccionado == calendarioToday.get(Calendar.YEAR)) {
+                        int hora = calendarioToday.get(Calendar.HOUR_OF_DAY);
+                        int minuto = calendarioToday.get(Calendar.MINUTE);
+                        List<Integer> horasAux = new ArrayList<>();
+                        for (int aux : horas) {
+                            if(aux>hora){
+                                horasAux.add(aux);
+                            }
+                        }
+                        horas=horasAux;
+                        
+                    }
+
                     //para todas las horas del dia
                     for (int hora : horas) {
                         for (int minuto : minutos) {

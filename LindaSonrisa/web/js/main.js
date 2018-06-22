@@ -179,7 +179,6 @@ function notWeekend() {
     var day = new Date(document.getElementById("dateDia").value).getUTCDay();
 
     // Days in JS range from 0-6 where 0 is Sunday and 6 is Saturday
-
     if (day == 6 || day == 0) {
         document.getElementById("error").innerHTML =
                 "<span  id='error' class='errormessage' style='color: red' >No\n\
@@ -190,51 +189,69 @@ function notWeekend() {
 }
 
 function validateForm() {
+    var validate = true;
+    var message = " ";
     if (document.formulario.txtNombre.value == "") {
         document.formulario.txtNombre.style.borderColor = "red";
-        alert("Ingresa tu nombre");
-        return false;
+        message += "Ingresa tu nombre \n";
+        validate = false;
+    } else {
+        document.formulario.txtNombre.style.borderColor = "green";
     }
     if (document.formulario.txtCorreo.value.trim().match(/^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{1,5}|[0-9]{1,3})(\]?)$/) == null) {
         document.formulario.txtCorreo.style.borderColor = "red";
-        alert("Ingresa un correo valido");
-        return false;
+        message += "Ingresa un correo valido \n";
+        validate = false;
+    } else {
+        document.formulario.txtCorreo.style.borderColor = "green";
     }
     if (document.formulario.txtDireccion.value == "") {
         document.formulario.txtDireccion.style.borderColor = "red";
-        alert("Ingresa una direccion");
-        return false;
+        message += "Ingresa una direccion \n";
+        validate = false;
+    } else {
+        document.formulario.txtDireccion.style.borderColor = "green";
     }
     if (document.formulario.txtTelefono.value == "") {
         document.formulario.txtTelefono.style.borderColor = "red";
-        alert("Ingresa un telefono");
-        return false;
+        message += "Ingresa un telefono \n";
+        validate = false;
+    } else {
+        document.formulario.txtTelefono.style.borderColor = "green";
     }
     if (document.formulario.calNacimiento.value == "") {
         document.formulario.calNacimiento.style.borderColor = "red";
-        alert("Ingresa tu fecha de nacimiento");
-        return false;
+        message += "Ingresa tu fecha de nacimiento \n";
+        validate = false;
+    } else {
+        document.formulario.calNacimiento.style.borderColor = "green";
     }
     if (document.formulario.cmbSexo.value == "0") {
         document.formulario.cmbSexo.style.borderColor = "red";
-        alert("Indica tu sexo biologico");
-        return false;
+        message += "Indica tu sexo biologico \n";
+        validate = false;
+    } else {
+        document.formulario.cmbSexo.style.borderColor = "green";
     }
     if (document.formulario.txtContrasenia.value == "") {
         document.formulario.txtContrasenia.style.borderColor = "red";
-        alert("Indica una contraseña");
-        return false;
+        message += "Indica una contraseña \n";
+        validate = false;
     } else if (document.formulario.txtContrasenia.value != document.formulario.txtconfirmPass.value) {
-        alert("Las contraseñas no coinciden!");
-        return fasle;
+        message += "Las contraseñas no coinciden! \n";
+        validate = false;
+    } else {
+        document.formulario.txtContrasenia.style.borderColor = "green";
+        document.formulario.txtconfirmPass.style.borderColor = "green";
     }
 
-    document.formulario.submit();
-    return true;
-}
-function cleanColor(e){
-    var name = e.name;
-    document.getElementsByName(name).style.borderColor = "blue";
+    if (validate) {
+        document.formulario.submit();
+        return true;
+    }else{
+        alert(message);
+        return false;
+    }
 }
 
 

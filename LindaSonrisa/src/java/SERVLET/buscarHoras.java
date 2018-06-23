@@ -35,25 +35,20 @@ public class buscarHoras extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             //obtenemos session y siempre que este con acceso continuamos
             HttpSession session = request.getSession();
-            if (session.getAttribute("acceso") == null) {
+            if (session.getAttribute("acceso") == null || (int) session.getAttribute("acceso") != 1) {
                 session.invalidate();
                 response.sendRedirect("index.html");
                 return;
             }
-            if ((int) session.getAttribute("acceso") == 1) {
-                String rut = request.getParameter("rutDentista");
-                TrabajadorDto dentista = new TrabajadorDto();
-                dentista.setRut(rut);
-                dentista = new TrabajadorDaoImp().buscar(dentista);
-                session.setAttribute("dentista", dentista);
-                if (session.getAttribute("trabajador") != null) {
-                    response.sendRedirect("PAGES/BuscarHoraSecretaria.jsp");
-                } else if (session.getAttribute("cliente") != null) {
-                    response.sendRedirect("PAGES/AgendarHora.jsp");
-                }
-
-            } else {
-                response.sendRedirect("index.html");
+            String rut = request.getParameter("rutDentista");
+            TrabajadorDto dentista = new TrabajadorDto();
+            dentista.setRut(rut);
+            dentista = new TrabajadorDaoImp().buscar(dentista);
+            session.setAttribute("dentista", dentista);
+            if (session.getAttribute("trabajador") != null) {
+                response.sendRedirect("PAGES/BuscarHoraSecretaria.jsp");
+            } else if (session.getAttribute("cliente") != null) {
+                response.sendRedirect("PAGES/AgendarHora.jsp");
             }
 
         }

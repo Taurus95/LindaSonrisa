@@ -40,7 +40,7 @@
         <header id="header">
             <div class="container">
                 <div id="logo" class="pull-left">
-                    <h1><a  href="/LindaSonrisa/cancelar" class="scrollto">Linda Sonrisa</a></h1>
+                    <h1><a  href="/LindaSonrisa/cancelarFlujoConsulta" class="scrollto">Linda Sonrisa</a></h1>
                     <h3 style="color: white">${trabajador.getNombre()}</h3>
                     <!-- Uncomment below if you prefer to use an image logo -->
                     <!-- <a href="#intro"><img src="img/logo.png" alt="" title=""></a> -->
@@ -48,7 +48,7 @@
 
                 <nav id="nav-menu-container">
                     <ul class="nav-menu">                                              
-                        <li><a href="/LindaSonrisa/cancelar">Cancelar</a></li>
+                        <li><a href="/LindaSonrisa/cancelarFlujoConsulta">Cancelar</a></li>
                     </ul>
                 </nav><!-- #nav-menu-container -->
             </div>

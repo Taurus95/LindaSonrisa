@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package SERVLET;
 
 import java.io.IOException;
@@ -7,17 +12,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import DTO.TrabajadorDto;
-import DAO_IMP.TrabajadorDaoImp;
-import java.util.ArrayList;
 import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author andres
  */
-@WebServlet(name = "buscarDentistas", urlPatterns = {"/buscarDentistas"})
-public class buscarDentistas extends HttpServlet {
+@WebServlet(name = "cancelarFlujoConsulta", urlPatterns = {"/cancelarFlujoConsulta"})
+public class cancelarFlujoConsulta extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,16 +40,14 @@ public class buscarDentistas extends HttpServlet {
                 response.sendRedirect("index.html");
                 return;
             }
-            String especialidad = request.getParameter("especialidad");
-            ArrayList<TrabajadorDto> lista = (ArrayList<TrabajadorDto>) new TrabajadorDaoImp().listarDentistaEspecialidad(especialidad);
-            session.setAttribute("especialidad", especialidad);
-            session.setAttribute("dentistas", lista);
-            if (session.getAttribute("trabajador") != null) {
-                response.sendRedirect("PAGES/ServicioYdentistaSecretaria.jsp");
-            } else if (session.getAttribute("cliente") != null) {
-                response.sendRedirect("PAGES/EspecialidadDoctor.jsp");
-            }
-
+            session.removeAttribute("rut");
+            session.removeAttribute("consulta");
+            session.removeAttribute("especialidad");
+            session.removeAttribute("dentistas");
+            session.removeAttribute("dentista");
+            session.removeAttribute("horasDisponibles");
+            response.sendRedirect("LindaSonrisa/PAGES/HomeSecretaria.jsp");
+            
         }
     }
 

@@ -191,7 +191,7 @@ public class ClienteDaoImp implements IClienteDao {
 
         return false;
     }
-    
+
     //comprobamos si existe registro de rut
     public boolean comprobar(String rut) {
         String query = "SELECT * FROM cliente WHERE rut = ?";
@@ -202,7 +202,7 @@ public class ClienteDaoImp implements IClienteDao {
 
             try (ResultSet results = sql.executeQuery()) {
                 while (results.next()) {
-                    
+
                     return true;
                 }
             } catch (Exception e) {
@@ -215,6 +215,28 @@ public class ClienteDaoImp implements IClienteDao {
         }
         return false;
     }
-    
+
+    public String buscarNombre(String rut) {
+        String query = "SELECT * FROM cliente WHERE rut = ?";
+        try (Connection connection = Conexion.getConexion()) {
+            PreparedStatement sql = connection.prepareStatement(query);
+            sql.setString(1, rut);
+
+            try (ResultSet results = sql.executeQuery()) {
+                while (results.next()) {
+                    connection.close();
+                    return results.getString("nombre");
+                }
+            } catch (Exception e) {
+                log.error("Error al obtener resultset de buscarNombre: " + e.getMessage());
+            }
+
+        } catch (SQLException s) {
+            log.error("Error SQL buscando nombre cliente " + s.getMessage());
+        } catch (Exception e) {
+            log.error("Error al buscar nombre cliente " + e.getMessage());
+        }
+        return "";
+    }
 
 }

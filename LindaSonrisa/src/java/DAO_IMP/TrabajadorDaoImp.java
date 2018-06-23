@@ -216,7 +216,6 @@ public class TrabajadorDaoImp implements ITrabajadorDao {
             try (ResultSet results = sql.executeQuery()) {
                 while (results.next()) {
                     return results.getString("nombre");
-
                 }
             } catch (Exception e) {
                 log.error("Error al obtener resultset de buscar: " + e.getMessage());

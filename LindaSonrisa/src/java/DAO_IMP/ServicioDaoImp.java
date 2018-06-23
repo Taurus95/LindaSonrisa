@@ -124,7 +124,7 @@ public class ServicioDaoImp implements IServicioDao {
         }
         return null;
     }
-    
+
     public String buscarNombre(int id) {
         String query = "SELECT * FROM servicio WHERE id_servicio=?";
         try (Connection conexion = Conexion.getConexion()) {
@@ -177,6 +177,23 @@ public class ServicioDaoImp implements IServicioDao {
             log.error("Error al buscando id servicio " + e.getMessage());
         }
         return null;
+    }
+
+    public int buscarPrecio(int id) {
+        String query = "SELECT * FROM servicio WHERE id_servicio=?";
+        try (Connection conexion = Conexion.getConexion()) {
+            PreparedStatement sql = conexion.prepareStatement(query);
+            sql.setInt(1, id);
+            ResultSet result = sql.executeQuery();
+            while (result.next()) {
+                return result.getInt("precio");
+            }
+        } catch (SQLException s) {
+            log.error("Error SQL buscando precio servicio " + s.getMessage());
+        } catch (Exception e) {
+            log.error("Error al buscando precio servicio " + e.getMessage());
+        }
+        return 0;
     }
 
 }

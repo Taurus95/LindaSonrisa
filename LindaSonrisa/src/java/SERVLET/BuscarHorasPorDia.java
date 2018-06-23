@@ -6,7 +6,6 @@ import DTO.HorasAldia;
 import DTO.TrabajadorDto;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -41,6 +40,11 @@ public class BuscarHorasPorDia extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             HttpSession session = request.getSession();
+            if (session.getAttribute("acceso") == null || (int) session.getAttribute("acceso") != 1) {
+                session.invalidate();
+                response.sendRedirect("index.html");
+                return;
+            }
             //variables
             //horas de trabajo
             List<Integer> horas = new ArrayList<>();
@@ -56,69 +60,66 @@ public class BuscarHorasPorDia extends HttpServlet {
             //int horas[] = {9, 10, 11, 12, 14, 15, 16, 17};
             //minutos
             int minutos[] = {0, 30};
-            if ((int) session.getAttribute("acceso") == 1) {
-                //obtenemos dentista para buscar sus horas disponibles
-                TrabajadorDto dentista = (TrabajadorDto) session.getAttribute("dentista");
-                try {
-                    //obtenemos fecha para la cual buscaremos horas disponibles
-                    java.util.Date fechaUtil = new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("dateDia"));
-                    java.sql.Date fecha = new java.sql.Date(fechaUtil.getTime());
-                    session.setAttribute("fecha", fecha);
-                    //horas ocupadas para tal dentista en tal hora
-                    ArrayList<ConsultaDto> horasOcupadas = (ArrayList<ConsultaDto>) new ConsultaDaoImp().listarPorDiaDoctor(dentista.getRut(), fecha);
-                    //lista donde agregar horas disponibles
-                    ArrayList<HorasAldia> horasDisponibles = new ArrayList<>();
-                    //tenemos que comprobar si el dia es el actual, por lo tanto las horas solo seran desde la hora actual en adelan
-                    Calendar calendario = new GregorianCalendar();
-                    Calendar calendarioToday = new GregorianCalendar();
-                    calendario.setTimeInMillis(fechaUtil.getTime());
-                    int diaSeleccionado = calendario.get(Calendar.DAY_OF_MONTH);
-                    int mesSeleccionado = calendario.get(Calendar.MONTH);
-                    int annoSeleccionado = calendario.get(Calendar.YEAR);
-                    //si el dia corresponde al dia actual se comparan horas
-                    if (diaSeleccionado == calendarioToday.get(Calendar.DAY_OF_MONTH) && mesSeleccionado == calendarioToday.get(Calendar.MONTH)
-                            && annoSeleccionado == calendarioToday.get(Calendar.YEAR)) {
-                        int hora = calendarioToday.get(Calendar.HOUR_OF_DAY);
-                        int minuto = calendarioToday.get(Calendar.MINUTE);
-                        List<Integer> horasAux = new ArrayList<>();
-                        for (int aux : horas) {
-                            if (aux > hora) {
-                                horasAux.add(aux);
-                            }
+            //obtenemos dentista para buscar sus horas disponibles
+            TrabajadorDto dentista = (TrabajadorDto) session.getAttribute("dentista");
+            try {
+                //obtenemos fecha para la cual buscaremos horas disponibles
+                java.util.Date fechaUtil = new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("dateDia"));
+                java.sql.Date fecha = new java.sql.Date(fechaUtil.getTime());
+                session.setAttribute("fecha", fecha);
+                //horas ocupadas para tal dentista en tal hora
+                ArrayList<ConsultaDto> horasOcupadas = (ArrayList<ConsultaDto>) new ConsultaDaoImp().listarPorDiaDoctor(dentista.getRut(), fecha);
+                //lista donde agregar horas disponibles
+                ArrayList<HorasAldia> horasDisponibles = new ArrayList<>();
+                //tenemos que comprobar si el dia es el actual, por lo tanto las horas solo seran desde la hora actual en adelan
+                Calendar calendario = new GregorianCalendar();
+                Calendar calendarioToday = new GregorianCalendar();
+                calendario.setTimeInMillis(fechaUtil.getTime());
+                int diaSeleccionado = calendario.get(Calendar.DAY_OF_MONTH);
+                int mesSeleccionado = calendario.get(Calendar.MONTH);
+                int annoSeleccionado = calendario.get(Calendar.YEAR);
+                //si el dia corresponde al dia actual se comparan horas
+                if (diaSeleccionado == calendarioToday.get(Calendar.DAY_OF_MONTH) && mesSeleccionado == calendarioToday.get(Calendar.MONTH)
+                        && annoSeleccionado == calendarioToday.get(Calendar.YEAR)) {
+                    int hora = calendarioToday.get(Calendar.HOUR_OF_DAY);
+                    int minuto = calendarioToday.get(Calendar.MINUTE);
+                    List<Integer> horasAux = new ArrayList<>();
+                    for (int aux : horas) {
+                        if (aux > hora) {
+                            horasAux.add(aux);
                         }
-                        horas = horasAux;
                     }
+                    horas = horasAux;
+                }
 
-                    //para todas las horas del dia
-                    for (int hora : horas) {
-                        for (int minuto : minutos) {
-                            HorasAldia horaConsulta = new HorasAldia(hora, minuto, "Disponible", dentista.getNombre());
-                            if (!horasOcupadas.isEmpty()) {
-                                for (ConsultaDto consulta : horasOcupadas) {
-                                    //si la hora se encuentra dentro de una consulta ya creada se cambia estado
-                                    if (consulta.getHora() == hora && consulta.getMinuto() == minuto) {
-                                        horaConsulta.setEstado("Ocupada");
-                                        break;
-                                    }
+                //para todas las horas del dia
+                for (int hora : horas) {
+                    for (int minuto : minutos) {
+                        HorasAldia horaConsulta = new HorasAldia(hora, minuto, "Disponible", dentista.getNombre());
+                        if (!horasOcupadas.isEmpty()) {
+                            for (ConsultaDto consulta : horasOcupadas) {
+                                //si la hora se encuentra dentro de una consulta ya creada se cambia estado
+                                if (consulta.getHora() == hora && consulta.getMinuto() == minuto) {
+                                    horaConsulta.setEstado("Ocupada");
+                                    break;
                                 }
                             }
-                            horasDisponibles.add(horaConsulta);
                         }
+                        horasDisponibles.add(horaConsulta);
                     }
-                    //se agrega la lista con horas disponibles a la session
-                    session.setAttribute("horasDisponibles", horasDisponibles);
-                    if (session.getAttribute("trabajador") != null) {
-                        response.sendRedirect("PAGES/BuscarHoraSecretaria.jsp#about");
-                    } else if (session.getAttribute("cliente") != null) {
-                        response.sendRedirect("PAGES/AgendarHora.jsp#about");
-                    }
-
-                } catch (ParseException ex) {
-                    System.out.println("Error en servlet parsenado fecha");
                 }
-            } else {
-                response.sendRedirect("index.html");
+                //se agrega la lista con horas disponibles a la session
+                session.setAttribute("horasDisponibles", horasDisponibles);
+                if (session.getAttribute("trabajador") != null) {
+                    response.sendRedirect("PAGES/BuscarHoraSecretaria.jsp#about");
+                } else if (session.getAttribute("cliente") != null) {
+                    response.sendRedirect("PAGES/AgendarHora.jsp#about");
+                }
+
+            } catch (ParseException ex) {
+                System.out.println("Error en servlet parsenado fecha");
             }
+
         }
     }
 

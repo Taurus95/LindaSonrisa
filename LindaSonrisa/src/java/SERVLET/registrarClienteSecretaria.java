@@ -9,7 +9,6 @@ import DAO_IMP.ClienteDaoImp;
 import DTO.ClienteDto;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Blob;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.logging.Level;
@@ -61,14 +60,25 @@ public class registrarClienteSecretaria extends HttpServlet {
             } catch (ParseException ex) {
                 Logger.getLogger(nuevoCliente.class.getName()).log(Level.SEVERE, null, ex);
             }
-            if (new ClienteDaoImp().agregar(nuevo)) {
-                //agregar ficha social si existe
-                session.setAttribute("ms", "Cliente registrado!");
-                response.sendRedirect("PAGES/HomeSecretaria.jsp");
+            if (!new ClienteDaoImp().comprobar(nuevo.getRut())) {
+                if (new ClienteDaoImp().agregar(nuevo)) {
+                    //agregar ficha social si existe
+                    session.setAttribute("ms", "Cliente registrado!");
+                    response.sendRedirect("PAGES/HomeSecretaria.jsp");
+                } else {
+                    session.setAttribute("ms", "No se pudo registrar, contactar admin");
+                    response.sendRedirect("PAGES/HomeSecretaria.jsp");
+                }
             } else {
-                session.setAttribute("ms", "No se pudo registrar, contactar admin");
-                response.sendRedirect("PAGES/HomeSecretaria.jsp");
+                if (new ClienteDaoImp().modificar(nuevo)) {
+                    session.setAttribute("ms", "Ya existe registro para el rut ingresado, los datos fueron actualizados!");
+                   response.sendRedirect("PAGES/HomeSecretaria.jsp");
+                } else {
+                    session.setAttribute("ms", "Ya existe registro para el rut ingresado!");
+                    response.sendRedirect("PAGES/RegistroClientesecretaria.jsp");
+                }
             }
+
         }
     }
 

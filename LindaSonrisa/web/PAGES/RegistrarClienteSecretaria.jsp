@@ -36,7 +36,10 @@
 
     </head>
     <body>
-
+        <c:if test="${ms!=''}">
+            <script>alert(${ms});</script>
+            ${ms=""}
+        </c:if>
         <header id="header">
             <div class="container">
 

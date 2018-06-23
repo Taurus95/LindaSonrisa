@@ -52,7 +52,8 @@ public class loginTrabajador extends HttpServlet {
                 //comparamos contraseñas en md5
                 if (trabajador.getContrasenia().equals(pass)) {
                     session.setAttribute("trabajador", trabajador);
-                    session.setAttribute("ms", "");
+                    session.setAttribute("ms", null);
+                    session.setAttribute("acceso", 1);
                     if (trabajador.getTipo().equalsIgnoreCase("Secretaria")) {
                         response.sendRedirect("PAGES/HomeSecretaria.jsp");
                     }

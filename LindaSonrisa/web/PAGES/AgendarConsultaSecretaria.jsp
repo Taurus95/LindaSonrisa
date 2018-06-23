@@ -42,13 +42,18 @@
 
                 <div id="logo" class="pull-left">
                     <h1><a href="/LindaSonrisa/cancelar" class="scrollto">Linda Sonrisa</a></h1>
+                    <h3 style="color: white">${trabajador.getNombre()}</h3>
                     <!-- Uncomment below if you prefer to use an image logo -->
                     <!-- <a href="#intro"><img src="img/logo.png" alt="" title=""></a> -->
                 </div>
 
                 <nav id="nav-menu-container">
                     <ul class="nav-menu">                                              
-                        <li><a href="/LindaSonrisa/cancelar">Cancelar</a></li>
+                        <li><a href="/LindaSonrisa/PAGES/ConsultasSecretaria.jsp">Consultas</a></li>
+                        <li><a href="/LindaSonrisa/PAGES/RegistrarClienteSecretaria.jsp">Registro Clientes</a></li>
+                        <li><a href="/LindaSonrisa/PAGES/AgendarConsultaSecretaria.jsp">Agendar Consulta</a></li>
+                        <li><a href="/LindaSonrisa/PAGES/InformesSecretaria.jsp">Informes</a></li>
+                        <li><a href="/LindaSonrisa/cancelar">Salir</a></li>
                     </ul>
                 </nav><!-- #nav-menu-container -->
             </div>

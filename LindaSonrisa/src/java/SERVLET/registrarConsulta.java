@@ -56,7 +56,11 @@ public class registrarConsulta extends HttpServlet {
                 if (new ConsultaDaoImp().agregar(nuevaConsulta)) {
                     nuevaConsulta.setIdConsulta(new ConsultaDaoImp().ultimoId());
                     session.setAttribute("consulta", nuevaConsulta);
-                    response.sendRedirect("PAGES/InformacionConsulta.jsp");
+                    if (session.getAttribute("trabajador") != null) {
+                        response.sendRedirect("PAGES/DetalleConsultaSecretaria.jsp");
+                    } else if (session.getAttribute("cliente") != null) {
+                        response.sendRedirect("PAGES/InformacionConsulta.jsp");
+                    }
                 }
             } else {
                 response.sendRedirect("index.html");

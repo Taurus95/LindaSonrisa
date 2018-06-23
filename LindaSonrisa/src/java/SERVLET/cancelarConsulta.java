@@ -43,15 +43,20 @@ public class cancelarConsulta extends HttpServlet {
                 response.sendRedirect("index.html");
                 return;
             }
-            ConsultaDto consulta = (ConsultaDto) session.getAttribute("consulta");
-            consulta.setEstado("Cancelada");
-            if (new ConsultaDaoImp().modificar(consulta)) {
-                session.invalidate();
-                response.sendRedirect("index.html");
-            } else {
-                response.sendRedirect("index.html");
+            if ((int) session.getAttribute("acceso") == 1) {
+                ConsultaDto consulta = (ConsultaDto) session.getAttribute("consulta");
+                consulta.setEstado("Cancelada");
+                if (new ConsultaDaoImp().modificar(consulta)) {
+                    if (session.getAttribute("trabajador") != null) {
+                        response.sendRedirect("PAGES/DetalleConsultaSecretaria.jsp");
+                    } else if (session.getAttribute("cliente") != null) {
+                        session.invalidate();
+                        response.sendRedirect("index.html");
+                    }
+                } else {
+                    response.sendRedirect("index.html");
+                }
             }
-
         }
     }
 

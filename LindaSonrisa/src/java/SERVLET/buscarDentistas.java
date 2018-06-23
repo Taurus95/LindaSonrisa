@@ -34,6 +34,7 @@ public class buscarDentistas extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             HttpSession session = request.getSession();
             if (session.getAttribute("acceso") == null) {
+                session.invalidate();
                 response.sendRedirect("index.html");
                 return;
             }
@@ -42,8 +43,13 @@ public class buscarDentistas extends HttpServlet {
                 ArrayList<TrabajadorDto> lista = (ArrayList<TrabajadorDto>) new TrabajadorDaoImp().listarDentistaEspecialidad(especialidad);
                 session.setAttribute("especialidad", especialidad);
                 session.setAttribute("dentistas", lista);
-                response.sendRedirect("PAGES/EspecialidadDoctor.jsp");
+                if (session.getAttribute("trabajador") != null) {
+                    response.sendRedirect("PAGES/ServicioYdentistaSecretaria.jsp");
+                } else if (session.getAttribute("cliente") != null) {
+                    response.sendRedirect("PAGES/EspecialidadDoctor.jsp");
+                }
             } else {
+                session.invalidate();
                 response.sendRedirect("index.html");
             }
         }

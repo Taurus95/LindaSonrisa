@@ -46,6 +46,7 @@
 
                 <div id="logo" class="pull-left">
                     <h1><a href="/LindaSonrisa/cancelar" class="scrollto">Linda Sonrisa</a></h1>
+                    <h3 style="color: white">Prueba nombre</h3>
                     <!-- Uncomment below if you prefer to use an image logo -->
                     <!-- <a href="#intro"><img src="img/logo.png" alt="" title=""></a> -->
                 </div>
@@ -64,7 +65,7 @@
         <section id="intro">
 
             <div class="intro-text">
-                <h2>Bienvenid@ <c:out value="${usuario.getNombre()}" /></h2>
+                <h2>Bienvenid@ <c:out value="${trabajador.getNombre()}" /></h2>
                 <p>Que tengas un exelente dia...</p>
                 <a href="/LindaSonrisa/PAGES/IngresarRut.jsp" class="btn-get-started scrollto">Actualiza tus datos personales</a>
             </div>

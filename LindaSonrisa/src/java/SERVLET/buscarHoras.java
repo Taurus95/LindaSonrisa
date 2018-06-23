@@ -46,7 +46,12 @@ public class buscarHoras extends HttpServlet {
                 dentista.setRut(rut);
                 dentista = new TrabajadorDaoImp().buscar(dentista);
                 session.setAttribute("dentista", dentista);
-                response.sendRedirect("PAGES/AgendarHora.jsp");
+                if (session.getAttribute("trabajador") != null) {
+                    response.sendRedirect("PAGES/BuscarHoraSecretaria.jsp");
+                } else if (session.getAttribute("cliente") != null) {
+                    response.sendRedirect("PAGES/AgendarHora.jsp");
+                }
+
             } else {
                 response.sendRedirect("index.html");
             }

@@ -82,11 +82,11 @@ public class BuscarHorasPorDia extends HttpServlet {
                         int minuto = calendarioToday.get(Calendar.MINUTE);
                         List<Integer> horasAux = new ArrayList<>();
                         for (int aux : horas) {
-                            if(aux>hora){
+                            if (aux > hora) {
                                 horasAux.add(aux);
                             }
                         }
-                        horas=horasAux;
+                        horas = horasAux;
                     }
 
                     //para todas las horas del dia
@@ -107,7 +107,12 @@ public class BuscarHorasPorDia extends HttpServlet {
                     }
                     //se agrega la lista con horas disponibles a la session
                     session.setAttribute("horasDisponibles", horasDisponibles);
-                    response.sendRedirect("PAGES/AgendarHora.jsp#about");
+                    if (session.getAttribute("trabajador") != null) {
+                        response.sendRedirect("PAGES/BuscarHoraSecretaria.jsp#about");
+                    } else if (session.getAttribute("cliente") != null) {
+                        response.sendRedirect("PAGES/AgendarHora.jsp#about");
+                    }
+
                 } catch (ParseException ex) {
                     System.out.println("Error en servlet parsenado fecha");
                 }

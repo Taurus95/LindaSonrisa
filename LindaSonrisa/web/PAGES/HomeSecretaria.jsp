@@ -37,6 +37,10 @@
 
     </head>
     <body>
+        <c:if test="${ms!=''}">
+            <script>alert(${ms});</script>
+            ${ms=""}
+        </c:if>
         <header id="header">
             <div class="container">
 
@@ -47,25 +51,24 @@
                 </div>
 
                 <nav id="nav-menu-container">
-                    <ul class="nav-menu">                                              
+                    <ul class="nav-menu">
+                        <li><a href="/LindaSonrisa/PAGES/ConsultasSecretaria.jsp">Consultas</a></li>
+                        <li><a href="/LindaSonrisa/PAGES/RegistrarClienteSecretaria.jsp">Registro Clientes</a></li>
+                        <li><a href="/LindaSonrisa/PAGES/AgendarConsultaSecretaria.jsp">Agendar Consulta</a></li>
                         <li><a href="/LindaSonrisa/cancelar">Salir</a></li>
                     </ul>
-                </nav><!-- #nav-menu-container -->
+                </nav>
             </div>
         </header>
-        <form role="form" class="contactForm" name="formulario" method="POST" action="" >
-            <section id="intro">
+        <section id="intro">
 
-                <div class="intro-text">
-                    <h2>Secretaria</h2>
-                    <div class="form-group col-lg-6">
-                        
-                    </div>
-                </div>
-
-            </section><!-- #intro -->
-        </form> 
-
+            <div class="intro-text">
+                <h2>Bienvenid@ <c:out value="${usuario.getNombre()}" /></h2>
+                <p>Que tengas un exelente dia...</p>
+                <a href="/LindaSonrisa/PAGES/IngresarRut.jsp" class="btn-get-started scrollto">Actualiza tus datos personales</a>
+            </div>
+            
+        </section>
 
         <!-- JavaScript Libraries -->
         <script src="../lib/jquery/jquery.min.js"></script>

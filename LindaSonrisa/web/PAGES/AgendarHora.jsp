@@ -84,7 +84,7 @@
                                         <tr> 
                                             <td><c:out value="${fecha}" /></td>
                                             <td><c:out value="${horaDisponible.hora}:" /><c:if test="${horaDisponible.minutos==0}" >00</c:if>
-                                                <c:if test="${horaDisponible.minutos==31}">31</c:if></td>
+                                                <c:if test="${horaDisponible.minutos==30}">30</c:if></td>
                                             <td><c:out value="${horaDisponible.doctor}"/></td>
                                             <td><c:out value="${horaDisponible.estado}"/></td>
                                             <c:if test="${horaDisponible.estado=='Disponible'}">

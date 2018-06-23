@@ -65,7 +65,6 @@
                             <a href="#" class="btn-get-started scrollto" onclick="document.formulario.submit()" >Siguiente</a>
                         </form>
                     </c:if>
-                    <br>
                     <c:if test="${dentistas!=null}" >
                         <form role="form" class="contactForm" name="formulario" method="POST" action="/LindaSonrisa/buscarHoras" >
                             <select class="form-control" name="rutDentista" >

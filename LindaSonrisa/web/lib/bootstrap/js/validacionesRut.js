@@ -90,7 +90,10 @@ function checkRutGenerico(campo, isEmpresa)
     if (!checkDV(rut))
     {
         alert("El RUT es incorrecto.");
+        document.formulario.txtRut.style.borderColor = "red";
         return false;
+    }else{
+        document.formulario.txtRut.style.borderColor = "green";
     }
     return true;
 }

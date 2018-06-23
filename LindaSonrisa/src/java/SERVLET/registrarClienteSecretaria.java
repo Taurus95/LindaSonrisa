@@ -5,24 +5,30 @@
  */
 package SERVLET;
 
+import DAO_IMP.ClienteDaoImp;
+import DTO.ClienteDto;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Blob;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import DAO_IMP.TrabajadorDaoImp;
-import DTO.TrabajadorDto;
 import org.apache.commons.codec.digest.DigestUtils;
+import static org.apache.taglibs.standard.functions.Functions.trim;
 
 /**
  *
  * @author andres
  */
-@WebServlet(name = "loginTrabajador", urlPatterns = {"/loginTrabajador"})
-public class loginTrabajador extends HttpServlet {
+@WebServlet(name = "registrarClienteSecretaria", urlPatterns = {"/registrarClienteSecretaria"})
+public class registrarClienteSecretaria extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,34 +44,30 @@ public class loginTrabajador extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             HttpSession session = request.getSession();
-            String rut = request.getParameter("txtRut");
-            //tomamos y ciframos pass
-            String pass = DigestUtils.md5Hex(request.getParameter("pass"));
-            TrabajadorDaoImp implement = new TrabajadorDaoImp();
-            TrabajadorDto trabajador = new TrabajadorDto();
-            trabajador.setRut(rut);
-            trabajador.setHabilitado(false);
-            //buscamos trabajador
-            trabajador = implement.buscar(trabajador);
-            //si esta habilitado cambiara a true
-            if (trabajador.isHabilitado()) {
-                //comparamos contraseñas en md5
-                if (trabajador.getContrasenia().equals(pass)) {
-                    session.setAttribute("trabajador", trabajador);
-                    session.setAttribute("ms", "");
-                    if (trabajador.getTipo().equalsIgnoreCase("Secretaria")) {
-                        response.sendRedirect("PAGES/HomeSecretaria.jsp");
-                    }
-                    if (trabajador.getTipo().equalsIgnoreCase("dentista")) {
-                        response.sendRedirect("PAGES/HomeDentista.jsp");
-                    }
-                } else {
-                    session.setAttribute("msg", "error");
-                    response.sendRedirect("PAGES/ingresarTrabajador.jsp");
-                }
+            ClienteDto nuevo = new ClienteDto();
+            nuevo.setRut((String) request.getParameter("txtRut"));
+            nuevo.setNombre(trim((String) request.getParameter("txtNombre")));
+            nuevo.setCorreo(trim((String) request.getParameter("txtCorreo")));
+            nuevo.setHabilitado(true);
+            nuevo.setTelefono(trim((String) request.getParameter("txtTelefono")));
+            nuevo.setContrasenia(DigestUtils.md5Hex(trim((String) request.getParameter("txtContrasenia"))));
+            nuevo.setSexo(trim((String) request.getParameter("cmbSexo")));
+            nuevo.setDireccion((String) request.getParameter("txtDireccion"));
+            //try para agregar fecha 
+            try {
+                java.util.Date fechaUtil = new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("calNacimiento"));
+                java.sql.Date fecha = new java.sql.Date(fechaUtil.getTime());
+                nuevo.setFechaNacimiento(fecha);
+            } catch (ParseException ex) {
+                Logger.getLogger(nuevoCliente.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            if (new ClienteDaoImp().agregar(nuevo)) {
+                //agregar ficha social si existe
+                session.setAttribute("ms", "Cliente registrado!");
+                response.sendRedirect("PAGES/HomeSecretaria.jsp");
             } else {
-                session.setAttribute("msg", "error");
-                response.sendRedirect("PAGES/ingresarTrabajador.jsp");
+                session.setAttribute("ms", "No se pudo registrar, contactar admin");
+                response.sendRedirect("PAGES/HomeSecretaria.jsp");
             }
         }
     }

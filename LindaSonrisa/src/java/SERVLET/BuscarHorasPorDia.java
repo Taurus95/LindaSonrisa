@@ -55,7 +55,7 @@ public class BuscarHorasPorDia extends HttpServlet {
             horas.add(17);
             //int horas[] = {9, 10, 11, 12, 14, 15, 16, 17};
             //minutos
-            int minutos[] = {0, 31};
+            int minutos[] = {0, 30};
             if ((int) session.getAttribute("acceso") == 1) {
                 //obtenemos dentista para buscar sus horas disponibles
                 TrabajadorDto dentista = (TrabajadorDto) session.getAttribute("dentista");
@@ -87,7 +87,6 @@ public class BuscarHorasPorDia extends HttpServlet {
                             }
                         }
                         horas=horasAux;
-                        
                     }
 
                     //para todas las horas del dia

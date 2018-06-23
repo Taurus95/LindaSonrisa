@@ -72,7 +72,7 @@
                                     <tr>
                                         <td><h5>Hora:</h5></td>
                                         <td><h5><c:out value="${consulta.hora}:" /><c:if test="${consulta.minuto==0}" >00</c:if>
-                                            <c:if test="${consulta.minuto==31}">31</c:if></h5></td>
+                                            <c:if test="${consulta.minuto==30}">30</c:if></h5></td>
                                     </tr>
                                 </tbody>
                             </table>

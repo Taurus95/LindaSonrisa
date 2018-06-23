@@ -36,20 +36,20 @@
 
     </head>
     <body>
-        <c:if test="${ms!=''}">
+        <c:if test="${ms!=null}">
             <script>alert(${ms});</script>
-            ${ms=""}
+            ${ms=null}
         </c:if>
         <header id="header">
             <div class="container">
 
                 <div id="logo" class="pull-left">
-                    <h1><a href="/LindaSonrisa/cancelar" class="scrollto">Linda Sonrisa</a></h1>
+                    <h1><a href="/LindaSonrisa/PAGES/HomeSecretaria.jsp" class="scrollto">Linda Sonrisa</a></h1>
                 </div>
 
                 <nav id="nav-menu-container">
                     <ul class="nav-menu">                                              
-                        <li><a href="/LindaSonrisa/cancelar">Cancelar</a></li>
+                        <li><a href="/LindaSonrisa/PAGES/HomeSecretaria.jsp">Cancelar</a></li>
                     </ul>
                 </nav><!-- #nav-menu-container -->
             </div>
@@ -106,7 +106,7 @@
 
                         </div>
                         <div class="container" align="center">
-                            <a href="#" onclick="validateForm()" class="btn-get-started scrollto">Registrarme</a>
+                            <a href="#" onclick="validateForm()" class="btn-get-started scrollto">Registrar</a>
                         </div>
                     </div>
                 </div>

@@ -37,9 +37,9 @@
 
     </head>
     <body>
-        <c:if test="${ms!=''}">
+        <c:if test="${ms!=null}">
             <script>alert(${ms});</script>
-            ${ms=""}
+            ${ms=null}
         </c:if>
         <header id="header">
             <div class="container">
@@ -55,6 +55,7 @@
                         <li><a href="/LindaSonrisa/PAGES/ConsultasSecretaria.jsp">Consultas</a></li>
                         <li><a href="/LindaSonrisa/PAGES/RegistrarClienteSecretaria.jsp">Registro Clientes</a></li>
                         <li><a href="/LindaSonrisa/PAGES/AgendarConsultaSecretaria.jsp">Agendar Consulta</a></li>
+                        <li><a href="/LindaSonrisa/PAGES/InformesSecretaria.jsp">Informes</a></li>
                         <li><a href="/LindaSonrisa/cancelar">Salir</a></li>
                     </ul>
                 </nav>

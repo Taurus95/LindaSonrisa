@@ -82,7 +82,7 @@
                                     </tr>
                                     <tr>
                                         <td><h5>Estado:</h5></td>
-                                        <td><h5><c:out value="${consulta.estado}"></h5></td>
+                                        <td><h5><c:out value="${consulta.estado}"/></h5></td>
                                     </tr>
                                 </tbody>
                             </table>

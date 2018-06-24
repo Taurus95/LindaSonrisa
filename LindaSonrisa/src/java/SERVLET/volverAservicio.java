@@ -1,28 +1,25 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package SERVLET;
 
-import DAO_IMP.ClienteDaoImp;
-import DTO.ClienteDto;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import static org.apache.taglibs.standard.functions.Functions.trim;
-import org.apache.commons.codec.digest.DigestUtils;
 
 /**
  *
  * @author andres
  */
-@WebServlet(name = "nuevoCliente", urlPatterns = {"/nuevoCliente"})
-public class nuevoCliente extends HttpServlet {
+@WebServlet(name = "volverAservicio", urlPatterns = {"/volverAservicio"})
+public class volverAservicio extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,32 +35,18 @@ public class nuevoCliente extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             HttpSession session = request.getSession();
-            ClienteDto nuevo = new ClienteDto();
-            nuevo.setRut((String) session.getAttribute("rut"));
-            nuevo.setNombre(trim((String) request.getParameter("txtNombre")));
-            nuevo.setCorreo(trim((String) request.getParameter("txtCorreo")));
-            nuevo.setHabilitado(true);
-            nuevo.setTelefono(trim((String) request.getParameter("txtTelefono")));
-            nuevo.setContrasenia(DigestUtils.md5Hex(trim((String) request.getParameter("txtContrasenia"))));
-            nuevo.setSexo(trim((String) request.getParameter("cmbSexo")));
-            nuevo.setDireccion((String) request.getParameter("txtDireccion"));
-            //try para agregar fecha 
-            try {
-                java.util.Date fechaUtil = new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("calNacimiento"));
-                java.sql.Date fecha = new java.sql.Date(fechaUtil.getTime());
-                nuevo.setFechaNacimiento(fecha);
-            } catch (ParseException ex) {
-                Logger.getLogger(nuevoCliente.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            if (new ClienteDaoImp().agregar(nuevo)) {
-                session.setAttribute("cliente", nuevo);
-                session.setAttribute("acceso", 1);
-                response.sendRedirect("PAGES/SubirDocumentos.jsp");
-            } else {
+            if (session.getAttribute("acceso") == null || (int) session.getAttribute("acceso") != 1) {
                 session.invalidate();
                 response.sendRedirect("index.html");
+                return;
             }
-
+            session.removeAttribute("dentistas");
+            if (session.getAttribute("trabajador") != null) {
+                response.sendRedirect("PAGES/ServicioYdentistaSecretaria.jsp");
+            } else if (session.getAttribute("cliente") != null) {
+                response.sendRedirect("PAGES/EspecialidadDoctor.jsp");
+            }
+            
         }
     }
 

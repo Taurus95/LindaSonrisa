@@ -74,6 +74,8 @@
                                 </c:forEach>
                             </select>
                             <a href="#" class="btn-get-started scrollto" onclick="document.formulario.submit()" >Siguiente</a>
+                            <br>
+                            <a href="LindaSonrisa/volverAservicio" class="btn-get-started scrollto" >Volver</a>
                         </form>
                     </c:if>
                 </div>

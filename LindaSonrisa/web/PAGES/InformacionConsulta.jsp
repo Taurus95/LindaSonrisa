@@ -76,7 +76,6 @@
                                     </tr>
                                 </tbody>
                             </table>
-
                             <form name="formulario" action="/LindaSonrisa/cancelarConsulta" method="POST" >
                                 <input type="hidden" value="${consulta.idConsulta}" name="idConsulta" >
                             <a href="#" class="btn-get-started scrollto" onclick="confirmCancelar()"  >Cancelar</a>

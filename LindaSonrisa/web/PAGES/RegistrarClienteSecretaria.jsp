@@ -54,13 +54,13 @@
                         <li><a href="/LindaSonrisa/PAGES/RegistrarClienteSecretaria.jsp">Registro Clientes</a></li>
                         <li><a href="/LindaSonrisa/PAGES/AgendarConsultaSecretaria.jsp">Agendar Consulta</a></li>
                         <li><a href="/LindaSonrisa/PAGES/InformesSecretaria.jsp">Informes</a></li>
-                        <li><a href="/LindaSonrisa/cancelar">Salir</a></li>
+                        <li><a href="/LindaSonrisa/cancelar">Cerrar sesion</a></li>
                     </ul>
-                </nav><!-- #nav-menu-container -->
+                </nav>
             </div>
         </header>
         <section id="intro">
-            <form class="login100-form validate-form" name="formulario" enctype="multipart/form-data"
+            <form  name="formulario" enctype="multipart/form-data"
                   method="POST" action="/LindaSonrisa/registrarClienteSecretaria" >
                 <div class="inform-text">
                     <h2>Registrar cliente</h2>
@@ -79,10 +79,10 @@
                             <br>
                             <input type="text" name="txtTelefono" onkeydown="" class="form-control" id="telefono" placeholder="Teléfono" required=""/>
                             <br>
-                            <label style="color:white">Finiquito:</label>
+                            <label for="finiquito" style="color:white">Finiquito:</label>
                             <input type="file" name="finiquito">
                             <br>
-                            <label style="color:white">Certificado AFP:</label>
+                            <label for="certificadoAFP" style="color:white">Certificado AFP:</label>
                             <input type="file" name="certificadoAFP">
                         </div>
                         <div class="col-sm-6">
@@ -100,15 +100,14 @@
                             <input type="password" class="form-control" name="txtconfirmPass" id="txtconfirmPass" onkeyup="comprobarPass()" required=""
                                    placeholder="Repetir contraseña">
                             <br>
-                            <label style="color:white">Liquidacion 1:</label>
+                            <label for="liquidacion1" style="color:white">Liquidacion 1:</label>
                             <input type="file" name="liquidacion1">
                             <br>
-                            <label style="color:white">Liquidacion 2:</label>
+                            <label for="liquidacion2" style="color:white">Liquidacion 2:</label>
                             <input type="file" name="liquidacion2">
                             <br>
-                            <label style="color:white">Liquidacion 3:</label>
+                            <label for="liquidacion3" style="color:white">Liquidacion 3:</label>
                             <input type="file" name="liquidacion3">
-
                         </div>
                         <div class="container" align="center">
                             <a href="#" onclick="validateForm()" class="btn-get-started scrollto">Registrar</a>

@@ -150,7 +150,7 @@ h1, h2, h3, h4, h5, h6 {
 #intro .inform-text {
   position: absolute;
   left: 0;
-  top: 80px;
+  top: 70px;
   right: 0;
   height: calc(50% - 60px);
   display: flex;

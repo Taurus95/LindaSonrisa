@@ -46,7 +46,7 @@ public class cancelarFlujoConsulta extends HttpServlet {
             session.removeAttribute("dentistas");
             session.removeAttribute("dentista");
             session.removeAttribute("horasDisponibles");
-            response.sendRedirect("LindaSonrisa/PAGES/HomeSecretaria.jsp");
+            response.sendRedirect("PAGES/HomeSecretaria.jsp");
             
         }
     }

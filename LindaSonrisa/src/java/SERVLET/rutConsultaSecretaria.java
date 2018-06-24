@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import DAO_IMP.ClienteDaoImp;
+import DAO_IMP.ConsultaDaoImp;
+import DTO.ConsultaDto;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -36,15 +38,21 @@ public class rutConsultaSecretaria extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             HttpSession session = request.getSession();
-            String rut=request.getParameter("txtRut");
-            if(!new ClienteDaoImp().comprobar(rut)){
-                 session.setAttribute("mj", "El cliente necesita registro");
-                 response.sendRedirect("LindaSonrisa/PAGES/RegistrarClienteSecretaria.jsp");
-            }else{
-                session.setAttribute("rut", rut);
-                response.sendRedirect("LindaSonrisa/PAGES/ServicioYdentistaSecretaria.jsp");
+            String rut = request.getParameter("txtRut");
+            if (!new ClienteDaoImp().comprobar(rut)) {
+                session.setAttribute("mj", "El cliente necesita registro");
+                response.sendRedirect("PAGES/RegistrarClienteSecretaria.jsp");
+            } else {
+                ConsultaDto consulta = new ConsultaDaoImp().consultaPendienteCliente(rut);
+                if (null == consulta) {
+                    session.setAttribute("rut", rut);
+                    response.sendRedirect("PAGES/ServicioYdentistaSecretaria.jsp");
+                } else {
+                    session.setAttribute("consulta", consulta);
+                    response.sendRedirect("PAGES/DetalleConsultaSecretaria.jsp");
+                }
             }
-            
+
         }
     }
 

@@ -135,6 +135,15 @@ BEGIN
   FROM   dual;
 END;
 
+CREATE OR REPLACE TRIGGER servicio_tri
+BEFORE INSERT ON Servicio
+FOR EACH ROW
+BEGIN
+  SELECT servicio_seq.NEXTVAL
+  INTO   :new.id_servicio
+  FROM   dual;
+END;
+
 CREATE OR REPLACE TRIGGER consulta_tri
 BEFORE INSERT ON Consulta
 FOR EACH ROW
@@ -177,10 +186,10 @@ INSERT INTO Servicio (nombre,descripcion,precio,habilitado) VALUES ('Odontopedia
 INSERT INTO Servicio (nombre,descripcion,precio,habilitado) VALUES ('Implantologia', 'Especialista a cargo de reponer piezas dentales perdidas o que están por pasar a ese estado', 25000, 1);
 
 INSERT INTO Trabajador VALUES ('11.756.660-9', 'Roberto Gonzales Feliciano', '19/02/1987', 'M', 'Roberto.GF@hotmail.com', 'Independencia N1167, Santiago', '9 828273546', '66df9ccc4f5eda4b4fff1a68e3f3dbcd', 'Dentista', 'Odontologia General', 1);
-INSERT INTO Trabajador VALUES ('13.831.883-4', 'Diana Rodriguez Papala', '01/01/1998', 'F', 'DianaR@outlook.com', 'Av. Perez N872, Buin', '9 82937452', '38693b6fab3e37d602488565b8e28736', 'Secretaria', 'null', 1);
+INSERT INTO Trabajador VALUES ('13.831.883-4', 'Diana Rodriguez Papala', '01/01/1998', 'F', 'DianaR@outlook.com', 'Av. Perez N872, Buin', '9 82937452', '202cb962ac59075b964b07152d234b70', 'Secretaria', 'null', 1);
 INSERT INTO Trabajador VALUES('16.014.886-1', 'Luis Fernandez Hurtado', '10/11/1985', 'M', 'LuisFer@outlook.com', 'Las hermanas N333, Paine', '9 63527163', '65f86f5d73caeb793c777836dfa01c7b', 'Administrativo', 'null', 1);
 INSERT INTO Trabajador VALUES('17.031.885-4', 'Pedro Molina Soto', '10/11/1981', 'M', 'PedroM@outlook.com', 'Las hermanas N333, Paine', '9 63527163', '65f86f5d73caeb793c777836dfa01c7b', 'Dentista', 'Ortodoncia', 1);
-INSERT INTO Trabajador VALUES('15.835.608-2', 'Cecilia Ortiz Mena', '15/04/1981', 'F', 'CeciliaO@outlook.com', 'Las hermanas N333, Paine', '9 6518921', '65f86f5d73caeb793c777836dfa01c7b', 'Dentista', 'Implantologia', 1);
+INSERT INTO Trabajador VALUES('15.835.608-2', 'Cecilia Ortiz Mena', '15/04/1981', 'F', 'CeciliaO@outlook.com', 'Las hermanas N333, Paine', '9 6518921', '202cb962ac59075b964b07152d234b70', 'Dentista', 'Implantologia', 1);
 INSERT INTO Trabajador VALUES('17.885.123-K', 'Valeria Molina Aviles', '17/05/1987', 'F', 'ValeriaM@outlook.com', 'Las primas N123, Paine', '9 63527163', '65f86f5d73caeb793c777836dfa01c7b', 'Dentista', 'Endodoncia', 1);
 INSERT INTO Trabajador VALUES('15.675.243-8', 'Camila huentecura Solis', '19/04/1985', 'F', 'CamilaH@outlook.com', 'Los hermanos 456, Paine', '9 6518921', '65f86f5d73caeb793c777836dfa01c7b', 'Dentista', 'Odontopediatria', 1);
 

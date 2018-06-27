@@ -76,9 +76,6 @@
                             <a href="#" class="btn-get-started scrollto" onclick="document.formulario.submit()" >Siguiente</a>
                             <br>
                         </form>
-                        <form action="/LindaSonrisa/volverAservicio" name="volver" method="POST">
-                            <a href="" onclick="document.volver.submit()" class="btn-get-started scrollto" >Volver</a>
-                        </form>
                     </c:if>
                 </div>
             </div>

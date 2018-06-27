@@ -53,7 +53,7 @@
                         <li><a href="/LindaSonrisa/PAGES/RegistrarClienteSecretaria.jsp">Registro Clientes</a></li>
                         <li><a href="/LindaSonrisa/PAGES/AgendarConsultaSecretaria.jsp">Agendar Consulta</a></li>
                         <li><a href="/LindaSonrisa/PAGES/InformesSecretaria.jsp">Informes</a></li>
-                        <li><a href="/LindaSonrisa/cancelar">Salir</a></li>
+                        <li><a href="/LindaSonrisa/cancelar">Cerrar session</a></li>
                     </ul>
                 </nav><!-- #nav-menu-container -->
             </div>

@@ -57,33 +57,34 @@
         <section id="intro">
             <div class="inform-text">
                 <h2>Acreditacion de situacion economica!</h2>
-                <form  name="formulario" method="POST" action="/LindaSonrisa/nuevoCliente" >
-                    <div>
-                        <label for="finiquito" style="color:white">Finiquito:</label>
-                        <input type="file" name="finiquito">
-                    </div>
-                    <div>
-                        <label for="certificadoAFP" style="color:white">Certificado AFP:</label>
-                        <input type="file" name="certificadoAFP">
-                    </div>
-                    <div>
-                        <label for="liquidacion1" style="color:white">Liquidacion 1:</label>
-                        <input type="file" name="liquidacion1">
-                    </div>
-                    <div>
-                        <label for="liquidacion2" style="color:white">Liquidacion 2:</label>
-                        <input type="file" name="liquidacion2">
-                    </div>
-                    <div>
-                        <label for="liquidacion3" style="color:white">Liquidacion 3:</label>
-                        <input type="file" name="liquidacion3" >
-                    </div>
-                    <br>
-                    <a href="#" onclick="document.formulario.submit()" class="btn-get-started scrollto">Subir Documentos</a>
-                    <br>
-                    <a href="PAGES/EspecialidadDoctor.jsp" class="btn-get-started scrollto">Saltar</a>
-                </form> 
-
+                <div class="row">
+                    <form  name="formulario" method="POST" action="/LindaSonrisa/nuevoCliente" >
+                        <div>
+                            <label for="finiquito" style="color:white">Finiquito:</label>
+                            <input type="file" name="finiquito">
+                        </div>
+                        <div>
+                            <label for="certificadoAFP" style="color:white">Certificado AFP:</label>
+                            <input type="file" name="certificadoAFP">
+                        </div>
+                        <div>
+                            <label for="liquidacion1" style="color:white">Liquidacion 1:</label>
+                            <input type="file" name="liquidacion1">
+                        </div>
+                        <div>
+                            <label for="liquidacion2" style="color:white">Liquidacion 2:</label>
+                            <input type="file" name="liquidacion2">
+                        </div>
+                        <div>
+                            <label for="liquidacion3" style="color:white">Liquidacion 3:</label>
+                            <input type="file" name="liquidacion3" >
+                        </div>
+                        <br>
+                        <a href="#" onclick="document.formulario.submit()" class="btn-get-started scrollto">Subir Documentos</a>
+                        <br>
+                        <a href="/LindaSonrisa/PAGES/EspecialidadDoctor.jsp" class="btn-get-started scrollto">Saltar</a>
+                    </form> 
+                </div>
             </div>
 
         </section>

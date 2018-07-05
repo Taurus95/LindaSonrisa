@@ -43,10 +43,11 @@ public class registrarClienteSecretaria extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             HttpSession session = request.getSession();
-            ClienteDto nuevo = new ClienteDto();
-            nuevo.setRut((String) request.getParameter("txtRut"));
-            nuevo.setNombre(trim((String) request.getParameter("txtNombre")));
+            ClienteDto nuevo = new ClienteDto();            
+            nuevo.setRut((String) request.getParameter("txtRut"));            
+            nuevo.setNombre(trim((String)request.getParameter("txtNombre")));
             nuevo.setCorreo(trim((String) request.getParameter("txtCorreo")));
+            System.out.println("INFO-> "+nuevo.toString());
             nuevo.setHabilitado(true);
             nuevo.setTelefono(trim((String) request.getParameter("txtTelefono")));
             nuevo.setContrasenia(DigestUtils.md5Hex(trim((String) request.getParameter("txtContrasenia"))));
@@ -60,6 +61,7 @@ public class registrarClienteSecretaria extends HttpServlet {
             } catch (ParseException ex) {
                 Logger.getLogger(nuevoCliente.class.getName()).log(Level.SEVERE, null, ex);
             }
+            System.out.println(nuevo);
             if (!new ClienteDaoImp().comprobar(nuevo.getRut())) {
                 if (new ClienteDaoImp().agregar(nuevo)) {
                     //agregar ficha social si existe

@@ -62,31 +62,31 @@
             <div class="contactForm">
                 <div class="inform-text">
                     <h2>Detalle de consulta</h2>
-                    <div class="form-group col-lg-4">
-                        <table class="table form-control" aling="center">
+                    <div class="col-lg-4">
+                        <table class="table table-bordered" aling="center">
                             <tbody>
                                 <tr>
-                                    <td><h5>Dentista: </h5></td>
-                                    <td><h5><c:out value="${dentista.buscarNombre(consulta.rutTrabajador)}"/></h5></td>
-                                    <td><h5>Paciente: </h5></td>
-                                    <td><h5><c:out value="${cliente.buscarNombre(consulta.rutCliente)}"/></h5></td>
+                                    <td><h5 style="color:white">Dentista: </h5></td>
+                                    <td><h5 style="color:white"><c:out value="${dentista.buscarNombre(consulta.rutTrabajador)}"/></h5></td>
+                                    <td><h5 style="color:white">Paciente: </h5></td>
+                                    <td><h5 style="color:white"><c:out value="${cliente.buscarNombre(consulta.rutCliente)}"/></h5></td>
                                 </tr>
                                 <tr>
-                                    <td><h5>Servicio : </h5></td>
-                                    <td><h5><c:out value="${service.buscarNombre(consulta.idServicio)}"/></h5></td>
-                                    <td><h5>Precio : </h5></td>
-                                    <td><h5><c:out value="${service.buscarPrecio(consulta.idServicio)}"/></h5></td>
+                                    <td><h5 style="color:white">Servicio : </h5></td>
+                                    <td><h5 style="color:white"><c:out value="${service.buscarNombre(consulta.idServicio)}"/></h5></td>
+                                    <td><h5 style="color:white">Precio : </h5></td>
+                                    <td><h5 style="color:white"><c:out value="${service.buscarPrecio(consulta.idServicio)}"/></h5></td>
                                 </tr>
                                 <tr>
-                                    <td><h5>Dia:</h5></td>
-                                    <td><h5><c:out value="${consulta.fecha}"></c:out></h5></td>
-                                        <td><h5>Hora:</h5></td>
-                                        <td><h5><c:out value="${consulta.hora}:" /><c:if test="${consulta.minuto==0}" >00</c:if>
+                                    <td><h5 style="color:white">Dia:</h5></td>
+                                    <td><h5 style="color:white"><c:out value="${consulta.fecha}"></c:out></h5></td>
+                                        <td style="color:white"><h5>Hora:</h5></td>
+                                        <td style="color:white"><h5><c:out value="${consulta.hora}:" /><c:if test="${consulta.minuto==0}" >00</c:if>
                                             <c:if test="${consulta.minuto==30}">30</c:if></h5></td>
                                     </tr>
                                     <tr>
-                                        <td><h5>Estado:</h5></td>
-                                        <td><h5><c:out value="${consulta.estado}"/></h5></td>
+                                        <td><h5 style="color:white">Estado:</h5></td>
+                                        <td><h5 style="color:white"><c:out value="${consulta.estado}"/></h5></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -94,13 +94,13 @@
                             <div class="col-lg-6">
                                 <form name="formulario" action="/LindaSonrisa/cancelarConsulta" method="POST" >
                                     <input type="hidden" value="${consulta.idConsulta}" name="idConsulta" >
-                                    <a href="#" class="btn-get-started scrollto" onclick="confirmCancelar()"  >Cancelar</a>
+                                    <a href="#" class="btn-get-started scrollto" onclick="confirmCancelar()">Cancelar</a>
                                 </form>
                             </div>
                             <div class="col-lg-6">
-                                <form name="formulario" action="/LindaSonrisa/boletaConsulta" method="POST" >
+                                <form name="boletaForm" action="/LindaSonrisa/boletaConsulta" method="POST" >
                                     <input type="hidden" value="${consulta.idConsulta}" name="idConsulta" >
-                                    <a href="#" class="btn-get-started scrollto"  >Boleta</a>
+                                    <a href="#" class="btn-get-started scrollto" onclick="document.boletaForm.submit"  >Boleta</a>
                                 </form>
                             </div>
                         </div>

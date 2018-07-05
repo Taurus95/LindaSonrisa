@@ -37,6 +37,11 @@
 
     </head>
     <body>
+        <c:if test="${msj!=null}" >
+            <script>alert("${msj}");</script>
+            <c:remove var="msj"></c:remove>
+            <c:remove var="horasDisponibles"></c:remove>
+        </c:if>
         <header id="header">
             <div class="container">
                 <div id="logo" class="pull-left">

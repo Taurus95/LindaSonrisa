@@ -48,6 +48,11 @@ public class loginTrabajador extends HttpServlet {
             //buscamos trabajador
             trabajador = implement.buscar(trabajador);
             //si esta habilitado cambiara a true
+            if (trabajador == null) {
+                session.setAttribute("msg", "error");
+                response.sendRedirect("PAGES/ingresarTrabajador.jsp");
+                return;
+            }
             if (trabajador.isHabilitado()) {
                 //comparamos contraseñas en md5
                 if (trabajador.getContrasenia().equals(pass)) {

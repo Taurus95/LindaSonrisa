@@ -110,10 +110,22 @@ public class BuscarHorasPorDia extends HttpServlet {
                 }
                 //se agrega la lista con horas disponibles a la session
                 session.setAttribute("horasDisponibles", horasDisponibles);
+
                 if (session.getAttribute("trabajador") != null) {
-                    response.sendRedirect("PAGES/BuscarHoraSecretaria.jsp#about");
+                    if (horasDisponibles.isEmpty()) {
+                        session.setAttribute("msj", "No hay horas disponibles para tal dia, porfavor selecciona otro.");
+                        response.sendRedirect("PAGES/BuscarHoraSecretaria.jsp");
+                    }else{
+                        response.sendRedirect("PAGES/BuscarHoraSecretaria.jsp#about");
+                    }
                 } else if (session.getAttribute("cliente") != null) {
-                    response.sendRedirect("PAGES/AgendarHora.jsp#about");
+                    if (horasDisponibles.isEmpty()) {
+                        session.setAttribute("msj", "No hay horas disponibles para tal dia, porfavor selecciona otro.");
+                        response.sendRedirect("PAGES/AgendarHora.jsp");
+                    }else{
+                        response.sendRedirect("PAGES/AgendarHora.jsp#about");
+                    }
+                    
                 }
 
             } catch (ParseException ex) {

@@ -224,7 +224,6 @@ public class ClienteDaoImp implements IClienteDao {
 
             try (ResultSet results = sql.executeQuery()) {
                 while (results.next()) {
-                    connection.close();
                     return results.getString("nombre");
                 }
             } catch (Exception e) {

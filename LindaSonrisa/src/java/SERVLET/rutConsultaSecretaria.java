@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import DAO_IMP.ClienteDaoImp;
 import DAO_IMP.ConsultaDaoImp;
+import DTO.ClienteDto;
 import DTO.ConsultaDto;
 import javax.servlet.http.HttpSession;
 
@@ -45,8 +46,16 @@ public class rutConsultaSecretaria extends HttpServlet {
             } else {
                 ConsultaDto consulta = new ConsultaDaoImp().consultaPendienteCliente(rut);
                 if (null == consulta) {
-                    session.setAttribute("rut", rut);
-                    response.sendRedirect("PAGES/ServicioYdentistaSecretaria.jsp");
+                    ClienteDto aux = new ClienteDto();
+                    aux.setRut(rut);
+                    aux = new ClienteDaoImp().buscar(aux);
+                    if (aux != null && aux.isHabilitado()) {
+                        session.setAttribute("cliente", aux);
+                        response.sendRedirect("PAGES/ServicioYdentistaSecretaria.jsp");
+                    } else {
+                        session.setAttribute("mj", "El cliente necesita registro");
+                        response.sendRedirect("PAGES/AgendarConsultaSecretaria.jsp");
+                    }
                 } else {
                     session.setAttribute("consulta", consulta);
                     response.sendRedirect("PAGES/DetalleConsultaSecretaria.jsp");

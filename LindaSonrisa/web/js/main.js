@@ -176,8 +176,11 @@ function maxDatetoday() {
 }
 //no hay disponibilidad findesemana
 function notWeekend() {
+    if(document.getElementById("dateDia").value==""){
+        alert("Selecciona un dia disponible en el calendario.");
+        return false;
+    }
     var day = new Date(document.getElementById("dateDia").value).getUTCDay();
-
     // Days in JS range from 0-6 where 0 is Sunday and 6 is Saturday
     if (day == 6 || day == 0) {
         document.getElementById("error").innerHTML =

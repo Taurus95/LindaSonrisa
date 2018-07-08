@@ -99,8 +99,9 @@
                             </div>
                             <div class="col-lg-6">
                                 <form name="boletaForm" action="/LindaSonrisa/boletaConsulta" method="POST" >
+                                    <label for="descuento" style="color:white">Descuento:</label>
                                     <input type="number" value="0" required="" name="descuento" >
-                                    <a href="#" class="btn-get-started scrollto" onclick="descuentoForm()"  >Boleta</a>
+                                    <a href="#" class="btn-get-started scrollto" onclick="descuentoForm()" >Boleta</a>
                                 </form>
                             </div>
                         </div>

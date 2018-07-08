@@ -191,7 +191,7 @@ function notWeekend() {
     document.formulario.submit();
 }
 function descuentoForm() {
-    if (document.boletaForm.descuento.value != "") {
+    if (document.boletaForm.descuento.value == "") {
         alert("ingresa descuento, 0 si no aplica");
         return false;
     } else {

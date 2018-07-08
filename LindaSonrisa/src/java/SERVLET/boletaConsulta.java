@@ -74,11 +74,11 @@ public class boletaConsulta extends HttpServlet {
                         out.println("Servicio:\t" + new ServicioDaoImp().buscarNombre(consulta.getIdServicio()));
                         out.println("Precio:\t $" + new ServicioDaoImp().buscarPrecio(consulta.getIdServicio()));
                         out.println("Descuento:\t $" + descuento);
-                        out.println("Total:\t" + consulta.getTotal());
+                        out.println("Total:\t $" + consulta.getTotal());
                     } finally {
                         out.close();
+                        response.sendRedirect("PAGES/DetalleConsultaSecretaria.jsp");
                     }
-                    response.sendRedirect("PAGES/DetalleConsultaSecretaria.jsp");
                 } else {
                     response.sendRedirect("index.html");
                 }

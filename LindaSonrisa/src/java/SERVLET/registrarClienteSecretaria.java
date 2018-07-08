@@ -43,11 +43,10 @@ public class registrarClienteSecretaria extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             HttpSession session = request.getSession();
-            ClienteDto nuevo = new ClienteDto();            
-            nuevo.setRut((String) request.getParameter("txtRut"));            
-            nuevo.setNombre(trim((String)request.getParameter("txtNombre")));
+            ClienteDto nuevo = new ClienteDto();
+            nuevo.setRut((String) request.getParameter("txtRut"));
+            nuevo.setNombre(trim((String) request.getParameter("txtNombre")));
             nuevo.setCorreo(trim((String) request.getParameter("txtCorreo")));
-            System.out.println("INFO-> "+nuevo.toString());
             nuevo.setHabilitado(true);
             nuevo.setTelefono(trim((String) request.getParameter("txtTelefono")));
             nuevo.setContrasenia(DigestUtils.md5Hex(trim((String) request.getParameter("txtContrasenia"))));
@@ -74,7 +73,7 @@ public class registrarClienteSecretaria extends HttpServlet {
             } else {
                 if (new ClienteDaoImp().modificar(nuevo)) {
                     session.setAttribute("ms", "Ya existe registro para el rut ingresado, los datos fueron actualizados!");
-                   response.sendRedirect("PAGES/HomeSecretaria.jsp");
+                    response.sendRedirect("PAGES/HomeSecretaria.jsp");
                 } else {
                     session.setAttribute("ms", "Ya existe registro para el rut ingresado!");
                     response.sendRedirect("PAGES/RegistroClientesecretaria.jsp");

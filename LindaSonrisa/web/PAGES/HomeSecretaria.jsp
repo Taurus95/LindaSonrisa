@@ -38,8 +38,8 @@
     </head>
     <body>
         <c:if test="${ms!=null}">
-            <script>alert(${ms});</script>
-            ${ms=null}
+            <script>alert("${ms}");</script>
+            <c:remove var="ms" ></c:remove>
         </c:if>
         <header id="header">
             <div class="container">

@@ -60,7 +60,7 @@
             </div>
         </header>
         <section id="intro">
-            <form  name="formulario" enctype="multipart/form-data"
+            <form  name="formulario" 
                    method="POST" action="/LindaSonrisa/registrarClienteSecretaria" >
                 <div class="inform-text">
                     <h2>Registrar cliente</h2>

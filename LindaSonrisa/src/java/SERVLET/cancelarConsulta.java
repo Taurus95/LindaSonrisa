@@ -45,7 +45,9 @@ public class cancelarConsulta extends HttpServlet {
             }
             if ((int) session.getAttribute("acceso") == 1) {
                 ConsultaDto consulta = (ConsultaDto) session.getAttribute("consulta");
-                consulta.setEstado("Cancelada");
+                if(consulta.getEstado().equalsIgnoreCase("Pendiente")){
+                    consulta.setEstado("Cancelada");
+                }
                 if (new ConsultaDaoImp().modificar(consulta)) {
                     if (session.getAttribute("trabajador") != null) {
                         response.sendRedirect("PAGES/DetalleConsultaSecretaria.jsp");

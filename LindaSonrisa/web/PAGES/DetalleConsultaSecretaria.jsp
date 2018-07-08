@@ -99,8 +99,8 @@
                             </div>
                             <div class="col-lg-6">
                                 <form name="boletaForm" action="/LindaSonrisa/boletaConsulta" method="POST" >
-                                    <input type="hidden" value="${consulta.idConsulta}" name="idConsulta" >
-                                    <a href="#" class="btn-get-started scrollto" onclick="document.boletaForm.submit"  >Boleta</a>
+                                    <input type="number" value="0" required="" name="descuento" >
+                                    <a href="#" class="btn-get-started scrollto" onclick="descuentoForm()"  >Boleta</a>
                                 </form>
                             </div>
                         </div>

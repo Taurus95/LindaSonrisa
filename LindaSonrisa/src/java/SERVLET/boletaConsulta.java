@@ -5,6 +5,11 @@
  */
 package SERVLET;
 
+import DAO_IMP.ClienteDaoImp;
+import DAO_IMP.ConsultaDaoImp;
+import DAO_IMP.ServicioDaoImp;
+import DAO_IMP.TrabajadorDaoImp;
+import DTO.ConsultaDto;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -12,6 +17,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -33,20 +39,54 @@ public class boletaConsulta extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet boletaConsulta</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet boletaConsulta at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+            HttpSession session = request.getSession();
+            if (session.getAttribute("consulta") == null) {
+                session.invalidate();
+                response.sendRedirect("index.html");
+                return;
+            }
+            if ((int) session.getAttribute("acceso") == 1) {
+                ConsultaDto consulta = (ConsultaDto) session.getAttribute("consulta");
+                int descuento = Integer.parseInt(request.getParameter("descuento"));
+                if (consulta.getEstado().equalsIgnoreCase("Pendiente")) {
+                    consulta.setTotal(consulta.getTotal() - descuento);
+                    consulta.setEstado("Realizada");
+                } else {
+                    response.sendRedirect("PAGES/DetalleConsultaSecretaria.jsp");
+                    return;
+                }
+                if (new ConsultaDaoImp().modificar(consulta)) {
+                    //crear exel ("BOLETA")
+                    response.setContentType("application/vnd.ms-excel");
+                    response.setHeader("Content-disposition", "filename=boleta.xls");
+                    //             PrintWriter out = response.getWriter();
+                    String minuto = " ";
+                    try {
+                        out.println("Boleta Consulta\t" + consulta.getFecha());
+                        out.println("Cliente:\t" + new ClienteDaoImp().buscarNombre(consulta.getRutCliente()));
+                        out.println("Dentista:\t" + new TrabajadorDaoImp().buscarNombre(consulta.getRutTrabajador()));
+                        if (consulta.getMinuto() == 0) {
+                            minuto = "00";
+                        } else {
+                            minuto = "30";
+                        }
+                        out.println("Hora:\t" + consulta.getHora() + " : " + minuto);
+                        out.println("Servicio:\t" + new ServicioDaoImp().buscarNombre(consulta.getIdServicio()));
+                        out.println("Precio:\t $" + new ServicioDaoImp().buscarPrecio(consulta.getIdServicio()));
+                        out.println("Descuento:\t $" + descuento);
+                        out.println("Total:\t" + consulta.getTotal());
+                    } finally {
+                        out.close();
+                    }
+                    response.sendRedirect("PAGES/DetalleConsultaSecretaria.jsp");
+                } else {
+                    response.sendRedirect("index.html");
+                }
+            }
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -59,6 +99,7 @@ public class boletaConsulta extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+
     }
 
     /**

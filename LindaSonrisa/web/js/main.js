@@ -176,7 +176,7 @@ function maxDatetoday() {
 }
 //no hay disponibilidad findesemana
 function notWeekend() {
-    if(document.getElementById("dateDia").value==""){
+    if (document.getElementById("dateDia").value == "") {
         alert("Selecciona un dia disponible en el calendario.");
         return false;
     }
@@ -189,6 +189,16 @@ function notWeekend() {
         return false;
     }
     document.formulario.submit();
+}
+function descuentoForm() {
+    if (document.boletaForm.descuento.value != "") {
+        alert("ingresa descuento, 0 si no aplica");
+        return false;
+    } else {
+        document.boletaForm.submit();
+        return true;
+    }
+
 }
 
 function validateForm() {
@@ -251,7 +261,7 @@ function validateForm() {
     if (validate) {
         document.formulario.submit();
         return true;
-    }else{
+    } else {
         alert(message);
         return false;
     }

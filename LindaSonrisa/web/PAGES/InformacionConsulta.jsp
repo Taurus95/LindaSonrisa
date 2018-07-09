@@ -16,7 +16,7 @@
         <link href="../img/apple-touch-icon.png" rel="apple-touch-icon">
 
         <!-- Google Fonts -->
-        <link href="../https://fonts.googleapis.com/css?family=Montserrat:300,400,500,700|Open+Sans:300,300i,400,400i,700,700i" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,700|Open+Sans:300,300i,400,400i,700,700i" rel="stylesheet">
 
         <!-- Bootstrap CSS File -->
         <link href="../lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">

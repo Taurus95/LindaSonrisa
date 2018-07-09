@@ -169,6 +169,38 @@ public class ClienteDaoImp implements IClienteDao {
         return obj;
     }
 
+    public ClienteDto buscarConRut(String rut) {
+        String query = "SELECT * FROM cliente WHERE rut = ?";
+        try (Connection connection = Conexion.getConexion()) {
+            ClienteDto obj = new ClienteDto();
+            PreparedStatement sql = connection.prepareStatement(query);
+            sql.setString(1, rut);
+            try (ResultSet results = sql.executeQuery()) {
+                while (results.next()) {
+                    obj.setRut(results.getString("rut"));
+                    obj.setNombre(results.getString("nombre"));
+                    obj.setSexo(results.getString("sexo"));
+                    obj.setCorreo(results.getString("correo"));
+                    obj.setDireccion(results.getString("direccion"));
+                    obj.setTelefono(results.getString("telefono"));
+                    obj.setFechaNacimiento(results.getDate("fecha_nacimiento"));
+                    obj.setHabilitado(results.getBoolean("habilitado"));
+                    obj.setContrasenia(results.getString("contraseña"));
+                    connection.close();
+                    return obj;
+                }
+            } catch (Exception e) {
+                log.error("Error al obtener resultset de buscar port rut: " + e.getMessage());
+            }
+
+        } catch (SQLException s) {
+            log.error("Error SQL buscando cliente por rut" + s.getMessage());
+        } catch (Exception e) {
+            log.error("Error al buscar cliente por rut " + e.getMessage());
+        }
+        return null;
+    }
+
     //habilitamos cliente con su rut
     @Override
     public boolean habilitar(ClienteDto cliente) {

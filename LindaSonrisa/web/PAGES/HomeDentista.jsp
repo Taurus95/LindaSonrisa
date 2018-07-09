@@ -4,8 +4,13 @@
     Author     : andres
 --%>
 
+<%@page import="DAO_IMP.ClienteDaoImp"%>
+<%@page import="DTO.ClienteDto"%>
+<%@page import="java.util.Calendar"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<jsp:useBean id="consulta" scope="page" class="DAO_IMP.ConsultaDaoImp" />
+<jsp:useBean id="cliente" scope="page" class="DAO_IMP.ClienteDaoImp" />
 <!DOCTYPE html>
 <html>
     <head>
@@ -53,40 +58,54 @@
                 </nav><!-- #nav-menu-container -->
             </div>
         </header>
-        <form role="form" class="contactForm" name="formulario" method="POST" action="" >
-            <section id="intro">
-
-                <div class="intro-text">
-                    <h2>Dentista</h2>
-                    <div class="form-group col-lg-6">
-                        <div class="container" align="center" >
-                            <table class="table-responsive-md table">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">Dia</th>
-                                        <th scope="col">Hora</th>
-                                        <th scope="col">Doctor</th>
-                                        <th scope="col">Estado</th>                                        
+        <section id="intro">
+            <div class="intro-text">
+                <h2>Bienvenid@ <c:out value="${trabajador.getNombre()}" /></h2>
+                <p>Que tengas un exelente dia...</p>
+                <a href="/LindaSonrisa/PAGES/HomeDentista.jsp#about " class="btn-get-started scrollto">Mis pacientes</a>
+                <a href="/LindaSonrisa/PAGES/ActualizarDatosSecretaria.jsp " class="btn-get-started scrollto">Actualiza tus datos personales</a>
+            </div>
+        </section>
+        <section id="about" >
+            <div class="container-fluid">
+                <div class="section-header">
+                    <h3 class="section-title">Tus consultas del dia</h3>
+                    <span class="section-divider"></span>
+                    <p class="section-description">
+                        <a href="#intro">Inicio</a>
+                    </p>
+                    <div class="container" align="center" >
+                        <table class="table-responsive-md table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Hora</th>
+                                    <th scope="col">Paciente</th>
+                                    <th scope="col">Telefono</th>
+                                    <th scope="col">Correo</th>
+                                    <th scope="col">Estado consulta</th>                                        
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <%
+                                    java.sql.Date date = new java.sql.Date(Calendar.getInstance().getTime().getTime());
+                                %>
+                                <c:forEach var="aux" items="${consulta.listarPorDiaDoctor(trabajador.getRut(), date )}">
+                                    <tr> 
+                                        <c:set var="paciente" value="${cliente.buscarConRut(aux.rutCliente)}" ></c:set>
+                                        <td><c:out value="${aux.hora}:" /><c:if test="${aux.minutos==0}" >00</c:if>
+                                            <c:if test="${aux.minutos==30}">30</c:if></td>
+                                        <td><c:out value="${paciente.nombre}" /></td>
+                                        <td><c:out value="${paciente.telefono}" /></td>
+                                        <td><c:out value="${paciente.correo}" /></td>
+                                        <td><c:out value="${aux.estado}" /></td>
                                     </tr>
-                                </thead>
-                                <tbody>
-                                    
-                                        <tr> 
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                        </tr>
-                                    
-                                </tbody>
-                            </table>
-                        </div>
+                                </c:forEach>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
-
-            </section>
-        </form> 
-
+            </div>
+        </section>
 
         <!-- JavaScript Libraries -->
         <script src="../lib/jquery/jquery.min.js"></script>

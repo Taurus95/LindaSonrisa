@@ -64,6 +64,8 @@ public class loginTrabajador extends HttpServlet {
                     }
                     if (trabajador.getTipo().equalsIgnoreCase("dentista")) {
                         response.sendRedirect("PAGES/HomeDentista.jsp");
+                    }if(trabajador.getTipo().equalsIgnoreCase("Administrativo")){
+                        response.sendRedirect("PAGES/HomeAdministrativo.jsp");
                     }
                 } else {
                     session.setAttribute("msg", "error");

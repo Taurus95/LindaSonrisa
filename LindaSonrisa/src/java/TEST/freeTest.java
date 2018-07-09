@@ -19,6 +19,8 @@ public class freeTest {
     public static void main(String[] args) {
         java.sql.Date date = new java.sql.Date(Calendar.getInstance().getTime().getTime());
         System.out.println("fecha actual: " + date.toString());
+        
+        java.sql.Date prueba = new java.sql.Date(0);
     }
 
 }

@@ -8,10 +8,6 @@ package SERVLET;
 import DAO_IMP.ConsultaDaoImp;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Date;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import javax.jms.Session;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -46,13 +42,6 @@ public class buscarPorCliente extends HttpServlet {
                 return;
             }
             String rut = (String) session.getAttribute("txtRut");
-//            java.sql.Date fecha;
-//            try {
-//                java.util.Date fechaUtil = new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("dateDia"));
-//                fecha = new java.sql.Date(fechaUtil.getTime());
-//            } catch (Exception ex) {
-//                fecha = new java.sql.Date(Calendar.getInstance().getTime().getTime());
-//            }
             ConsultaDaoImp implement = new ConsultaDaoImp();
             session.setAttribute("listaConsultas", implement.listarPorCliente(rut));
             response.sendRedirect("PAGES/ConsultasSecretaria.jsp");

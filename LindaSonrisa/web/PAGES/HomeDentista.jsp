@@ -11,6 +11,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <jsp:useBean id="consulta" scope="page" class="DAO_IMP.ConsultaDaoImp" />
 <jsp:useBean id="cliente" scope="page" class="DAO_IMP.ClienteDaoImp" />
+<jsp:useBean id="now" class="java.sql.Date" />
 <!DOCTYPE html>
 <html>
     <head>
@@ -89,7 +90,7 @@
                                 <%
                                     java.sql.Date date = new java.sql.Date(Calendar.getInstance().getTime().getTime());
                                 %>
-                                <c:forEach var="aux" items="${consulta.listarPorDiaDoctor(trabajador.getRut(), date )}">
+                                <c:forEach var="aux" items="${consulta.listarPorDiaDoctor(trabajador.getRut(), now )}">
                                     <tr> 
                                         <c:set var="paciente" value="${cliente.buscarConRut(aux.rutCliente)}" ></c:set>
                                         <td><c:out value="${aux.hora}:" /><c:if test="${aux.minutos==0}" >00</c:if>

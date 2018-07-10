@@ -89,8 +89,8 @@
                                 <c:forEach var="aux" items="${consulta.listarPorDiaDoctor(trabajador.getRut())}">
                                     <tr> 
                                         <c:set var="paciente" value="${cliente.buscarConRut(aux.rutCliente)}" ></c:set>
-                                        <td><c:out value="${aux.hora}:" /><c:if test="${aux.minutos==0}" >00</c:if>
-                                            <c:if test="${aux.minutos==30}">30</c:if></td>
+                                        <td><c:out value="${aux.hora}:" /><c:if test="${aux.minuto==0}" >00</c:if>
+                                            <c:if test="${aux.minuto==30}">30</c:if></td>
                                         <td><c:out value="${paciente.nombre}" /></td>
                                         <td><c:out value="${paciente.telefono}" /></td>
                                         <td><c:out value="${paciente.correo}" /></td>

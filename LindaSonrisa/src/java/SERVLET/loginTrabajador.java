@@ -60,9 +60,11 @@ public class loginTrabajador extends HttpServlet {
                     session.setAttribute("ms", null);
                     session.setAttribute("acceso", 1);
                     if (trabajador.getTipo().equalsIgnoreCase("Secretaria")) {
+                        session.setAttribute("sec", 1);
                         response.sendRedirect("PAGES/HomeSecretaria.jsp");
                     }
                     if (trabajador.getTipo().equalsIgnoreCase("dentista")) {
+                        session.setAttribute("den", 1);
                         response.sendRedirect("PAGES/HomeDentista.jsp");
                     }if(trabajador.getTipo().equalsIgnoreCase("Administrativo")){
                         response.sendRedirect("PAGES/HomeAdministrativo.jsp");

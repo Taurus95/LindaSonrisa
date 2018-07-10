@@ -10,6 +10,9 @@
 <jsp:useBean id="dentista" scope="page" class="DAO_IMP.TrabajadorDaoImp" />
 <jsp:useBean id="cliente" scope="page" class="DAO_IMP.ClienteDaoImp" />
 <!DOCTYPE html>
+<c:if test="${sec!=1}" >
+    <c:redirect url="../cancelar" ></c:redirect>
+</c:if>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">

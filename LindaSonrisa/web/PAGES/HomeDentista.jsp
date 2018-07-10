@@ -6,12 +6,14 @@
 
 <%@page import="DAO_IMP.ClienteDaoImp"%>
 <%@page import="DTO.ClienteDto"%>
-<%@page import="java.util.Calendar"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <jsp:useBean id="consulta" scope="page" class="DAO_IMP.ConsultaDaoImp" />
 <jsp:useBean id="cliente" scope="page" class="DAO_IMP.ClienteDaoImp" />
 <!DOCTYPE html>
+<c:if test="${den!=1}" >
+    <c:redirect url="../cancelar" ></c:redirect>
+</c:if>
 <html>
     <head>
         <meta charset="utf-8">

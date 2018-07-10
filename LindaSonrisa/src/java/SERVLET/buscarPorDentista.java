@@ -43,7 +43,7 @@ public class buscarPorDentista extends HttpServlet {
                 response.sendRedirect("index.html");
                 return;
             }
-            String rut = (String) session.getAttribute("txtRut");
+            String rut = (String) request.getParameter("rutDentista");
             java.sql.Date fecha;
             try {
                 java.util.Date fechaUtil = new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("dateDia"));
@@ -53,7 +53,7 @@ public class buscarPorDentista extends HttpServlet {
             }
             ConsultaDaoImp implement = new ConsultaDaoImp();
             session.setAttribute("listaConsultas", implement.listarPorDiaDoctor(rut, fecha));
-            response.sendRedirect("PAGES/ConsultasSecretaria.jsp");
+            response.sendRedirect("PAGES/ConsultasSecretaria.jsp#about");
         }
     }
 

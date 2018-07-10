@@ -75,16 +75,12 @@
                                     <td><h5 style="color:white">Servicio : </h5></td>
                                     <td><h5 style="color:white"><c:out value="${service.buscarNombre(consulta.idServicio)}"/></h5></td>
                                     <td><h5 style="color:white">Precio : </h5></td>
-                                    <td><h5 style="color:white"><c:out value="${service.buscarPrecio(consulta.idServicio)}"/></h5></td>
+                                    <td><h5 style="color:white">$ <c:out value="${service.buscarPrecio(consulta.idServicio)}"/></h5></td>
                                 </tr>
                                 <tr>
                                     <td><h5 style="color:white">Dia:</h5></td>
-                                    <td><h5 style="color:white"><c:out value="${consulta.fecha}"></c:out></h5></td>
-                                        <td style="color:white"><h5>Hora:</h5></td>
-                                        <td style="color:white"><h5><c:out value="${consulta.hora}:" /><c:if test="${consulta.minuto==0}" >00</c:if>
-                                            <c:if test="${consulta.minuto==30}">30</c:if></h5></td>
-                                    </tr>
-                                    <tr>
+                                    <td><h5 style="color:white"><c:out value="${consulta.fecha}"></c:out> , <c:out value="${consulta.hora}:" /><c:if test="${consulta.minuto==0}" >00</c:if>
+                                            <c:if test="${consulta.minuto==30}">30</c:if> </td>
                                         <td><h5 style="color:white">Estado:</h5></td>
                                         <td><h5 style="color:white"><c:out value="${consulta.estado}"/></h5></td>
                                 </tr>

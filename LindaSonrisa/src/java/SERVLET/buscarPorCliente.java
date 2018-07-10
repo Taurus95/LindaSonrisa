@@ -41,10 +41,10 @@ public class buscarPorCliente extends HttpServlet {
                 response.sendRedirect("index.html");
                 return;
             }
-            String rut = (String) session.getAttribute("txtRut");
+            String rut = (String) request.getParameter("txtRut");
             ConsultaDaoImp implement = new ConsultaDaoImp();
             session.setAttribute("listaConsultas", implement.listarPorCliente(rut));
-            response.sendRedirect("PAGES/ConsultasSecretaria.jsp");
+            response.sendRedirect("PAGES/ConsultasSecretaria.jsp#about");
             
         }
     }

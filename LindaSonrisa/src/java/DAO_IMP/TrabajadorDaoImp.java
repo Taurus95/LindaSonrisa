@@ -205,6 +205,41 @@ public class TrabajadorDaoImp implements ITrabajadorDao {
         }
         return list;
     }
+    public List<TrabajadorDto> listarDentista() {
+        String query = "SELECT * FROM trabajador WHERE especialidad IS NOT NULL";
+        List<TrabajadorDto> list = new ArrayList<>();
+        try (Connection connection = Conexion.getConexion()) {
+            PreparedStatement sql = connection.prepareStatement(query);
+
+            try (ResultSet results = sql.executeQuery()) {
+                while (results.next()) {
+                    TrabajadorDto trabajador = new TrabajadorDto();
+                    trabajador.setRut(results.getString("rut"));
+                    trabajador.setNombre(results.getString("nombre"));
+                    trabajador.setFechaNacimiento(results.getDate("fecha_nacimiento"));
+                    trabajador.setSexo(results.getString("sexo"));
+                    trabajador.setCorreo(results.getString("correo"));
+                    trabajador.setDireccion(results.getString("direccion"));
+                    trabajador.setTelefono(results.getString("telefono"));
+                    trabajador.setContrasenia(results.getString("contraseña"));
+                    trabajador.setTipo(results.getString("tipo"));
+                    trabajador.setEspecialidad(results.getString("especialidad"));
+                    trabajador.setHabilitado(results.getBoolean("habilitado"));
+                    list.add(trabajador);
+
+                }
+            } catch (Exception e) {
+                log.error("Error al obtener resultset de listar dentistas: " + e.getMessage());
+            }
+            connection.close();
+
+        } catch (SQLException s) {
+            log.error("Error SQL listando dentistas " + s.getMessage());
+        } catch (Exception e) {
+            log.error("Error al listar dentistas " + e.getMessage());
+        }
+        return list;
+    }
     
      public String buscarNombre(String rut) {
         String query = "SELECT * FROM trabajador WHERE rut = ?";

@@ -7,6 +7,8 @@
 <%@page import="java.util.Calendar"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<jsp:useBean id="dentista" scope="page" class="DAO_IMP.TrabajadorDaoImp" />
+<jsp:useBean id="cliente" scope="page" class="DAO_IMP.ClienteDaoImp" />
 <!DOCTYPE html>
 <html>
     <head>
@@ -69,10 +71,12 @@
                                 <form role="form" class="contactForm" name="buscarPorDentista" method="POST" action="/LindaSonrisa/buscarPorDentista" >
                                     <div class="row">
                                         <div class="col-lg-6" >
-                                            <input type="text" name="txtRut" class="form-control" 
-                                                   placeholder="Ingrese rut" required="" id="txtRut"
-                                                   onkeypress="return soloRUT(event)" 
-                                                   onblur="checkRutGenerico(txtRut.value, false)"  />
+                                            <select class="form-control" name="rutDentista">
+                                                <option disabled="" value="0" selected="" >Selecciona un dentista</option>
+                                                <c:forEach var="dentista" items="${dentista.listarDentista()}">
+                                                    <option value="${dentista.rut}" >${dentista.nombre}</option>
+                                                </c:forEach>
+                                            </select>
                                         </div>
                                         <div class="col-lg-6" >
                                             <input id="dateDia"   class="form-control" type="date" name="dateDia" value="" />
@@ -89,7 +93,7 @@
                                            placeholder="Ingrese rut" required="" id="txtRut"
                                            onkeypress="return soloRUT(event)" 
                                            onblur="checkRutGenerico(txtRut.value, false)"  />
-                                    </div>
+                                    
                                 </form>
                             </td>
                             <td><a href="#" class="btn-get-started scrollto" onclick="document.buscarPorCliente.submit()" >Buscar</a></td>
@@ -112,6 +116,7 @@
                         <table class="table-responsive-md table">
                             <thead>
                                 <tr>
+                                    <th scope="col" >Paciente</th>
                                     <th scope="col">Dia</th>
                                     <th scope="col">Hora</th>
                                     <th scope="col">Doctor</th>
@@ -122,14 +127,16 @@
                             <tbody>
                                 <c:forEach var="horaDisponible" items="${listaConsultas}">
                                     <tr> 
+                                        <td><c:out value="${cliente.buscarNombre(horaDisponible.rutCliente)}" /></td>
                                         <td><c:out value="${horaDisponible.fecha}" /></td>
-                                        <td><c:out value="${horaDisponible.hora}:" /><c:if test="${horaDisponible.minutos==0}" >00</c:if>
-                                            <c:if test="${horaDisponible.minutos==30}">30</c:if></td>
-                                        <td><c:out value="${horaDisponible.doctor}"/></td>
+                                        <td><c:out value="${horaDisponible.hora}:" /><c:if test="${horaDisponible.minuto==0}" >00</c:if>
+                                            <c:if test="${horaDisponible.minuto==30}">30</c:if>
+                                        </td>
+                                        <td><c:out value="${dentista.buscarNombre(horaDisponible.rutTrabajador)}" /></td>
                                         <td><c:out value="${horaDisponible.estado}"/></td>
                                         <td><form method="POST" action="/LindaSonrisa/verDetalle">
                                                 <input type="hidden" name="idConsulta" value="${horaDisponible.idConsulta}" >
-                                                <input type="submit" value="Ver Detalle">
+                                                <input type="submit" class="btn-success" value="Ver Detalle">
                                             </form>
                                         </td>
                                     </tr>
@@ -139,7 +146,6 @@
                     </div>
                 </div>
             </div>
-
         </section>
         <c:remove var="listaConsultas" ></c:remove>
     </c:if>

@@ -13,5 +13,4 @@ public interface IInsumoDao extends IBaseDao<InsumoDto> {
     
     public List<DetalleInsumoDto> buscarDetalles(InsumoDto obj);
     
-
 }

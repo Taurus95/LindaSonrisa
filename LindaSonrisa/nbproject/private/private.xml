@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/home/andres/NetBeansProjects/LindaSonrisa/LindaSonrisa/src/java/SERVLET/cancelarFlujoConsulta.java</file>
+            <file>file:/home/andres/NetBeansProjects/LindaSonrisa/LindaSonrisa/src/java/DAO_IMP/DetalleInsumoServicioDaoImp.java</file>
+            <file>file:/home/andres/NetBeansProjects/LindaSonrisa/LindaSonrisa/src/java/SERVLET/boletaConsulta.java</file>
+            <file>file:/home/andres/NetBeansProjects/LindaSonrisa/LindaSonrisa/src/java/SERVLET/registrarClienteSecretaria.java</file>
+            <file>file:/home/andres/NetBeansProjects/LindaSonrisa/LindaSonrisa/src/java/DAO_IMP/PedidoDaoImp.java</file>
+            <file>file:/home/andres/NetBeansProjects/LindaSonrisa/LindaSonrisa/src/java/SERVLET/BuscarHorasPorDia.java</file>
+            <file>file:/home/andres/NetBeansProjects/LindaSonrisa/LindaSonrisa/src/java/SERVLET/cancelar.java</file>
+            <file>file:/home/andres/NetBeansProjects/LindaSonrisa/LindaSonrisa/src/java/DAO/IInsumoDao.java</file>
+            <file>file:/home/andres/NetBeansProjects/LindaSonrisa/LindaSonrisa/src/java/DTO/ConsultaDto.java</file>
+            <file>file:/home/andres/NetBeansProjects/LindaSonrisa/LindaSonrisa/src/java/SERVLET/buscarDentistas.java</file>
+            <file>file:/home/andres/NetBeansProjects/LindaSonrisa/LindaSonrisa/src/java/DTO/InsumoDto.java</file>
+            <file>file:/home/andres/NetBeansProjects/LindaSonrisa/LindaSonrisa/src/java/DAO_IMP/FichaSocialDaoImp.java</file>
+        </group>
+    </open-files>
+</project-private>

@@ -5,7 +5,7 @@ import java.util.Objects;
 
 
 public class ClienteDto {
-    
+
     private String rut; //PK
     private String nombre;
     private String correo;
@@ -30,7 +30,7 @@ public class ClienteDto {
         this.contrasenia = contrasenia;
         this.habilitado = habilitado;
     }
-    
+
 
     public String getRut() {
         return rut;
@@ -134,5 +134,5 @@ public class ClienteDto {
         return "ClienteDto{" + "rut=" + rut + ", nombre=" + nombre + ", correo=" + correo + ", sexo=" + sexo + ", direccion=" + direccion + ", telefono=" + telefono + ", fechaNacimiento=" + fechaNacimiento + ", contrasenia=" + contrasenia + ", habilitado=" + habilitado + '}';
     }
 
-    
+
 }

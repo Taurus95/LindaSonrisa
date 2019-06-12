@@ -15,7 +15,7 @@ public interface IBaseDao<T> {
     public boolean agregar(T obj);
 
     public boolean modificar(T obj);
-    
+
     public T buscar(T obj);
 
 }

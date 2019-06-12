@@ -185,16 +185,16 @@ INSERT INTO Trabajador VALUES('16.014.886-1', 'Luis Fernandez Hurtado', '10/11/1
 INSERT INTO Trabajador VALUES ('11.756.660-9', 'Roberto Gonzales Feliciano', '19/02/1987', 'M', 'Roberto.GF@hotmail.com', 'Independencia N1167, Santiago', '9 828273546', '21232f297a57a5a743894a0e4a801fc3', 'Dentista', 'Odontologia General', 1);
 INSERT INTO Trabajador VALUES('17.925.614-2', 'Pedro Molina Soto', '10/11/1981', 'M', 'PedroM@outlook.com', 'Las hermanas N333, Paine', '9 63527163', '21232f297a57a5a743894a0e4a801fc3', 'Dentista', 'Ortodoncia', 1);
 INSERT INTO Trabajador VALUES('15.835.608-2', 'Cecilia Ortiz Mena', '15/04/1981', 'F', 'CeciliaO@outlook.com', 'Las hermanas N333, Paine', '9 6518921', '21232f297a57a5a743894a0e4a801fc3', 'Dentista', 'Implantologia', 1);
-INSERT INTO Trabajador VALUES('17.885.123-K', 'Valeria Molina Aviles', '17/05/1987', 'F', 'ValeriaM@outlook.com', 'Las primas N123, Paine', '9 63527163', '21232f297a57a5a743894a0e4a801fc3', 'Dentista', 'Endodoncia', 1);
-INSERT INTO Trabajador VALUES('15.675.243-8', 'Camila Huentecura Solis', '19/04/1985', 'F', 'CamilaH@outlook.com', 'Los hermanos 456, Paine', '9 6518921', '21232f297a57a5a743894a0e4a801fc3', 'Dentista', 'Odontopediatria', 1);
+INSERT INTO Trabajador VALUES('17.885.123-3', 'Valeria Molina Aviles', '17/05/1987', 'F', 'ValeriaM@outlook.com', 'Las primas N123, Paine', '9 63527163', '21232f297a57a5a743894a0e4a801fc3', 'Dentista', 'Endodoncia', 1);
+INSERT INTO Trabajador VALUES('15.177.618-3', 'Camila Huentecura Solis', '19/04/1985', 'F', 'CamilaH@outlook.com', 'Los hermanos 456, Paine', '9 6518921', '21232f297a57a5a743894a0e4a801fc3', 'Dentista', 'Odontopediatria', 1);
 
 
 
 INSERT INTO Consulta (id_servicio,fecha,rut_cliente,rut_trabajador,estado,total) VALUES( 3, '11/05/2017', '18.876.827-3', '11.756.660-9', 'Realizada', 15000);
 INSERT INTO Consulta (id_servicio,fecha,rut_cliente,rut_trabajador,estado,total) VALUES( 1, '19/11/2017', '19.017.683-5', '17.925.614-2', 'Pendiente', 25000);
 INSERT INTO Consulta (id_servicio,fecha,rut_cliente,rut_trabajador,estado,total) VALUES( 5, '11/05/2017', '19.850.084-4', '15.835.608-2', 'Realizada', 15000);
-INSERT INTO Consulta (id_servicio,fecha,rut_cliente,rut_trabajador,estado,total) VALUES( 2, '19/11/2017', '15.582.167-1', '17.885.123-K', 'Realizada', 25000);
-INSERT INTO Consulta (id_servicio,fecha,rut_cliente,rut_trabajador,estado,total) VALUES( 4, '19/09/2018', '22.645.620-1', '15.675.243-8', 'Pendiente', 15000);
+INSERT INTO Consulta (id_servicio,fecha,rut_cliente,rut_trabajador,estado,total) VALUES( 2, '19/11/2017', '15.582.167-1', '17.885.123-3', 'Realizada', 25000);
+INSERT INTO Consulta (id_servicio,fecha,rut_cliente,rut_trabajador,estado,total) VALUES( 4, '19/09/2018', '22.645.620-1', '15.177.618-3', 'Pendiente', 15000);
 INSERT INTO Consulta (id_servicio,fecha,rut_cliente,rut_trabajador,estado,total) VALUES( 3, '28/03/2018', '20.165.175-1', '11.756.660-9', 'Cancelada', 25000);
 
 INSERT INTO Detalle_insumo VALUES ('a1',1,50,'01/10/2020',300,'10/12/2017');

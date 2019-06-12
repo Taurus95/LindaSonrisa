@@ -65,7 +65,7 @@
                 <h2>Bienvenid@ <c:out value="${trabajador.getNombre()}" /></h2>
                 <p>Que tengas un exelente dia...</p>
                 <a href="/LindaSonrisa/PAGES/HomeDentista.jsp#about " class="btn-get-started scrollto">Mis pacientes</a>
-                <a href="/LindaSonrisa/PAGES/ActualizarDatosSecretaria.jsp " class="btn-get-started scrollto">Actualiza tus datos personales</a>
+                <a href="#" class="btn-get-started scrollto">Actualiza tus datos personales</a>
             </div>
         </section>
         <section id="about" >
